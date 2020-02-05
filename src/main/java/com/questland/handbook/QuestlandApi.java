@@ -18,9 +18,9 @@ public class QuestlandApi {
         return itemRepository.findAll(pageable);
     }
 
-    @GetMapping("/items/{linkId}")
-    public Item getItemByLinkId(@PathVariable("linkId") long linkId) {
-        return itemRepository.findByLinkId(linkId);
+    @GetMapping("/items/{id}")
+    public Item getItemById(@PathVariable("id") long id) {
+        return itemRepository.findById(id).orElse(null);
     }
 
 }

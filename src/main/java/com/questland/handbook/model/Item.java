@@ -1,12 +1,15 @@
 package com.questland.handbook.model;
 
+import java.util.List;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
@@ -17,8 +20,6 @@ public class Item {
 
     @Id
     private long id;
-
-    private long linkId;
 
     private String name;
 
