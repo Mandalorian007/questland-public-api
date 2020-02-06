@@ -1,20 +1,26 @@
 package com.questland.handbook.loader;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.questland.handbook.ItemRepository;
 import com.questland.handbook.loader.model.PrivateItem;
 import com.questland.handbook.loader.model.PrivateLink;
 import com.questland.handbook.loader.model.PrivateStats;
+import com.questland.handbook.model.Emblem;
 import com.questland.handbook.model.Item;
 import com.questland.handbook.model.ItemSlot;
 import com.questland.handbook.model.Quality;
 import com.questland.handbook.model.Stat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
@@ -33,6 +39,8 @@ public class ItemLoader implements ApplicationRunner {
       "http://gs-bhs-wrk-02.api-ql.com/client/checkstaticdata/?lang=en&graphics_quality=hd_android";
   private final String itemUrl =
       "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/item_templates/";
+  private final String setEmblemUrl =
+      "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/wearable_sets/";
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
@@ -49,6 +57,8 @@ public class ItemLoader implements ApplicationRunner {
         restTemplate.getForObject(String.format(itemUrl, latestToken), PrivateItem[].class));
     log.info("# of items discovered: " + privateItems.size());
 
+    Map<Integer, Emblem> emblemMap = getEmblemMap();
+
     Set<String> validItemTypes = Set.of(
         "head",
         "chest",
@@ -64,7 +74,7 @@ public class ItemLoader implements ApplicationRunner {
         // Filter out any item that wouldn't be considered gear
         .filter(item -> validItemTypes.contains(item.getItemType()))
         // Convert to our internal gear model
-        .map(this::covertItemFromPrivate)
+        .map(item -> covertItemFromPrivate(item, emblemMap))
 
         .collect(Collectors.toList());
 
@@ -75,12 +85,13 @@ public class ItemLoader implements ApplicationRunner {
 
   }
 
-  private Item covertItemFromPrivate(PrivateItem privateItem) {
+  private Item covertItemFromPrivate(PrivateItem privateItem, Map<Integer, Emblem> emblemMap) {
     return Item.builder()
         .id(privateItem.getLinkId())
         .name(privateItem.getName())
         .quality(convertQualityFromPrivate(privateItem.getQuality()))
         .itemSlot(covertItemSlotFromPrivate(privateItem.getItemType()))
+        .emblem(emblemMap.getOrDefault(privateItem.getSet(), Emblem.UNKNOWN))
         .potential(convertPotentialFromPrivate(privateItem.getStats()))
         .attack(convertAttackFromPrivate(privateItem.getStats()))
         .magic(convertMagicFromPrivate(privateItem.getStats()))
@@ -247,5 +258,78 @@ public class ItemLoader implements ApplicationRunner {
     }
 
     return Optional.empty();
+  }
+
+  private Map<Integer, Emblem> getEmblemMap() {
+    String latestTokenResponse = restTemplate.getForObject(latestTokenUrl, String.class);
+    Map<Integer, Emblem> emblemMap = new HashMap<>();
+    try {
+      String emblemToken = new ObjectMapper().readTree(latestTokenResponse)
+          .path("data")
+          .path("static_data")
+          .path("crc_details")
+          .path("wearable_sets").asText();
+      log.info("Latest set/emblem token is: " + emblemToken);
+
+      String emblemUrl = String.format(setEmblemUrl, emblemToken);
+      log.info(emblemUrl);
+      String emblemDataRaw =
+          restTemplate.getForObject(emblemUrl, String.class);
+
+      JsonNode emblemArray = new ObjectMapper().readTree(emblemDataRaw);
+      for (JsonNode emblemEntry : emblemArray) {
+        Iterable<JsonNode> iterable = emblemEntry::elements;
+        List<JsonNode> emblemEntryList =
+            StreamSupport.stream(iterable.spliterator(), false)
+                .collect(Collectors.toList());
+        emblemMap.put(
+            emblemEntryList.get(0).asInt(),
+            getEmblemFromPrivate(emblemEntryList.get(1).asText()));
+      }
+      return emblemMap;
+    } catch (JsonProcessingException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  private static Emblem getEmblemFromPrivate(String emblem) {
+    switch (emblem) {
+      case "Sacred":
+        return Emblem.SACRED;
+      case "Necro":
+        return Emblem.NECRO;
+      case "Beast":
+        return Emblem.BEAST;
+      case "Nature":
+        return Emblem.NATURE;
+      case "Dragon":
+        return Emblem.DRAGON;
+      case "Shadow":
+        return Emblem.SHADOW;
+      case "Myth":
+        return Emblem.MYTH;
+      case "Ice":
+        return Emblem.ICE;
+      case "Venom":
+        return Emblem.VENOM;
+      case "Death":
+        return Emblem.DEATH;
+      case "Lava":
+        return Emblem.LAVA;
+      case "Hex":
+        return Emblem.HEX;
+      case "Noble":
+        return Emblem.NOBLE;
+      case "Thunder":
+        return Emblem.THUNDER;
+      case "Abyss":
+        return Emblem.ABYSS;
+      case "Wind":
+        return Emblem.WIND;
+      default:
+        log.warn(
+            "Discovered an unrecognized emblem: `" + emblem + "` this should be investigated.");
+        return Emblem.UNKNOWN;
+    }
   }
 }

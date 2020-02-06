@@ -40,6 +40,9 @@ public class Item {
     private int health;
 
     @Enumerated(EnumType.STRING)
+    private Emblem emblem;
+
+    @Enumerated(EnumType.STRING)
     private Stat itemBonus;
 
     @ElementCollection

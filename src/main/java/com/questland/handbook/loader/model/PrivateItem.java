@@ -26,6 +26,8 @@ public class PrivateItem {
     @JsonProperty("s")
     private String itemType;
 
+    private int set;
+
     private PrivateStats stats;
 
     private List<PrivateLink> links;
