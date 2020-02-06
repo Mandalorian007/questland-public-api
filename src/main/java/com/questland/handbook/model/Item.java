@@ -39,6 +39,14 @@ public class Item {
 
     private int health;
 
+    private int attackGain;
+
+    private int magicGain;
+
+    private int defenseGain;
+
+    private int healthGain;
+
     @Enumerated(EnumType.STRING)
     private Emblem emblem;
 

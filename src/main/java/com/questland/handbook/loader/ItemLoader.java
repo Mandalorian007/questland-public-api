@@ -97,6 +97,10 @@ public class ItemLoader implements ApplicationRunner {
         .magic(convertMagicFromPrivate(privateItem.getStats()))
         .defense(convertDefenseFromPrivate(privateItem.getStats()))
         .health(convertHealthFromPrivate(privateItem.getStats()))
+        .attackGain(convertAttackGainFromPrivate(privateItem.getStats()))
+        .magicGain(convertMagicGainFromPrivate(privateItem.getStats()))
+        .defenseGain(convertDefenseGainFromPrivate(privateItem.getStats()))
+        .healthGain(convertHealthGainFromPrivate(privateItem.getStats()))
         .itemBonus(covertItemBonusFromPrivate(privateItem.getLinks()))
         .itemLinks(convertItemLinksFromPrivate(privateItem.getLinks()))
         .orbBonus(covertOrbBonusFromPrivate(privateItem.getLinks()))
@@ -175,6 +179,22 @@ public class ItemLoader implements ApplicationRunner {
 
   private static int convertHealthFromPrivate(PrivateStats stats) {
     return stats.getHealth()[0];
+  }
+
+  private static int convertAttackGainFromPrivate(PrivateStats stats) {
+    return stats.getAttack()[1];
+  }
+
+  private static int convertMagicGainFromPrivate(PrivateStats stats) {
+    return stats.getMagic()[1];
+  }
+
+  private static int convertDefenseGainFromPrivate(PrivateStats stats) {
+    return stats.getDefense()[1];
+  }
+
+  private static int convertHealthGainFromPrivate(PrivateStats stats) {
+    return stats.getHealth()[1];
   }
 
   private static Stat covertItemBonusFromPrivate(List<PrivateLink> links) {
