@@ -29,7 +29,7 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ItemSlot itemSlot;
 
-    private int potential;
+    private int totalPotential;
 
     private int attack;
 
@@ -39,13 +39,13 @@ public class Item {
 
     private int health;
 
-    private int attackGain;
+    private int attackPotential;
 
-    private int magicGain;
+    private int magicPotential;
 
-    private int defenseGain;
+    private int defensePotential;
 
-    private int healthGain;
+    private int healthPotential;
 
     @Enumerated(EnumType.STRING)
     private Emblem emblem;

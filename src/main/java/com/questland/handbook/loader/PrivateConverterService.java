@@ -26,15 +26,15 @@ public class PrivateConverterService {
         .quality(convertQualityFromPrivate(privateItem.getQuality()))
         .itemSlot(covertItemSlotFromPrivate(privateItem.getItemType()))
         .emblem(emblemMap.getOrDefault(privateItem.getSet(), Emblem.UNKNOWN))
-        .potential(convertPotentialFromPrivate(privateItem.getStats()))
+        .totalPotential(convertTotalPotentialFromPrivate(privateItem.getStats()))
         .attack(convertAttackFromPrivate(privateItem.getStats()))
         .magic(convertMagicFromPrivate(privateItem.getStats()))
         .defense(convertDefenseFromPrivate(privateItem.getStats()))
         .health(convertHealthFromPrivate(privateItem.getStats()))
-        .attackGain(convertAttackGainFromPrivate(privateItem.getStats()))
-        .magicGain(convertMagicGainFromPrivate(privateItem.getStats()))
-        .defenseGain(convertDefenseGainFromPrivate(privateItem.getStats()))
-        .healthGain(convertHealthGainFromPrivate(privateItem.getStats()))
+        .attackPotential(convertAttackPotentialFromPrivate(privateItem.getStats()))
+        .magicPotential(convertMagicPotentialFromPrivate(privateItem.getStats()))
+        .defensePotential(convertDefensePotentialFromPrivate(privateItem.getStats()))
+        .healthPotential(convertHealthPotentialFromPrivate(privateItem.getStats()))
         .itemBonus(covertItemBonusFromPrivate(privateItem.getLinks()))
         .itemLinks(convertItemLinksFromPrivate(privateItem.getLinks()))
         .orbBonus(covertOrbBonusFromPrivate(privateItem.getLinks()))
@@ -153,7 +153,7 @@ public class PrivateConverterService {
     }
   }
 
-  private static int convertPotentialFromPrivate(PrivateStats stats) {
+  private static int convertTotalPotentialFromPrivate(PrivateStats stats) {
     return stats.getAttack()[1] + stats.getMagic()[1] + stats.getDefense()[1] + stats
         .getHealth()[1];
   }
@@ -174,19 +174,19 @@ public class PrivateConverterService {
     return stats.getHealth()[0];
   }
 
-  private static int convertAttackGainFromPrivate(PrivateStats stats) {
+  private static int convertAttackPotentialFromPrivate(PrivateStats stats) {
     return stats.getAttack()[1];
   }
 
-  private static int convertMagicGainFromPrivate(PrivateStats stats) {
+  private static int convertMagicPotentialFromPrivate(PrivateStats stats) {
     return stats.getMagic()[1];
   }
 
-  private static int convertDefenseGainFromPrivate(PrivateStats stats) {
+  private static int convertDefensePotentialFromPrivate(PrivateStats stats) {
     return stats.getDefense()[1];
   }
 
-  private static int convertHealthGainFromPrivate(PrivateStats stats) {
+  private static int convertHealthPotentialFromPrivate(PrivateStats stats) {
     return stats.getHealth()[1];
   }
 
