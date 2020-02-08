@@ -25,7 +25,7 @@ public class PrivateConverterService {
         .name(privateItem.getName())
         .quality(convertQualityFromPrivate(privateItem.getQuality()))
         .itemSlot(covertItemSlotFromPrivate(privateItem.getItemType()))
-        .emblem(emblemMap.getOrDefault(privateItem.getSet(), Emblem.UNKNOWN))
+        .emblem(emblemMap.getOrDefault(privateItem.getSet(), Emblem.NONE))
         .totalPotential(convertTotalPotentialFromPrivate(privateItem.getStats()))
         .attack(convertAttackFromPrivate(privateItem.getStats()))
         .magic(convertMagicFromPrivate(privateItem.getStats()))
@@ -105,7 +105,7 @@ public class PrivateConverterService {
       default:
         log.warn(
             "Discovered an unrecognized emblem: `" + emblem + "` this should be investigated.");
-        return Emblem.UNKNOWN;
+        return Emblem.NONE;
     }
   }
 

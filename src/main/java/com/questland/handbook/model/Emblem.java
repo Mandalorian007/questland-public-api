@@ -17,5 +17,5 @@ public enum Emblem {
   THUNDER,
   ABYSS,
   WIND,
-  UNKNOWN
+  NONE
 }
