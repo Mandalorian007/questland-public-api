@@ -28,12 +28,11 @@ public class QuestlandApi {
   }
 
   @GetMapping("/items/name/{name}")
-  public List<Item> getItemByName(@PathVariable("name") String name,
-                                  @RequestParam(value = "", required = false) Quality quality) {
+  public List<Item> getItemByName(@PathVariable("name") String name) {
     List<Item> itemsByName = itemRepository.findByNameIgnoreCase(name);
-    if (quality != null) {
+    if (itemsByName.size() > 1) {
       itemsByName = itemsByName.stream()
-          .filter(item -> item.getQuality().equals(quality))
+          .filter(item -> item.getQuality().equals(Quality.LEGENDARY))
           .collect(Collectors.toList());
     }
     return itemsByName;
