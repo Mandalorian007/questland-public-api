@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: questland-public-api
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+---
+spring:
+  profiles: production
+server:
+  port: 80
