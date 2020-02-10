@@ -3,6 +3,7 @@ package com.questland.handbook;
 import com.questland.handbook.model.Item;
 import com.questland.handbook.model.Quality;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -20,8 +21,22 @@ public class QuestlandApi {
   private final ItemRepository itemRepository;
 
   @GetMapping("/items")
-  public List<Item> getItems(Sort sort) {
-    return itemRepository.findAll(sort);
+  public List<Item> getItems(Sort sort,
+                             @RequestParam(value = "filterArtifacts", defaultValue = "false") boolean filterArtifacts) {
+    if (filterArtifacts) {
+      return itemRepository.findAllByQualityIn(
+          Set.of(
+              Quality.COMMON,
+              Quality.UNCOMMON,
+              Quality.RARE,
+              Quality.EPIC,
+              Quality.LEGENDARY
+          ),
+          sort);
+    } else {
+      return itemRepository.findAll(sort);
+    }
+
   }
 
   @GetMapping("/items/{id}")
