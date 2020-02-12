@@ -2,10 +2,12 @@ package com.questland.handbook.loader;
 
 import com.questland.handbook.loader.model.PrivateItem;
 import com.questland.handbook.loader.model.PrivateLink;
+import com.questland.handbook.loader.model.PrivateOrb;
 import com.questland.handbook.loader.model.PrivateStats;
 import com.questland.handbook.model.Emblem;
 import com.questland.handbook.model.Item;
 import com.questland.handbook.model.ItemSlot;
+import com.questland.handbook.model.Orb;
 import com.questland.handbook.model.Quality;
 import com.questland.handbook.model.Stat;
 import java.util.ArrayList;
@@ -39,6 +41,37 @@ public class PrivateConverterService {
         .itemLinks(convertItemLinksFromPrivate(privateItem.getLinks()))
         .orbBonus(covertOrbBonusFromPrivate(privateItem.getLinks()))
         .orbLinks(convertOrbLinksFromPrivate(privateItem.getLinks()))
+        .build();
+  }
+
+  public Orb covertOrbFromPrivate(PrivateOrb privateOrb) {
+    int defense = convertDefenseFromPrivate(privateOrb.getStats());
+    int health = convertHealthFromPrivate(privateOrb.getStats());
+    Stat stat;
+
+    if (defense > 0) {
+      stat = Stat.DEFENSE;
+    } else if (health > 0) {
+      stat = Stat.HEALTH;
+    } else {
+      stat = Stat.ATTACK_MAGIC;
+    }
+
+    return Orb.builder()
+        .id(privateOrb.getLinkId())
+        .name(privateOrb.getName())
+        .quality(convertQualityFromPrivate(privateOrb.getQuality()))
+        .attack(convertAttackFromPrivate(privateOrb.getStats()))
+        // magic stat is always identical to attack
+        .magic(convertAttackFromPrivate(privateOrb.getStats()))
+        .defense(defense)
+        .health(health)
+        .attackPotential(convertAttackPotentialFromPrivate(privateOrb.getStats()))
+        // magic potential is always identical to attack
+        .magicPotential(convertAttackPotentialFromPrivate(privateOrb.getStats()))
+        .defensePotential(convertDefensePotentialFromPrivate(privateOrb.getStats()))
+        .healthPotential(convertHealthPotentialFromPrivate(privateOrb.getStats()))
+        .statBonus(stat)
         .build();
   }
 
@@ -148,46 +181,55 @@ public class PrivateConverterService {
       case "health":
       case "hp":
         return Stat.HEALTH;
+      case "dmg":
+        return Stat.ATTACK_MAGIC;
       default:
         return Stat.NONE;
     }
   }
 
   private static int convertTotalPotentialFromPrivate(PrivateStats stats) {
-    return stats.getAttack()[1] + stats.getMagic()[1] + stats.getDefense()[1] + stats
-        .getHealth()[1];
+    return convertAttackPotentialFromPrivate(stats) + convertMagicPotentialFromPrivate(stats)
+           + convertDefensePotentialFromPrivate(stats) + convertHealthPotentialFromPrivate(stats);
   }
 
   private static int convertAttackFromPrivate(PrivateStats stats) {
-    return stats.getAttack()[0];
+    return getIndexOrDefault(stats.getAttack(), 0);
   }
 
   private static int convertMagicFromPrivate(PrivateStats stats) {
-    return stats.getMagic()[0];
+    return getIndexOrDefault(stats.getMagic(), 0);
   }
 
   private static int convertDefenseFromPrivate(PrivateStats stats) {
-    return stats.getDefense()[0];
+    return getIndexOrDefault(stats.getDefense(), 0);
   }
 
   private static int convertHealthFromPrivate(PrivateStats stats) {
-    return stats.getHealth()[0];
+    return getIndexOrDefault(stats.getHealth(), 0);
   }
 
   private static int convertAttackPotentialFromPrivate(PrivateStats stats) {
-    return stats.getAttack()[1];
+    return getIndexOrDefault(stats.getAttack(), 1);
   }
 
   private static int convertMagicPotentialFromPrivate(PrivateStats stats) {
-    return stats.getMagic()[1];
+    return getIndexOrDefault(stats.getMagic(), 1);
   }
 
   private static int convertDefensePotentialFromPrivate(PrivateStats stats) {
-    return stats.getDefense()[1];
+    return getIndexOrDefault(stats.getDefense(), 1);
   }
 
   private static int convertHealthPotentialFromPrivate(PrivateStats stats) {
-    return stats.getHealth()[1];
+    return getIndexOrDefault(stats.getHealth(), 1);
+  }
+
+  private static int getIndexOrDefault(int[] array, int index) {
+    if (array != null && array.length >= index + 1) {
+      return array[index];
+    }
+    return 0;
   }
 
   private static Stat covertItemBonusFromPrivate(List<PrivateLink> links) {
@@ -235,10 +277,11 @@ public class PrivateConverterService {
 
     if (privateLinks.size() == 2) {
       // Gear link should always be 30
-      if (privateLinks.get(0).getBonusAmount() > 20)
+      if (privateLinks.get(0).getBonusAmount() > 20) {
         return Optional.of(privateLinks.get(0));
-      else
+      } else {
         return Optional.of(privateLinks.get(1));
+      }
     }
 
     return Optional.empty();
@@ -251,10 +294,11 @@ public class PrivateConverterService {
 
     if (privateLinks.size() == 2) {
       // Orb link should always be 15
-      if (privateLinks.get(1).getBonusAmount() < 20)
+      if (privateLinks.get(1).getBonusAmount() < 20) {
         return Optional.of(privateLinks.get(1));
-      else
+      } else {
         return Optional.of(privateLinks.get(0));
+      }
     }
 
     return Optional.empty();

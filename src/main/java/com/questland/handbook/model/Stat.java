@@ -5,5 +5,6 @@ public enum Stat {
     ATTACK,
     MAGIC,
     DEFENSE,
-    HEALTH
+    HEALTH,
+    ATTACK_MAGIC
 }

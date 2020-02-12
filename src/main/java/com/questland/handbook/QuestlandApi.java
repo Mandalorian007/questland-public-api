@@ -1,6 +1,7 @@
 package com.questland.handbook;
 
 import com.questland.handbook.model.Item;
+import com.questland.handbook.model.Orb;
 import com.questland.handbook.model.Quality;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class QuestlandApi {
 
   private final ItemRepository itemRepository;
+  private final OrbRepository orbRepository;
 
   @GetMapping("/items")
   public List<Item> getItems(Sort sort,
@@ -36,7 +38,6 @@ public class QuestlandApi {
     } else {
       return itemRepository.findAll(sort);
     }
-
   }
 
   @GetMapping("/items/{id}")
@@ -63,4 +64,18 @@ public class QuestlandApi {
         new ResponseStatusException(HttpStatus.NOT_FOUND, "Item was not found."));
   }
 
+  @GetMapping("/orbs")
+  public List<Orb> getOrbs(Sort sort) {
+    return orbRepository.findAll(sort);
+  }
+
+  @GetMapping("/orbs/{id}")
+  public Orb getOrbById(@PathVariable("id") long id) {
+    return orbRepository.findById(id).orElse(null);
+  }
+
+  @GetMapping("/orbs/name/{name}")
+  public Orb getOrbByName(@PathVariable("name") String name) {
+    return orbRepository.findByNameIgnoreCase(name);
+  }
 }

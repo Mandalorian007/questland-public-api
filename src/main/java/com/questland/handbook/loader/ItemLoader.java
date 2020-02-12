@@ -69,7 +69,6 @@ public class ItemLoader implements ApplicationRunner {
         .filter(item -> validItemTypes.contains(item.getItemType()))
         // Convert to our internal gear model
         .map(item -> privateConverter.covertItemFromPrivate(item, emblemMap))
-
         .collect(Collectors.toList());
 
     log.info("Loading " + items.size() + " items into database...");

@@ -3,7 +3,7 @@ package com.questland.handbook.config;
 import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -19,6 +19,6 @@ public class SpringFoxConfig {
             .select()
             .apis(Predicates.not(RequestHandlerSelectors.basePackage("org.springframework.boot")))
             .build()
-            .directModelSubstitute(Pageable.class, SwaggerPageable.class);
+            .directModelSubstitute(Sort.class, SwaggerSort.class);
     }
 }
