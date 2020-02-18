@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -37,6 +38,7 @@ public class ItemLoader implements ApplicationRunner {
       "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/wearable_sets/";
 
   @Override
+  @Scheduled(cron = "0 0 0 ? * * *")
   public void run(ApplicationArguments args) throws Exception {
     String latestTokenResponse = restTemplate.getForObject(latestTokenUrl, String.class);
 
@@ -70,6 +72,9 @@ public class ItemLoader implements ApplicationRunner {
         // Convert to our internal gear model
         .map(item -> privateConverter.covertItemFromPrivate(item, emblemMap))
         .collect(Collectors.toList());
+
+    log.info("dropping existing item table");
+    itemRepository.deleteAll();
 
     log.info("Loading " + items.size() + " items into database...");
     itemRepository.saveAll(items);

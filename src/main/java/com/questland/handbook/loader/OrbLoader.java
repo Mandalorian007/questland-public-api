@@ -13,10 +13,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -34,6 +36,7 @@ public class OrbLoader implements ApplicationRunner {
       "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/item_templates/";
 
   @Override
+  @Scheduled(cron = "0 0 0 ? * * *")
   public void run(ApplicationArguments args) throws Exception {
     String latestTokenResponse = restTemplate.getForObject(latestTokenUrl, String.class);
 
@@ -53,6 +56,9 @@ public class OrbLoader implements ApplicationRunner {
         // Convert to our internal orb model
         .map(orb -> privateConverter.covertOrbFromPrivate(orb))
         .collect(Collectors.toList());
+
+    log.info("dropping existing orb table");
+    orbRepository.deleteAll();
 
     log.info("Loading " + orbs.size() + " orbs into database...");
     orbRepository.saveAll(orbs);
