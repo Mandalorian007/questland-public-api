@@ -4,6 +4,7 @@ import com.questland.handbook.loader.model.PrivateItem;
 import com.questland.handbook.loader.model.PrivateLink;
 import com.questland.handbook.loader.model.PrivateOrb;
 import com.questland.handbook.loader.model.PrivateStats;
+import com.questland.handbook.loader.model.PrivateWeaponPassive;
 import com.questland.handbook.model.Emblem;
 import com.questland.handbook.model.Item;
 import com.questland.handbook.model.ItemSlot;
@@ -11,6 +12,7 @@ import com.questland.handbook.model.Orb;
 import com.questland.handbook.model.Quality;
 import com.questland.handbook.model.Stat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -21,7 +23,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class PrivateConverterService {
 
-  public Item covertItemFromPrivate(PrivateItem privateItem, Map<Integer, Emblem> emblemMap) {
+  public Item covertItemFromPrivate(PrivateItem privateItem, Map<Integer, Emblem> emblemMap,
+                                    Map<Integer, PrivateWeaponPassive> weaponPassives) {
     return Item.builder()
         .id(privateItem.getLinkId())
         .name(privateItem.getName())
@@ -41,6 +44,16 @@ public class PrivateConverterService {
         .itemLinks(convertItemLinksFromPrivate(privateItem.getLinks()))
         .orbBonus(covertOrbBonusFromPrivate(privateItem.getLinks()))
         .orbLinks(convertOrbLinksFromPrivate(privateItem.getLinks()))
+        .passive1Name(
+            convertToPassiveNameFromPrivate(privateItem.getWeaponPassives(), weaponPassives, 1))
+        .passive1Description(
+            convertToPassiveDescriptionFromPrivate(privateItem.getWeaponPassives(), weaponPassives,
+                1))
+        .passive2Name(
+            convertToPassiveNameFromPrivate(privateItem.getWeaponPassives(), weaponPassives, 2))
+        .passive2Description(
+            convertToPassiveDescriptionFromPrivate(privateItem.getWeaponPassives(), weaponPassives,
+                2))
         .build();
   }
 
@@ -186,6 +199,65 @@ public class PrivateConverterService {
       default:
         return Stat.NONE;
     }
+  }
+
+  private static String convertToPassiveNameFromPrivate(List<Integer> passiveIds,
+                                                        Map<Integer, PrivateWeaponPassive> weaponPassives,
+                                                        int passiveNumber) {
+    if (passiveIds == null || passiveIds.size() < 2) {
+      return null;
+    }
+    PrivateWeaponPassive passive =
+        weaponPassives.getOrDefault(passiveIds.get(passiveNumber - 1), null);
+    if (passive == null) {
+      return null;
+    }
+    return passive.getName();
+  }
+
+  private static String convertToPassiveDescriptionFromPrivate(List<Integer> passiveIds,
+                                                               Map<Integer, PrivateWeaponPassive> weaponPassives,
+                                                               int passiveNumber) {
+    if (passiveIds == null || passiveIds.size() < 2) {
+      return null;
+    }
+    PrivateWeaponPassive passive =
+        weaponPassives.getOrDefault(passiveIds.get(passiveNumber - 1), null);
+    if (passive == null) {
+      return null;
+    }
+    return cleanDescription(passive.getDescription(), passive.getTemplateData(),
+        passive.getTriggerChance());
+  }
+
+  private static String cleanDescription(String description, String templateData, int triggerChance) {
+    String[] attirbuteParts = templateData.split(",");
+
+    return description
+        .replace("<sprite=\"skill_atlas\" name=\"r\">", " red")
+        .replace("<sprite=\"skill_atlas\" name=\"w\">", " white")
+        .replace("<sprite=\"skill_atlas\" name=\"b\">", " blue")
+        // Strip text formatting
+        .replaceAll("\\r\\n•", "")
+        .replaceAll("\\r\\n", "")
+
+        // Handle template things
+        .replace("#ATTR_OTHER#", arrayGetOrDefault(4, attirbuteParts) + "%")
+        .replace("#TRIGGER_PARAM#", "" + triggerChance)
+        .replace("#SHIELD#", arrayGetOrDefault(3, attirbuteParts) + "%")
+        .replace("#HEAL#", arrayGetOrDefault(5, attirbuteParts) + "%")
+        .replace("#CHAIN_CHANCE#", arrayGetOrDefault(1, attirbuteParts) + "%")
+        .replace("#ATTR_CHANCE#", arrayGetOrDefault(6, attirbuteParts) + "%")
+
+        // Hacky approach to strip html
+        .replaceAll("\\<[^>]*>", "");
+  }
+
+  private static String arrayGetOrDefault(int index, String[] array) {
+    if (array.length -1 >= index) {
+      return array[index];
+    }
+    return "";
   }
 
   private static int convertTotalPotentialFromPrivate(PrivateStats stats) {

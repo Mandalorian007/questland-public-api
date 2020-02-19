@@ -65,4 +65,12 @@ public class Item {
     @ElementCollection
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Integer> orbLinks;
+
+    private String passive1Name;
+
+    private String passive1Description;
+
+    private String passive2Name;
+
+    private String passive2Description;
 }

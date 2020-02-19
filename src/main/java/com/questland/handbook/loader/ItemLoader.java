@@ -1,10 +1,12 @@
 package com.questland.handbook.loader;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.questland.handbook.ItemRepository;
 import com.questland.handbook.loader.model.PrivateItem;
+import com.questland.handbook.loader.model.PrivateWeaponPassive;
 import com.questland.handbook.model.Emblem;
 import com.questland.handbook.model.Item;
 import java.util.Arrays;
@@ -36,6 +38,8 @@ public class ItemLoader implements ApplicationRunner {
       "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/item_templates/";
   private final String setEmblemUrl =
       "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/wearable_sets/";
+  private final String weaponPassivesUrl =
+      "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/static_passive_skills/";
 
   @Override
   @Scheduled(cron = "0 0 0 ? * * *")
@@ -55,6 +59,9 @@ public class ItemLoader implements ApplicationRunner {
 
     Map<Integer, Emblem> emblemMap = getEmblemMap();
 
+    Map<Integer, PrivateWeaponPassive> weaponPassives = getWeaponPassives();
+    log.info("Loaded " + weaponPassives.size() + " weapon passives");
+
     Set<String> validItemTypes = Set.of(
         "head",
         "chest",
@@ -70,7 +77,7 @@ public class ItemLoader implements ApplicationRunner {
         // Filter out any item that wouldn't be considered gear
         .filter(item -> validItemTypes.contains(item.getItemType()))
         // Convert to our internal gear model
-        .map(item -> privateConverter.covertItemFromPrivate(item, emblemMap))
+        .map(item -> privateConverter.covertItemFromPrivate(item, emblemMap, weaponPassives))
         .collect(Collectors.toList());
 
     log.info("dropping existing item table");
@@ -79,7 +86,6 @@ public class ItemLoader implements ApplicationRunner {
     log.info("Loading " + items.size() + " items into database...");
     itemRepository.saveAll(items);
     log.info("Database load of " + itemRepository.count() + " items complete.");
-
   }
 
 
@@ -110,6 +116,30 @@ public class ItemLoader implements ApplicationRunner {
             PrivateConverterService.getEmblemFromPrivate(emblemEntryList.get(1).asText()));
       }
       return emblemMap;
+    } catch (JsonProcessingException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  private Map<Integer, PrivateWeaponPassive> getWeaponPassives() {
+    try {
+      String latestTokenResponse = restTemplate.getForObject(latestTokenUrl, String.class);
+
+      String passiveToken = new ObjectMapper().readTree(latestTokenResponse)
+          .path("data")
+          .path("static_data")
+          .path("crc_details")
+          .path("static_passive_skills").asText();
+      log.info("Latest weapon passives token is: " + passiveToken);
+
+      String passiveWeaponsUrl = String.format(weaponPassivesUrl, passiveToken);
+      String passiveItemsRaw =
+          restTemplate.getForObject(passiveWeaponsUrl, String.class);
+
+      TypeReference<HashMap<Integer, PrivateWeaponPassive>> typeRef = new TypeReference<>() {
+      };
+      return new ObjectMapper().readValue(passiveItemsRaw, typeRef);
+
     } catch (JsonProcessingException e) {
       throw new RuntimeException(e);
     }
