@@ -9,6 +9,7 @@ import com.questland.handbook.loader.model.PrivateItem;
 import com.questland.handbook.loader.model.PrivateWeaponPassive;
 import com.questland.handbook.model.Emblem;
 import com.questland.handbook.model.Item;
+import com.questland.handbook.model.Quality;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +41,17 @@ public class ItemLoader implements ApplicationRunner {
       "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/wearable_sets/";
   private final String weaponPassivesUrl =
       "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/static_passive_skills/";
+
+  private Set<String> manuallyWhitelistedNames = Set.of(
+      "Triumphant Crown",
+      "Total Triumph Carapace",
+      "Gloves of Total Triumph",
+      "Triumphant Walk Boots",
+      "The Sacred Claw",
+      "Triumphant Thump Ring",
+      "Flight of Victory Necklace",
+      "Triumphant Defender"
+  );
 
   @Override
   @Scheduled(cron = "0 0 0 ? * * *")
@@ -79,6 +91,8 @@ public class ItemLoader implements ApplicationRunner {
         // Convert to our internal gear model
         .map(item -> privateConverter.covertItemFromPrivate(item, emblemMap, weaponPassives))
         .collect(Collectors.toList());
+
+    items = applyWhitelist(items);
 
     log.info("dropping existing item table");
     itemRepository.deleteAll();
@@ -143,6 +157,35 @@ public class ItemLoader implements ApplicationRunner {
     } catch (JsonProcessingException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  private List<Item> applyWhitelist(List<Item> items) {
+    Set<Quality> artifactQualities = Set.of(
+        Quality.ARTIFACT1,
+        Quality.ARTIFACT2,
+        Quality.ARTIFACT3,
+        Quality.ARTIFACT4
+    );
+    Set<String> whiteListedNames = items.stream()
+        .filter(item -> !artifactQualities.contains(item.getQuality()))
+        .filter(item -> item.getTotalPotential() < 200)
+        .map(Item::getName)
+        .collect(Collectors.toSet());
+    whiteListedNames.addAll(manuallyWhitelistedNames);
+
+    return items.stream()
+        .filter(item -> {
+          boolean contains = whiteListedNames.contains(item.getName());
+          if (contains) {
+            return true;
+          } else {
+            if (!artifactQualities.contains(item.getQuality())) {
+              log.info("Filtering item with name: " + item.getName());
+            }
+            return false;
+          }
+        })
+        .collect(Collectors.toList());
   }
 
 }

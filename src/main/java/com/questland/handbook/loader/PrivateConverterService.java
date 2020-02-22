@@ -12,6 +12,7 @@ import com.questland.handbook.model.Orb;
 import com.questland.handbook.model.Quality;
 import com.questland.handbook.model.Stat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -21,6 +22,17 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class PrivateConverterService {
+
+  private static List<String> whitelistedItemNames = Arrays.asList(
+      "The Sacred Claw",
+      "Gloves of Total Triumph",
+      "Triumphant Crown",
+      "Flight of Victory Necklace",
+      "Total Triumph Carapace",
+      "Triumphant Thump Ring",
+      "Triumphant Walk Boots",
+      "Triumphant Defender"
+  );
 
   public Item covertItemFromPrivate(PrivateItem privateItem, Map<Integer, Emblem> emblemMap,
                                     Map<Integer, PrivateWeaponPassive> weaponPassives) {
@@ -46,12 +58,14 @@ public class PrivateConverterService {
         .passive1Name(
             convertToPassiveNameFromPrivate(privateItem.getWeaponPassives(), weaponPassives, 1))
         .passive1Description(
-            convertToPassiveDescriptionFromPrivate(privateItem.getWeaponPassives(), weaponPassives,
+            convertToPassiveDescriptionFromPrivate(privateItem.getWeaponPassives(),
+                weaponPassives,
                 1))
         .passive2Name(
             convertToPassiveNameFromPrivate(privateItem.getWeaponPassives(), weaponPassives, 2))
         .passive2Description(
-            convertToPassiveDescriptionFromPrivate(privateItem.getWeaponPassives(), weaponPassives,
+            convertToPassiveDescriptionFromPrivate(privateItem.getWeaponPassives(),
+                weaponPassives,
                 2))
         .build();
   }
@@ -229,7 +243,8 @@ public class PrivateConverterService {
         passive.getTriggerChance());
   }
 
-  private static String cleanDescription(String description, String templateData, int triggerChance) {
+  private static String cleanDescription(String description, String templateData,
+                                         int triggerChance) {
     String[] attirbuteParts = templateData.split(",");
 
     return description
@@ -253,7 +268,7 @@ public class PrivateConverterService {
   }
 
   private static String arrayGetOrDefault(int index, String[] array) {
-    if (array.length -1 >= index) {
+    if (array.length - 1 >= index) {
       return array[index];
     }
     return "";
