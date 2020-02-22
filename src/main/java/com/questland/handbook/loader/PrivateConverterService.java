@@ -12,7 +12,6 @@ import com.questland.handbook.model.Orb;
 import com.questland.handbook.model.Quality;
 import com.questland.handbook.model.Stat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -40,10 +39,10 @@ public class PrivateConverterService {
         .magicPotential(convertMagicPotentialFromPrivate(privateItem.getStats()))
         .defensePotential(convertDefensePotentialFromPrivate(privateItem.getStats()))
         .healthPotential(convertHealthPotentialFromPrivate(privateItem.getStats()))
-        .itemBonus(covertItemBonusFromPrivate(privateItem.getLinks()))
+        /*.itemBonus(covertItemBonusFromPrivate(privateItem.getLinks()))
         .itemLinks(convertItemLinksFromPrivate(privateItem.getLinks()))
         .orbBonus(covertOrbBonusFromPrivate(privateItem.getLinks()))
-        .orbLinks(convertOrbLinksFromPrivate(privateItem.getLinks()))
+        .orbLinks(convertOrbLinksFromPrivate(privateItem.getLinks()))*/
         .passive1Name(
             convertToPassiveNameFromPrivate(privateItem.getWeaponPassives(), weaponPassives, 1))
         .passive1Description(

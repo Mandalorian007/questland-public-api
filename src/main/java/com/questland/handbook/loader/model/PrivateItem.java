@@ -2,9 +2,8 @@ package com.questland.handbook.loader.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 @Data
 // Ignoring unknowns to minimize internal API reliance
@@ -30,7 +29,7 @@ public class PrivateItem {
 
     private PrivateStats stats;
 
-    private List<PrivateLink> links;
+    //private List<PrivateLink> links;
 
     @JsonProperty("pskls")
     private List<Integer> weaponPassives;

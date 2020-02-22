@@ -52,7 +52,7 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private Emblem emblem;
 
-    @Enumerated(EnumType.STRING)
+    /*@Enumerated(EnumType.STRING)
     private Stat itemBonus;
 
     @ElementCollection
@@ -64,7 +64,7 @@ public class Item {
 
     @ElementCollection
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Integer> orbLinks;
+    private List<Integer> orbLinks;*/
 
     private String passive1Name;
 
