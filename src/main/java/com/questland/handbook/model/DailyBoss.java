@@ -3,6 +3,6 @@ package com.questland.handbook.model;
 import lombok.Data;
 
 @Data
-public class GuildBoss {
+public class DailyBoss {
   private final String name;
 }

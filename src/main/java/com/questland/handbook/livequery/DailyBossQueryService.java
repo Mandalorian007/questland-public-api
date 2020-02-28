@@ -1,7 +1,7 @@
 package com.questland.handbook.livequery;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.questland.handbook.model.GuildBoss;
+import com.questland.handbook.model.DailyBoss;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @Service
-public class GuildBossQueryService {
+public class DailyBossQueryService {
 
   @Value("${PLAYER_TOKEN}")
   private String playerToken;
@@ -21,7 +21,7 @@ public class GuildBossQueryService {
   private final String playerLoginUrl = "http://gs-global-wrk-04.api-ql.com/client/init/";
 
   //TODO consider caching on this method
-  public GuildBoss getCurrentGuildBoss() {
+  public DailyBoss getCurrentDailyBoss() {
     if (playerToken == null) {
       log.error("Player token is missing!");
       return null;
@@ -37,15 +37,15 @@ public class GuildBossQueryService {
           new HttpEntity<String>(headers),
           String.class).getBody();
 
-      String guildBossName = new ObjectMapper().readTree(playerLoginInfo)
+      String dailyBossName = new ObjectMapper().readTree(playerLoginInfo)
           .path("data")
           .path("ch_boss")
           .path("boss")
           .path("name").asText();
 
-      return new GuildBoss(guildBossName);
+      return new DailyBoss(dailyBossName);
     } catch (Exception e) {
-      log.error("Failed to load guild boss data", e);
+      log.error("Failed to load daily boss data", e);
       return null;
     }
 

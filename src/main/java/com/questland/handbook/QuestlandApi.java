@@ -1,7 +1,7 @@
 package com.questland.handbook;
 
-import com.questland.handbook.livequery.GuildBossQueryService;
-import com.questland.handbook.model.GuildBoss;
+import com.questland.handbook.livequery.DailyBossQueryService;
+import com.questland.handbook.model.DailyBoss;
 import com.questland.handbook.model.Item;
 import com.questland.handbook.model.Orb;
 import com.questland.handbook.model.Quality;
@@ -23,7 +23,7 @@ public class QuestlandApi {
 
   private final ItemRepository itemRepository;
   private final OrbRepository orbRepository;
-  private final GuildBossQueryService guildBossQueryService;
+  private final DailyBossQueryService dailyBossQueryService;
 
   @GetMapping("/items")
   public List<Item> getItems(Sort sort,
@@ -82,11 +82,11 @@ public class QuestlandApi {
     return orbRepository.findByNameIgnoreCase(name);
   }
 
-  @GetMapping("/guildboss/current")
-  public GuildBoss getCurrentGuildBoss() {
-    GuildBoss currentGuildBoss = guildBossQueryService.getCurrentGuildBoss();
-    return currentGuildBoss != null
-           ? currentGuildBoss
-           : new GuildBoss("Couldn't find current guild boss");
+  @GetMapping("/dailyboss/current")
+  public DailyBoss getCurrentDailyBoss() {
+    DailyBoss currentDailyBoss = dailyBossQueryService.getCurrentDailyBoss();
+    return currentDailyBoss != null
+           ? currentDailyBoss
+           : new DailyBoss("Couldn't find current daily boss");
   }
 }
