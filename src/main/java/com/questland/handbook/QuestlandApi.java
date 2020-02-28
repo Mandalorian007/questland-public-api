@@ -1,5 +1,7 @@
 package com.questland.handbook;
 
+import com.questland.handbook.livequery.GuildBossQueryService;
+import com.questland.handbook.model.GuildBoss;
 import com.questland.handbook.model.Item;
 import com.questland.handbook.model.Orb;
 import com.questland.handbook.model.Quality;
@@ -21,6 +23,7 @@ public class QuestlandApi {
 
   private final ItemRepository itemRepository;
   private final OrbRepository orbRepository;
+  private final GuildBossQueryService guildBossQueryService;
 
   @GetMapping("/items")
   public List<Item> getItems(Sort sort,
@@ -77,5 +80,13 @@ public class QuestlandApi {
   @GetMapping("/orbs/name/{name}")
   public Orb getOrbByName(@PathVariable("name") String name) {
     return orbRepository.findByNameIgnoreCase(name);
+  }
+
+  @GetMapping("/guildboss/current")
+  public GuildBoss getCurrentGuildBoss() {
+    GuildBoss currentGuildBoss = guildBossQueryService.getCurrentGuildBoss();
+    return currentGuildBoss != null
+           ? currentGuildBoss
+           : new GuildBoss("Couldn't find current guild boss");
   }
 }
