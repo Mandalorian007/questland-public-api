@@ -1,0 +1,1087 @@
+stageId,monsterName,count
+1,Venomous Pest,3
+1,Forsaken Skeleton,1
+3,Venom Pest,3
+3,Fire Spitter,2
+5,Venom Pest,3
+5,Fire Spitter,2
+5,Ghargantula,1
+9,Forsaken Warrior,3
+9,Magma Spider,1
+11,Fire Spitter,2
+11,Warrior Remains,2
+11,Forsaken Warrior,1
+11,Marble Golem,1
+13,Assassin,2
+13,Forsaken Warrior,2
+13,Venom Pest,1
+15,Assassin,3
+15,Magma Spider,2
+15,Warrior Remains,1
+17,Fire Spitter,2
+17,Forsaken Warrior,2
+17,Magma Spider,2
+17,Venom Pest,2
+17,Werebear,1
+19,Barbarian,2
+19,Forsaken Warrior,2
+21,Assassin,2
+21,Barbarian,2
+21,Forsaken Warrior,2
+21,Venom Pest,2
+21,Forest Spirit,1
+33,Venom Pest,2
+33,Assassin,1
+33,Dark Wizard,1
+35,Barbarian,2
+35,Venom Pest,2
+35,Dark Wizard,1
+35,Magma Spider,1
+37,Magma Spider,4
+37,Warrior Remains,2
+37,Assassin,1
+37,Dark Wizard,1
+37,Forest Oomph,1
+39,Forsaken Warrior,2
+39,Magma Spider,2
+39,Goblin Procrastinator,1
+39,Scrounger Toad,1
+23,Warrior Remains,3
+23,Forsaken Warrior,2
+23,Archent,1
+23,Goblin Procrastinator,1
+25,Warrior Remains,4
+25,Assassin,1
+25,Scrounger Toad,1
+27,Barbarian,2
+27,Fire Spitter,2
+27,Forsaken Warrior,1
+27,Scrounger Toad,1
+29,Dark Wizard,2
+29,Scrounger Toad,2
+29,Barbarian,1
+29,Forsaken Warrior,1
+29,Ghoulmancer,1
+29,Goblin Procrastinator,1
+31,Revenant,2
+31,Warrior Remains,2
+41,Revenant,3
+41,Assassin,2
+41,Magma Spider,1
+43,Forsaken Warrior,3
+43,Dark Wizard,2
+43,Passivus Agressivus,1
+43,Reptilian Warrior,1
+43,Revenant,1
+43,Warrior Remains,1
+45,Barbarian,1
+45,Ogre,1
+45,Scrounger Toad,1
+45,Warrior Remains,1
+49,Assassin,1
+49,Dark Wizard,1
+49,Ogre,1
+49,Revenant,1
+49,Terrifying Skeleton,1
+49,Warrior Remains,1
+47,Forsaken Warrior,4
+47,Scrounger Toad,2
+47,Magma Spider,1
+47,Moorhog,1
+47,Revenant,1
+51,Barbarian,3
+51,Assassin,1
+51,Dark Wizard,1
+51,Magma Spider,1
+53,Barbarian,2
+53,Revenant,2
+53,Magma Spider,1
+53,Venom Pest,1
+55,Assassin,2
+55,Barbarian,2
+55,Scrounger Toad,2
+55,Forsaken Warrior,1
+55,Mooch,1
+55,Ogre,1
+57,Enchanted Warrior,1
+57,Magma Spider,1
+57,Revenant,1
+57,Terrifying Skeleton,1
+61,Assassin,1
+61,Butterball,1
+61,Ogre,1
+61,Terrifying Skeleton,1
+61,Venom Pest,1
+65,Passivus Agressivus,2
+65,Revenant,2
+65,Assassin,1
+65,Hecate,1
+65,Restraint Revenant,1
+65,Terrifying Skeleton,1
+63,Assassin,2
+63,Fire Spitter,1
+63,Goblin Procrastinator,1
+63,Ogre,1
+63,Venom Pest,1
+73,Barbarian,1
+73,Forsaken Warrior,4
+73,Magma Spider,1
+73,Terrifying Skeleton,1
+73,Tomb Guardian,1
+73,Venom Pest,1
+77,Forsaken Warrior,1
+77,Magma Spider,1
+77,Passivus Agressivus,1
+77,Revenant,2
+77,Venom Pest,1
+79,Cleric,1
+79,Dark Wizard,1
+79,Forsaken Warrior,1
+79,Genieus,1
+79,Magma Spider,1
+79,Skeletal Shieldman,2
+79,Venom Pest,1
+79,Warrior Remains,1
+69,Bob Barbarian,1
+69,Cleric,2
+69,Revenant,1
+69,Scrounger Toad,1
+69,Slimy Thief,1
+81,Dark Wizard,1
+81,Enchanted Warrior,1
+81,Fire Spitter,2
+81,Passivus Agressivus,1
+81,Revenant,1
+67,Assassin,3
+67,Barbarian,2
+67,Dark Wizard,2
+67,Rasayan,1
+67,Skeletal Shieldman,1
+75,Fire Spitter,1
+75,Passivus Agressivus,1
+75,Revenant,2
+75,Skeletal Shieldman,1
+75,Warrior Remains,1
+83,Assassin,1
+83,Blue Allergy Goblin,1
+83,Dried Wizard,1
+83,Goblin Procrastinator,1
+83,High Necropriest,1
+83,Ogre,1
+83,Scrounger Toad,1
+83,Skeletal Shieldman,1
+83,Terrifying Skeleton,1
+85,Barbarian,1
+85,Bob Barbarian,1
+85,Dark Wizard,1
+85,Forsaken Warrior,1
+85,Magma Spider,1
+85,Venom Pest,1
+87,Blue Allergy Goblin,1
+87,Barbarian,3
+87,Cleric,1
+87,Dark Wizard,1
+87,Dunedigger,1
+87,Scrounger Toad,1
+87,Slimy Thief,1
+89,Barbarian,1
+89,Dark Wizard,1
+89,Dried Wizard,1
+89,Magic Muskrat,1
+91,Butterball,1
+91,Dark Wizard,1
+91,Magic Muskrat,3
+91,Rob Barbarian,1
+93,Barbarian,1
+93,Cleric,1
+93,Cutting Assassin,1
+93,Forsaken Warrior,3
+93,Hierophant,1
+93,Terrifying Skeleton,2
+95,Bob Barbarian,1
+95,Dark Wizard,2
+95,Imp Warlock,1
+95,Magic Mage,1
+95,Magic Muskrat,1
+97,Barbarian,1
+97,Cleric,1
+97,Heavy Ogre,1
+97,Ogre,1
+97,Striga,1
+97,Terrifying Skeleton,3
+97,Warrior Remains,1
+99,Barbarian,1
+99,Bob Barbarian,1
+99,Butterball,1
+99,Cleric,1
+99,Heavy Ogre,1
+99,Skeletal Shieldman,1
+101,Dark Wizard,1
+101,Restraint Revenant,1
+101,Revenant,2
+101,Scrounger Toad,2
+103,Abomination,1
+103,Forsaken Warrior,2
+103,Goblin Procrastinator,1
+103,Magic Muskrat,1
+103,Skeletal Shieldman,1
+103,Terrifying Skeleton,1
+103,Warrior Remains,1
+105,Cutting Assassin,1
+105,Enchanted Warrior,1
+105,Hell Minion,1
+105,Magic Muskrat,2
+105,Slick Hunter,1
+107,Barbarian,2
+107,Butterball,2
+107,Heavy Ogre,1
+107,Terrifying Skeleton,1
+109,Cold Mage,1
+109,Countering Champion,1
+109,Forsaken Warrior,1
+109,Hell Minion,1
+109,High Vampire,1
+109,Powerful Skeleton,1
+109,Rob Barbarian,1
+109,Skeletal Shieldman,1
+109,Warrior Remains,1
+111,Dried Wizard,1
+111,Enchanted Warrior,2
+111,Forsaken Warrior,1
+111,Magic Muskrat,1
+111,Warrior Remains,1
+113,Blood Baron,1
+113,Cleric,1
+113,Cold Mage,1
+113,Enchanted Warrior,2
+113,Forsaken Warrior,1
+113,Passivus Agressivus,1
+113,Rob Barbarian,1
+113,Warrior Remains,1
+115,Butterball,1
+115,Cold Mage,1
+115,Countering Champion,1
+115,Enchanted Warrior,1
+115,Powerful Skeleton,1
+115,Restraint Revenant,1
+117,Butterball,1
+117,Countering Champion,1
+117,Forsaken Warrior,1
+117,Magic Muskrat,2
+117,Ted Barbarian,1
+119,Heavy Ogre,1
+119,Powerful Skeleton,1
+119,Rob Barbarian,2
+119,Terrifying Skeleton,2
+119,Warrior Remains,2
+119,Wendigore,1
+121,Countering Champion,1
+121,Dried Wizard,2
+121,Enchanted Warrior,1
+121,Rob Barbarian,1
+121,Warrior Remains,1
+123,Cold Mage,1
+123,Heavy Ogre,1
+123,Imp Warlock,1
+123,Rob Barbarian,1
+123,Shielding Mage Maus,1
+123,Ted Barbarian,1
+125,Bearbarian,1
+125,Blade Bleeder,1
+125,Cold Mage,1
+125,Forsaken Warrior,1
+125,Powerful Skeleton,1
+125,Rob Barbarian,1
+125,Ted Barbarian,2
+125,Terrifying Skeleton,1
+127,Cold Mage,1
+127,Countering Champion,1
+127,Dried Wizard,1
+127,Magic Muskrat,1
+127,Moor Mage,1
+127,Wise Mage,1
+129,Cleric,1
+129,Cold Blue,1
+129,Cold Red,1
+129,Cold White,1
+129,Dried Wizard,1
+129,Rob Barbarian,1
+129,Ted Barbarian,1
+129,Terrifying Skeleton,1
+129,Warrior Remains,1
+133,Bob Barbarian,2
+133,Dried Wizard,3
+133,Wise Mage,1
+131,Butterball,1
+131,Cold Mage,1
+131,Dried Wizard,1
+131,Enchanted Warrior,2
+131,Merciless Mage,1
+135,Necromancer,1
+135,Powerful Skeleton,1
+135,Scrounger Toad,1
+135,Shielding Mage Maus,1
+135,Skeletal Shieldman,1
+135,Slimy Thief,1
+135,Terrifying Skeleton,2
+135,Vendyetti,1
+139,Butterball,1
+139,Countering Champion,2
+139,Powerful Skeleton,1
+139,Rob Barbarian,1
+139,Ted Barbarian,1
+141,Butterball,2
+141,Dodgy Assassin,1
+141,Rob Barbarian,2
+141,Ted Barbarian,1
+143,Bob Barbarian,1
+143,Cleric,1
+143,Countering Champion,1
+143,Magic Muskrat,1
+143,Magma Spider,1
+143,Minotaur,1
+143,Ted Barbarian,2
+143,Venom Pest,1
+145,Black Ninja,1
+145,Cleric,1
+145,Slick Hunter,1
+145,Stunning Assasin,1
+145,Terrifying Skeleton,1
+145,Warrior Remains,1
+147,Bob Barbarian,1
+147,Butterball,1
+147,Countering Champion,1
+147,Forsaken Warrior,1
+147,Goblin Procrastinator,1
+147,Ice Reaper,1
+147,Scrounger Toad,1
+147,Skeletal Shieldman,1
+147,Slimy Thief,1
+151,Attack Totem,1
+151,Butterball,1
+151,Heavy Ogre,1
+151,Powerful Skeleton,1
+151,Terrifying Skeleton,1
+151,Warrior Remains,1
+153,Cleric,1
+153,Enchanted Warrior,2
+153,Rob Barbarian,1
+153,Ted Barbarian,1
+153,Wise Mage,1
+155,Frost Dragon,1
+155,Imp Warlock,1
+155,Magic Muskrat,1
+155,Powerful Skeleton,1
+155,Shielding Mage Maus,1
+155,Ted Barbarian,1
+155,Terrifying Skeleton,1
+157,Countering Champion,1
+157,Enchanted Warrior,2
+157,Forsaken Warrior,1
+157,Rob Barbarian,1
+157,Shielding Mage Maus,1
+159,Attack Totem,1
+159,Butterball,1
+159,Heavy Ogre,1
+159,Magic Mage,1
+159,Merciless Mage,1
+159,Wise Mage,1
+161,Butterball,1
+161,Cleric,1
+161,Countering Champion,1
+161,Skeletal Shieldman,1
+161,Terrifying Skeleton,2
+161,Warrior Remains,2
+161,Zohan Blackbeard,1
+335,Dried Wizard,1
+335,Forsaken Warrior,1
+335,Magic Muskrat,3
+335,Warrior Remains,1
+337,Enchanted Warrior,2
+337,Passivus Agressivus,1
+337,Skeletal Shieldman,1
+337,Terrifying Skeleton,1
+337,Venomous Merman,1
+337,Warrior Remains,1
+163,Dried Wizard,1
+163,Heavy Ogre,2
+163,Imp Warlock,1
+163,Necromancer,1
+163,Shielding Mage Maus,1
+167,Dried Wizard,3
+167,Enchanted Warrior,1
+167,Magic Muskrat,2
+165,Cleric,1
+165,Countering Champion,1
+165,Giant Thorax,1
+165,Imp Warlock,1
+165,Rob Barbarian,1
+165,Shielded Ally,2
+165,Skeletal Shieldman,1
+165,Terrifying Skeleton,1
+339,Butterball,3
+339,Cleric,2
+339,Heavy Ogre,1
+169,Butterball,1
+169,Cleric,2
+169,Countering Champion,1
+169,Rob Barbarian,1
+169,Ted Barbarian,1
+171,Countering Champion,1
+171,Dried Wizard,1
+171,Forsaken Warrior,1
+171,Heavy Ogre,1
+171,Octomage,1
+171,Powerful Skeleton,1
+171,Shielding Mage Maus,1
+171,Terrifying Skeleton,1
+171,Warrior Remains,1
+173,Butterball,2
+173,Cleric,2
+173,Heavy Ogre,1
+173,Rob Barbarian,1
+175,Countering Champion,1
+175,Cutting Assassin,1
+175,Necromancer,1
+175,Powerful Skeleton,1
+175,Seamurai,1
+175,Ted Barbarian,1
+175,Terrifying Skeleton,2
+175,Warrior Remains,1
+177,Black Ninja,1
+177,Countering Champion,1
+177,Forsaken Warrior,1
+177,Rob Barbarian,1
+177,Slick Hunter,1
+177,Stunning Assasin,1
+179,Cleric,1
+179,Countering Champion,1
+179,Heavy Ogre,1
+179,Rob Barbarian,2
+179,Ted Barbarian,1
+181,Countering Champion,1
+181,Forsaken Warrior,1
+181,Goblin Procrastinator,1
+181,Lurking Assassin,1
+181,Mantamort,1
+181,Rob Barbarian,1
+181,Ted Barbarian,1
+181,Venom Pest,1
+181,Warrior Remains,1
+183,Countering Champion,1
+183,Imp Warlock,2
+183,Magic Muskrat,1
+183,Shielding Mage Maus,2
+185,Enchanted Warrior,2
+185,Magic Muskrat,3
+185,Shielding Mage Maus,1
+187,Cave Troll,1
+187,Dodging Revenant,1
+187,Imp Warlock,2
+187,Magic Muskrat,1
+187,Scrounger Toad,2
+187,Skeletal Shieldman,1
+187,Terrifying Skeleton,1
+189,Butterball,1
+189,Cold Mage,1
+189,Magic Muskrat,3
+189,Merciless Mage,1
+191,Countering Champion,1
+191,Goblin Procrastinator,1
+191,Powerful Skeleton,1
+191,Shy Bomber,1
+191,Ted Barbarian,1
+191,Terrifying Skeleton,2
+191,Warrior Remains,1
+191,White Widow,1
+341,Cold Mage,1
+341,Dried Wizard,2
+341,Enchanted Warrior,2
+341,Restraint Revenant,1
+193,Butterball,1
+193,Cleric,1
+193,Enchanted Warrior,2
+193,Heavy Ogre,1
+193,Wise Mage,1
+195,Magma Spider,2
+195,Powerful Skeleton,1
+195,Terrifying Skeleton,1
+195,Warrior Remains,2
+195,Zuulaman,1
+195,Zuulaman's Fiend,1
+195,Zuulaman's Fiend,1
+197,Bob Barbarian,1
+197,Dried Wizard,2
+197,Heavy Ogre,1
+197,Imp Warlock,1
+197,Shielding Mage Maus,1
+199,Blade Bleeder,2
+199,Rob Barbarian,2
+199,Ted Barbarian,2
+201,Butterball,1
+201,Cold Mage,1
+201,Magic Muskrat,2
+201,Phantom Miner,3
+201,Skeletal Shieldman,1
+201,Warrior Remains,1
+203,Black Ninja,1
+203,Dried Wizard,2
+203,Enchanted Warrior,1
+203,Slick Hunter,1
+203,Stunning Assasin,1
+205,Cave Mantis,1
+205,Cleric,1
+205,Cold Mage,1
+205,Countering Champion,1
+205,Restraint Revenant,2
+205,Skeletal Shieldman,1
+205,Ted Barbarian,1
+205,Warrior Remains,1
+207,Bob Barbarian,1
+207,Cold Mage,1
+207,Dried Wizard,2
+207,Skeletal Shieldman,1
+207,Warrior Remains,1
+209,Bob Barbarian,1
+209,Cleric,1
+209,Dried Wizard,2
+209,Rob Barbarian,1
+209,Ted Barbarian,1
+211,Countering Champion,1
+211,Forsaken Warrior,1
+211,Necromancer,1
+211,Onyx Dragon,1
+211,Powerful Skeleton,1
+211,Ted Barbarian,1
+211,Terrifying Skeleton,1
+343,Imp Warlock,1
+343,Magic Mage,1
+343,Magic Muskrat,1
+343,Necromancer,1
+343,Shielding Mage Maus,1
+343,Wise Mage,1
+213,Dried Wizard,2
+213,Heavy Ogre,1
+213,Necromancer,1
+213,Rob Barbarian,1
+213,Ted Barbarian,1
+215,Dried Wizard,1
+215,Forsaken Warrior,1
+215,Goblin Procrastinator,1
+215,Harpy,1
+215,Magic Muskrat,2
+215,Powerful Skeleton,1
+215,Skeletal Shieldman,1
+215,Slimy Thief,1
+217,Cold Mage,1
+217,Enchanted Warrior,1
+217,Magic Muskrat,3
+217,Restraint Revenant,1
+219,Countering Champion,1
+219,Dried Wizard,1
+219,Enchanted Warrior,1
+219,Forsaken Warrior,2
+219,Hobgoblin,1
+219,Magic Muskrat,2
+219,Warrior Remains,1
+221,Bob Barbarian,1
+221,Dried Wizard,1
+221,Magic Mage,1
+221,Merciless Mage,1
+221,Wise Mage,2
+223,Butterball,1
+223,Cleric,1
+223,Cold Mage,1
+223,Moor Mage,1
+223,Warrior Remains,1
+223,Wise Mage,1
+225,Bob Barbarian,1
+225,Cleric,1
+225,Dried Wizard,2
+225,Forsaken Warrior,1
+225,Magic Muskrat,1
+225,Rocky Balboargh,1
+225,Venom Pest,1
+225,Warrior Remains,1
+227,Countering Champion,1
+227,Cutting Assassin,1
+227,Dried Wizard,1
+227,Hell Minion,1
+227,Shielding Mage Maus,1
+227,Slick Hunter,1
+229,Bob Barbarian,1
+229,Butterball,1
+229,Dried Wizard,2
+229,Magic Muskrat,2
+231,Cold Mage,1
+231,Forsaken Warrior,1
+231,Healing Totem,1
+231,Hubba&Dubba,1
+231,Imp Warlock,1
+231,Magic Muskrat,1
+231,Shielding Mage Maus,1
+231,Warrior Remains,2
+233,Butterball,3
+233,Heavy Ogre,1
+233,Rob Barbarian,1
+233,Terrifying Skeleton,1
+235,Kamikaze Goblin,1
+235,Kamikaze Goblin,1
+235,Magic Muskrat,1
+235,Magma Spider,1
+235,Rob Barbarian,2
+235,Troll Rider,1
+235,Venom Pest,1
+235,Warrior Remains,1
+237,Attack Totem,1
+237,Butterball,
+237,Dodgy Assassin,1
+237,Heavy Ogre,1
+237,Rob Barbarian,1
+237,Ted Barbarian,1
+239,Butterball,3
+239,Cleric,2
+239,Rob Barbarian,1
+241,Black Ninja,1
+241,Butterball,2
+241,Magma Spider,2
+241,Mediataur,1
+241,Powerful Skeleton,1
+241,Skeletal Shieldman,1
+241,Warrior Remains,1
+243,Dried Wizard,1
+243,Enchanted Warrior,2
+243,Magic Muskrat,2
+243,Shielding Mage Maus,1
+245,Bob Barbarian,1
+245,Dried Wizard,2
+245,Magic Mage,1
+245,Merciless Mage,1
+245,Wise Mage,1
+247,Forsaken Warrior,2
+247,Healing Totem,1
+247,Magic Muskrat,1
+247,Restless Hellion,1
+247,Scrounger Toad,1
+247,Venom Pest,1
+247,Warrior Remains,2
+249,Countering Champion,2
+249,Imp Warlock,1
+249,Rob Barbarian,1
+249,Shielding Mage Maus,1
+249,Warrior Remains,1
+251,Blue Succubus,1
+251,Cleric,1
+251,Countering Champion,1
+251,Heavy Ogre,1
+251,Red Succubus,1
+251,Ted Barbarian,1
+251,Terrifying Skeleton,1
+251,Warrior Remains,1
+251,White Succubus,1
+253,Bob Barbarian,1
+253,Dried Wizard,1
+253,Enchanted Warrior,1
+253,Magic Muskrat,2
+253,Wise Mage,1
+255,Dried Wizard,2
+255,Enchanted Warrior,2
+255,Rob Barbarian,1
+255,Ted Barbarian,1
+257,Black Ninja,1
+257,Coal Golem,1
+257,Countering Champion,1
+257,Dried Wizard,1
+257,Heavy Ogre,1
+257,Imp Warlock,1
+257,Magic Muskrat,1
+257,Powerful Skeleton,1
+257,Shielding Mage Maus,1
+345,Countering Champion,2
+345,Dried Wizard,1
+345,Hell Minion,1
+345,Magic Muskrat,1
+345,Rob Barbarian,1
+259,Bob Barbarian,1
+259,Butterball,2
+259,Countering Champion,2
+259,Powerful Skeleton,1
+261,Cleric,1
+261,Forsaken Warrior,1
+261,Powerful Skeleton,1
+261,Rob Barbarian,1
+261,Scorch,1
+261,Shielding Mage Maus,1
+261,Skeletal Shieldman,1
+261,Ted Barbarian,1
+261,Terrifying Skeleton,1
+263,Attack Totem,1
+263,Butterball,1
+263,Countering Champion,1
+263,Heavy Ogre,1
+263,Ted Barbarian,1
+263,Terrifying Skeleton,1
+265,Stygian,1
+265,Bob Barbarian,1
+265,Dried Wizard,2
+265,Forsaken Warrior,1
+265,Stygian's Fiend,1
+265,Stygian's Fiend,1
+265,Venom Pest,1
+265,Warrior Remains,1
+347,Butterball,1
+347,Cold Mage,1
+347,Merciless Mage,1
+347,Shielding Mage Maus,1
+347,Skeletal Shieldman,1
+347,Terrifying Skeleton,1
+267,Countering Champion,1
+267,Cutting Assassin,1
+267,Dried Wizard,1
+267,Hell Minion,1
+267,Shielding Mage Maus,1
+267,Slick Hunter,1
+269,Bob Barbarian,1
+269,Dried Wizard,2
+269,Lava Dragon,1
+269,Lava Dragon's Fiend,2
+269,Rob Barbarian,2
+269,Warrior Remains,1
+271,Bob Barbarian,1
+271,Dried Wizard,2
+271,Magic Mage,1
+271,Necromancer,1
+271,Wise Mage,1
+273,Dried Wizard,1
+273,Forsaken Warrior,1
+273,Heavy Ogre,1
+273,Magic Muskrat,1
+273,Necromancer,1
+273,Warrior Remains,1
+277,Cleric,1
+277,Fire Maul,1
+277,Forsaken Warrior,1
+277,Goblin Procrastinator,1
+277,Heavy Ogre,1
+277,Powerful Skeleton,1
+277,Skeletal Shieldman,1
+277,Terrifying Skeleton,1
+277,Warrior Remains,1
+279,Cold Mage,2
+279,Enchanted Warrior,1
+279,Imp Warlock,1
+279,Restraint Revenant,1
+279,Shielding Mage Maus,1
+281,Cleric,2
+281,Countering Champion,1
+281,Dried Wizard,2
+281,Magic Muskrat,1
+281,Megataur,1
+281,Powerful Skeleton,1
+281,Terrifying Skeleton,1
+283,Bob Barbarian,1
+283,Dried Wizard,1
+283,Magic Mage,1
+283,Merciless Mage,1
+283,Wise Mage,2
+285,Butterball,1
+285,Cleric,1
+285,Cold Mage,1
+285,Moor Mage,1
+285,Warrior Remains,1
+285,Wise Mage,1
+287,Fire Reaper,1
+287,Fire Reaper,1
+287,Fire Reaper,1
+287,Magic Muskrat,1
+287,Magma Spider,1
+287,Powerful Skeleton,1
+287,Ted Barbarian,1
+287,Terrifying Skeleton,1
+287,Venom Pest,1
+293,Black Ninja,1
+293,Bob Barbarian,1
+293,Butterball,1
+293,Countering Champion,1
+293,Slick Hunter,1
+293,Stunning Assasin,1
+295,Butterball,1
+295,Cleric,2
+295,Rob Barbarian,2
+295,Ted Barbarian,1
+289,Bob Barbarian,1
+289,Butterball,1
+289,Cold Mage,1
+289,Countering Champion,1
+289,Dried Wizard,1
+289,Forsaken Warrior,1
+289,Malachite Warrior,1
+289,Rob Barbarian,1
+289,Slimy Thief,1
+297,Bob Barbarian,1
+297,Butterball,2
+297,Cleric,1
+297,Countering Champion,1
+297,Heavy Ogre,1
+299,Dried Wizard,1
+299,Enchanted Warrior,2
+299,Rob Barbarian,1
+299,Shielding Mage Maus,1
+299,Skeletal Shieldman,1
+299,Ted Barbarian,1
+299,Terrifying Skeleton,1
+299,White Claw,1
+301,Imp Warlock,1
+301,Magic Mage,1
+301,Magic Muskrat,1
+301,Necromancer,1
+301,Shielding Mage Maus,1
+301,Wise Mage,1
+303,Dried Wizard,1
+303,Heavy Ogre,2
+303,Imp Warlock,1
+303,Necromancer,1
+303,Shielding Mage Maus,1
+305,Butterball,2
+305,Cleric,1
+305,Enchanted Warrior,2
+305,Forsaken Warrior,1
+305,Megamorph,1
+305,Rob Barbarian,1
+305,Shielding Mage Maus,1
+307,Butterball,1
+307,Cleric,1
+307,Enchanted Warrior,2
+307,Heavy Ogre,1
+307,Wise Mage,1
+309,Butterball,1
+309,Countering Champion,1
+309,Imp Warlock,1
+309,Magic Muskrat,2
+309,Shielding Mage Maus,1
+311,Butterball,1
+311,Countering Champion,1
+311,Heavy Ogre,1
+311,Imp Warlock,2
+311,Lurking Assassin,1
+311,Nightmarrah,1
+311,Shielding Mage Maus,2
+313,Black Ninja,1
+313,Cutting Assassin,1
+313,Hell Minion,1
+313,Slick Hunter,2
+313,Stunning Assasin,1
+315,Cleric,2
+315,Goblin Procrastinator,1
+315,Heavy Ogre,2
+315,Merciless Mage,1
+315,Slash Mantis,1
+315,Slimy Thief,2
+349,Butterball,1
+349,Cold Mage,1
+349,Countering Champion,1
+349,Dried Wizard,1
+349,Merciless Mage,1
+349,Shielding Mage Maus,1
+317,Enchanted Warrior,2
+317,Magic Mage,1
+317,Merciless Mage,1
+317,Shielding Mage Maus,1
+317,Wise Mage,1
+319,Attack Totem,1
+319,Butterball,3
+319,Cleric,1
+319,Growlax,1
+319,Magical Totem,1
+319,Rob Barbarian,1
+319,Skeletal Shieldman,1
+321,Cleric,1
+321,Countering Champion,1
+321,Skeletal Shieldman,1
+321,Ted Barbarian,1
+321,Terrifying Skeleton,1
+321,Warrior Remains,1
+351,Dried Wizard,2
+351,Enchanted Warrior,2
+351,Magic Muskrat,2
+323,Blue Slayer,1
+323,Forsaken Warrior,1
+323,Imp Warlock,1
+323,Magic Muskrat,1
+323,Red Slayer,1
+323,Skeletal Shieldman,1
+323,Terrifying Skeleton,1
+323,Warrior Remains,1
+323,White Slayer,1
+325,Butterball,2
+325,Heavy Ogre,1
+325,Rob Barbarian,2
+325,Ted Barbarian,1
+327,Dried Wizard,2
+327,Enchanted Warrior,1
+327,Merciless Mage,1
+327,Moor Mage,1
+327,Rob Barbarian,2
+327,Temple Golem,1
+327,Warrior Remains,1
+329,Dried Wizard,1
+329,Enchanted Warrior,2
+329,Rob Barbarian,2
+329,Warrior Remains,1
+331,Cold Mage,1
+331,Dried Wizard,2
+331,Enchanted Warrior,1
+331,Moor Mage,1
+331,Wise Mage,1
+333,Black Ninja,1
+333,Magic Mage,1
+333,Necromancer,1
+333,Slick Hunter,1
+333,Stunning Assasin,1
+333,Tormenthot,3
+333,Wise Mage,1
+374,Butterball,1
+374,Cleric,1
+374,Cutting Assassin,1
+374,Hell Minion,1
+374,Slick Hunter,1
+374,Warrior Remains,1
+376,Magic Mage,1
+376,Magic Muskrat,3
+376,Necromancer,1
+376,Wise Mage,1
+378,Bob Barbarian,1
+378,Butterball,1
+378,Countering Champion,1
+378,Dodgy Assassin,1
+378,Merciless Mage,2
+378,Rob Barbarian,1
+378,Sea Snake,1
+378,Ted Barbarian,1
+380,Dried Wizard,3
+380,Enchanted Warrior,1
+380,Heavy Ogre,1
+380,Necromancer,1
+382,Bob Barbarian,1
+382,Butterball,1
+382,Forsaken Warrior,1
+382,Goblin Procrastinator,1
+382,Magic Muskrat,2
+382,Medusa,1
+382,Merciless Mage,1
+382,Skeletal Shieldman,1
+384,Butterball,1
+384,Cleric,1
+384,Dried Wizard,2
+384,Enchanted Warrior,1
+384,Heavy Ogre,1
+386,Cold Mage,1
+386,Magic Mage,1
+386,Merciless Mage,1
+386,Moor Mage,1
+386,Wise Mage,2
+388,Heavy Ogre,1
+388,Imp Warlock,1
+388,Powerful Skeleton,1
+388,Rob Barbarian,1
+388,Sea Monarch,1
+388,Shielding Mage Maus,1
+388,Ted Barbarian,1
+388,Terrifying Skeleton,1
+388,Warrior Remains,1
+390,Butterball,1
+390,Countering Champion,1
+390,Heavy Ogre,1
+390,Hell Minion,1
+390,Rob Barbarian,1
+390,Terrifying Skeleton,1
+392,Attack Totem,1
+392,Butterball,1
+392,Cleric,1
+392,Countering Champion,1
+392,Heavy Ogre,1
+392,Rob Barbarian,1
+394,Attack Totem,1
+394,Butterball,1
+394,Cold Mage,1
+394,Heavy Ogre,1
+394,Lurking Assassin,1
+394,Rob Barbarian,1
+394,Sea Wizard,1
+394,Skeletal Shieldman,1
+394,Warrior Remains,1
+396,Cold Mage,1
+396,Dried Wizard,2
+396,Enchanted Warrior,1
+396,Moor Mage,1
+396,Wise Mage,1
+398,Bob Barbarian,2
+398,Cyclops,1
+398,Dodgy Assassin,2
+398,Dried Wizard,2
+398,Heavy Ogre,1
+400,Bob Barbarian,1
+400,Butterball,1
+400,Dried Wizard,1
+400,Magic Muskrat,2
+400,Wise Mage,1
+402,Butterball,1
+402,Heavy Ogre,1
+402,Imp Warlock,1
+402,Magic Muskrat,2
+402,Shielding Mage Maus,1
+404,Atlantis Cultist,1
+404,Bob Barbarian,1
+404,Cold Mage,1
+404,Dried Wizard,1
+404,Enchanted Warrior,2
+404,Magic Muskrat,1
+404,Skeletal Shieldman,1
+404,Warrior Remains,1
+406,Black Ninja,1
+406,Cutting Assassin,1
+406,Hell Minion,1
+406,Slick Hunter,2
+406,Stunning Assasin,1
+408,Cold Mage,1
+408,Imp Warlock,1
+408,Magic Mage,1
+408,Merciless Mage,1
+408,Shielding Mage Maus,1
+408,Wise Mage,1
+410,Cutting Assassin,1
+410,Hell Minion,1
+410,Naga,1
+410,Naga,1
+410,Naga,1
+410,Powerful Skeleton,1
+410,Slick Hunter,1
+410,Ted Barbarian,1
+410,Terrifying Skeleton,1
+412,Bob Barbarian,2
+412,Dried Wizard,3
+412,Wise Mage,1
+414,Bob Barbarian,1
+414,Butterball,1
+414,Countering Champion,2
+414,Cutting Assassin,1
+414,Dark Devourer,1
+414,Healing Totem,1
+414,Ted Barbarian,1
+414,Terrifying Skeleton,1
+416,Countering Champion,1
+416,Enchanted Warrior,2
+416,Shielding Mage Maus,1
+416,Ted Barbarian,1
+416,Terrifying Skeleton,1
+418,Bob Barbarian,1
+418,Dried Wizard,1
+418,Enchanted Warrior,2
+418,Wise Mage,2
+420,Butterball,2
+420,Cutting Assassin,1
+420,Forgotten Colossus,1
+420,Hell Minion,1
+420,Rob Barbarian,1
+420,Slick Hunter,1
+420,Stunning Assasin,2

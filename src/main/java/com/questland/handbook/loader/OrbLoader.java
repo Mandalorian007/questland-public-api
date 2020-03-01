@@ -1,19 +1,13 @@
 package com.questland.handbook.loader;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.questland.handbook.OrbRepository;
 import com.questland.handbook.loader.model.PrivateOrb;
-import com.questland.handbook.model.Emblem;
 import com.questland.handbook.model.Orb;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-import javax.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
@@ -27,7 +21,7 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class OrbLoader implements ApplicationRunner {
 
-  private final PrivateConverterService privateConverter;
+  private final PrivateItemAndOrbConverter privateConverter;
   private final OrbRepository orbRepository;
   private final RestTemplate restTemplate = new RestTemplate();
   private final String latestTokenUrl =

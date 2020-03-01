@@ -30,7 +30,7 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class ItemLoader implements ApplicationRunner {
 
-  private final PrivateConverterService privateConverter;
+  private final PrivateItemAndOrbConverter privateConverter;
   private final ItemRepository itemRepository;
   private final RestTemplate restTemplate = new RestTemplate();
   private final String latestTokenUrl =
@@ -129,7 +129,7 @@ public class ItemLoader implements ApplicationRunner {
                 .collect(Collectors.toList());
         emblemMap.put(
             emblemEntryList.get(0).asInt(),
-            PrivateConverterService.getEmblemFromPrivate(emblemEntryList.get(1).asText()));
+            PrivateItemAndOrbConverter.getEmblemFromPrivate(emblemEntryList.get(1).asText()));
       }
       return emblemMap;
     } catch (JsonProcessingException e) {

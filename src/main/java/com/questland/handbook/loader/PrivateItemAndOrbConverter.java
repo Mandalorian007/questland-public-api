@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class PrivateConverterService {
+public class PrivateItemAndOrbConverter {
 
   private static List<String> whitelistedItemNames = Arrays.asList(
       "The Sacred Claw",
