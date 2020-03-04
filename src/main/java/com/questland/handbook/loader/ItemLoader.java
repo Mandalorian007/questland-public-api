@@ -43,8 +43,11 @@ public class ItemLoader implements ApplicationRunner {
       "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/static_passive_skills/";
 
   private Set<String> manuallyWhitelistedNames = Set.of(
+      "Oni Horns",
+      "Claws of Oni",
       "Oni Warrior Armor",
       "Oni Grabbers",
+      "Winged Defender Shield",
       "Triumphant Crown",
       "Total Triumph Carapace",
       "Gloves of Total Triumph",
