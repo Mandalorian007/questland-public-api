@@ -39,7 +39,7 @@ public class OrbLoader implements ApplicationRunner {
         .path("static_data")
         .path("crc_details")
         .path("item_templates").asText();
-    log.info("Latest item token is: " + latestToken);
+    log.info("Latest orb token is: " + latestToken);
 
     List<PrivateOrb> privateOrbs = Arrays.asList(
         restTemplate.getForObject(String.format(orbUrl, latestToken), PrivateOrb[].class));

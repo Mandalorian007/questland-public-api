@@ -1,5 +1,7 @@
 package com.questland.handbook.model;
 
+import java.util.List;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -8,6 +10,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Data
@@ -48,20 +52,20 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private Emblem emblem;
 
-    /*@Enumerated(EnumType.STRING)
+    /*
+    @Enumerated(EnumType.STRING)
     private Stat itemBonus;
 
-    @ElementCollection
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Integer> itemLinks;
+    private Long itemLink1;
+    private Long itemLink2;
+    private Long itemLink3;
 
     @Enumerated(EnumType.STRING)
     private Stat orbBonus;
 
-    @ElementCollection
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Integer> orbLinks;*/
-
+    private Long orbLink1;
+    private Long orbLink2;
+*/
     private String passive1Name;
 
     private String passive1Description;

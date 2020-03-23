@@ -29,7 +29,7 @@ public class PrivateItem {
 
     private PrivateStats stats;
 
-    //private List<PrivateLink> links;
+    private List<PrivateLink> links;
 
     @JsonProperty("pskls")
     private List<Integer> weaponPassives;

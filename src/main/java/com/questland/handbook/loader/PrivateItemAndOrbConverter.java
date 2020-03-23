@@ -36,7 +36,10 @@ public class PrivateItemAndOrbConverter {
 
   public Item covertItemFromPrivate(PrivateItem privateItem, Map<Integer, Emblem> emblemMap,
                                     Map<Integer, PrivateWeaponPassive> weaponPassives) {
-    return Item.builder()
+    //List<Integer> itemLinks = convertItemLinksFromPrivate(privateItem.getLinks());
+    //List<Integer> orbLinks = convertOrbLinksFromPrivate(privateItem.getLinks());
+
+    Item.ItemBuilder builder = Item.builder()
         .id(privateItem.getLinkId())
         .name(privateItem.getName())
         .quality(convertQualityFromPrivate(privateItem.getQuality()))
@@ -51,10 +54,8 @@ public class PrivateItemAndOrbConverter {
         .magicPotential(convertMagicPotentialFromPrivate(privateItem.getStats()))
         .defensePotential(convertDefensePotentialFromPrivate(privateItem.getStats()))
         .healthPotential(convertHealthPotentialFromPrivate(privateItem.getStats()))
-        /*.itemBonus(covertItemBonusFromPrivate(privateItem.getLinks()))
-        .itemLinks(convertItemLinksFromPrivate(privateItem.getLinks()))
-        .orbBonus(covertOrbBonusFromPrivate(privateItem.getLinks()))
-        .orbLinks(convertOrbLinksFromPrivate(privateItem.getLinks()))*/
+        //.itemBonus(covertItemBonusFromPrivate(privateItem.getLinks()))
+        //.orbBonus(covertOrbBonusFromPrivate(privateItem.getLinks()))
         .passive1Name(
             convertToPassiveNameFromPrivate(privateItem.getWeaponPassives(), weaponPassives, 1))
         .passive1Description(
@@ -66,8 +67,26 @@ public class PrivateItemAndOrbConverter {
         .passive2Description(
             convertToPassiveDescriptionFromPrivate(privateItem.getWeaponPassives(),
                 weaponPassives,
-                2))
-        .build();
+                2));
+    /*
+    if (itemLinks.size() >= 1) {
+      builder.itemLink1((long)itemLinks.get(0));
+    }
+    if (itemLinks.size() >= 2) {
+      builder.itemLink2((long)itemLinks.get(1));
+    }
+    if (itemLinks.size() >= 3) {
+      builder.itemLink3((long)itemLinks.get(2));
+    }
+
+    if (orbLinks.size() >= 1) {
+      builder.orbLink1((long)orbLinks.get(0));
+    }
+    if (orbLinks.size() >= 2) {
+      builder.orbLink2((long)orbLinks.get(1));
+    }
+    */
+    return builder.build();
   }
 
   public Orb covertOrbFromPrivate(PrivateOrb privateOrb) {
@@ -353,7 +372,7 @@ public class PrivateItemAndOrbConverter {
       }
       return linkIds;
     }
-    return null;
+    return new ArrayList<>();
   }
 
   private static Optional<PrivateLink> extractGearLink(List<PrivateLink> privateLinks) {
