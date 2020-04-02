@@ -23,21 +23,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class PrivateItemAndOrbConverter {
 
-  private static List<String> whitelistedItemNames = Arrays.asList(
-      "The Sacred Claw",
-      "Gloves of Total Triumph",
-      "Triumphant Crown",
-      "Flight of Victory Necklace",
-      "Total Triumph Carapace",
-      "Triumphant Thump Ring",
-      "Triumphant Walk Boots",
-      "Triumphant Defender"
-  );
-
   public Item covertItemFromPrivate(PrivateItem privateItem, Map<Integer, Emblem> emblemMap,
                                     Map<Integer, PrivateWeaponPassive> weaponPassives) {
-    //List<Integer> itemLinks = convertItemLinksFromPrivate(privateItem.getLinks());
-    //List<Integer> orbLinks = convertOrbLinksFromPrivate(privateItem.getLinks());
+    List<Integer> itemLinks = convertItemLinksFromPrivate(privateItem.getLinks());
+    List<Integer> orbLinks = convertOrbLinksFromPrivate(privateItem.getLinks());
 
     Item.ItemBuilder builder = Item.builder()
         .id(privateItem.getLinkId())
@@ -54,8 +43,8 @@ public class PrivateItemAndOrbConverter {
         .magicPotential(convertMagicPotentialFromPrivate(privateItem.getStats()))
         .defensePotential(convertDefensePotentialFromPrivate(privateItem.getStats()))
         .healthPotential(convertHealthPotentialFromPrivate(privateItem.getStats()))
-        //.itemBonus(covertItemBonusFromPrivate(privateItem.getLinks()))
-        //.orbBonus(covertOrbBonusFromPrivate(privateItem.getLinks()))
+        .itemBonus(covertItemBonusFromPrivate(privateItem.getLinks()))
+        .orbBonus(covertOrbBonusFromPrivate(privateItem.getLinks()))
         .passive1Name(
             convertToPassiveNameFromPrivate(privateItem.getWeaponPassives(), weaponPassives, 1))
         .passive1Description(
@@ -68,7 +57,7 @@ public class PrivateItemAndOrbConverter {
             convertToPassiveDescriptionFromPrivate(privateItem.getWeaponPassives(),
                 weaponPassives,
                 2));
-    /*
+
     if (itemLinks.size() >= 1) {
       builder.itemLink1((long)itemLinks.get(0));
     }
@@ -85,7 +74,7 @@ public class PrivateItemAndOrbConverter {
     if (orbLinks.size() >= 2) {
       builder.orbLink2((long)orbLinks.get(1));
     }
-    */
+
     return builder.build();
   }
 
@@ -386,6 +375,10 @@ public class PrivateItemAndOrbConverter {
         return Optional.of(privateLinks.get(0));
       } else {
         return Optional.of(privateLinks.get(1));
+      }
+    } else if (privateLinks.size() == 1) {
+      if (privateLinks.get(0).getBonusAmount() > 20) {
+        return Optional.of(privateLinks.get(0));
       }
     }
 

@@ -52,7 +52,6 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private Emblem emblem;
 
-    /*
     @Enumerated(EnumType.STRING)
     private Stat itemBonus;
 
@@ -65,7 +64,7 @@ public class Item {
 
     private Long orbLink1;
     private Long orbLink2;
-*/
+
     private String passive1Name;
 
     private String passive1Description;
