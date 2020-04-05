@@ -59,7 +59,7 @@ stageId,monsterName,count
 27,Scrounger Toad,1
 29,Dark Wizard,2
 29,Scrounger Toad,2
-29,Barbarian,1
+29,Barbarian,2
 29,Forsaken Warrior,1
 29,Ghoulmancer,1
 29,Goblin Procrastinator,1
@@ -225,7 +225,7 @@ stageId,monsterName,count
 103,Goblin Procrastinator,1
 103,Magic Muskrat,1
 103,Skeletal Shieldman,1
-103,Terrifying Skeleton,1
+103,Terrifying Skeleton,2
 103,Warrior Remains,1
 105,Cutting Assassin,1
 105,Enchanted Warrior,1
@@ -1018,7 +1018,7 @@ stageId,monsterName,count
 398,Bob Barbarian,2
 398,Cyclops,1
 398,Dodgy Assassin,2
-398,Dried Wizard,2
+398,Dried Wizard,3
 398,Heavy Ogre,1
 400,Bob Barbarian,1
 400,Butterball,1
