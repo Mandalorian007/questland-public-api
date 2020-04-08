@@ -43,7 +43,12 @@ public class ItemLoader implements ApplicationRunner {
       "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/static_passive_skills/";
 
   private Set<String> manuallyWhitelistedNames = Set.of(
+      "War-forged Stompers",
+      "Ring of Avarice",
+      "Cinderlord’s Crown",
+      "Fire-forged Claws",
       "Cinderlord’s Carapace",
+      "The Last Wish",
       "Oni Totem",
       "Demon's Dame",
       "Necklace of Serendipity",
@@ -55,7 +60,7 @@ public class ItemLoader implements ApplicationRunner {
       "Winged Defender Shield",
       "Triumphant Crown",
       "Total Triumph Carapace",
-      "Gloves of Total Triumph",
+      "Gloves of Total Triumph ",
       "Triumphant Walk Boots",
       "The Sacred Claw",
       "Triumphant Thump Ring",
@@ -191,6 +196,7 @@ public class ItemLoader implements ApplicationRunner {
           } else {
             if (!artifactQualities.contains(item.getQuality())) {
               log.info("Filtering item with name: " + item.getName());
+              log.info(item.toString());
             }
             return false;
           }
