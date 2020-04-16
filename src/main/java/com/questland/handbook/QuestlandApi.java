@@ -73,8 +73,21 @@ public class QuestlandApi {
   }
 
   @GetMapping("/orbs")
-  public List<Orb> getOrbs(Sort sort) {
-    return orbRepository.findAll(sort);
+  public List<Orb> getOrbs(Sort sort,
+			   @RequestParam(value = "filterArtifacts", defaultValue = "false") boolean filterArtifacts) {
+    if (filterArtifacts) {
+      return orbRepository.findAllByQualityIn(
+          Set.of(
+              Quality.COMMON,
+              Quality.UNCOMMON,
+              Quality.RARE,
+              Quality.EPIC,
+              Quality.LEGENDARY
+          ),
+          sort);
+    } else {
+      return orbRepository.findAll(sort);
+    }
   }
 
   @GetMapping("/orbs/{id}")
