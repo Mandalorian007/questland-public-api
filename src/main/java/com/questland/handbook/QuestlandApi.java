@@ -83,8 +83,21 @@ public class QuestlandApi {
   }
 
   @GetMapping("/orbs/name/{name}")
-  public Orb getOrbByName(@PathVariable("name") String name) {
-    return orbRepository.findByNameIgnoreCase(name).stream().findFirst().orElseThrow(() ->
+  public Orb getOrbByName(@PathVariable("name") String name,
+			  @RequestParam(value = "quality", required = false) Quality quality) {
+    List<Orb> orbsByName = orbRepository.findByNameIgnoreCase(name);
+    // This logic assists with filtering for specific artifacts
+    if (quality != null) {
+      orbsByName = orbsByName.stream()
+          .filter(orb -> orb.getQuality().equals(quality))
+          .collect(Collectors.toList());
+      // This logic makes sure we select legendary over artifact if no quality was specified
+    } else if (orbsByName.size() > 1) {
+      orbsByName = orbsByName.stream()
+          .filter(orb -> orb.getQuality().equals(Quality.LEGENDARY))
+          .collect(Collectors.toList());
+    }
+    return orbsByName.stream().findFirst().orElseThrow(() ->
         new ResponseStatusException(HttpStatus.NOT_FOUND, "Orb was not found."));
   }
 
