@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class DailyBossController {
+public class DailyBossEndpoints {
   private final DailyBossQueryService dailyBossQueryService;
 
   @GetMapping("/dailyboss/current")

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class BattleLocationsController {
+public class BattleLocationEndpoints {
 
   private final BattleLocationsService battleLocationsService;
 

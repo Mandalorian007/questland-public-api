@@ -17,7 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequiredArgsConstructor
-public class OrbController {
+public class OrbEndpoints {
   private final OrbRepository orbRepository;
 
   @GetMapping("/orbs")

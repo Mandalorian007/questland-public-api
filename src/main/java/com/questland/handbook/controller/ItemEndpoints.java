@@ -17,7 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequiredArgsConstructor
-public class ItemController {
+public class ItemEndpoints {
   private final ItemRepository itemRepository;
 
   @GetMapping("/items")
