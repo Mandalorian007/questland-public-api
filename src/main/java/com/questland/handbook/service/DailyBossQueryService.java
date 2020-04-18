@@ -1,4 +1,4 @@
-package com.questland.handbook.livequery;
+package com.questland.handbook.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.questland.handbook.model.DailyBoss;

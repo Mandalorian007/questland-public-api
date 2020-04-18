@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Patty",
+    "number": 1,
+    "nestedObj": {
+      "name_nested": "Patty"
+    },
+    "list": [
+      1,
+      2,
+      "Patty"
+    ]
+  },
+  {
+    "name": "Patty",
+    "number": 1,
+    "nestedObj": {
+      "name_nested": "Patty"
+    },
+    "list": [
+      1,
+      2,
+      "Patty"
+    ]
+  },
+  {
+    "name": "Patty",
+    "number": 1,
+    "nestedObj": {
+      "name_nested": "Patty"
+    },
+    "list": [
+      1,
+      2,
+      "Patty"
+    ]
+  }
+]

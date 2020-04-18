@@ -1,4 +1,4 @@
-package com.questland.handbook;
+package com.questland.handbook.repository;
 
 import com.questland.handbook.model.Orb;
 import com.questland.handbook.model.Quality;

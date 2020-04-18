@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.questland.handbook.ItemRepository;
+import com.questland.handbook.repository.ItemRepository;
 import com.questland.handbook.loader.model.PrivateItem;
 import com.questland.handbook.loader.model.PrivateWeaponPassive;
 import com.questland.handbook.model.Emblem;
@@ -43,6 +43,8 @@ public class ItemLoader implements ApplicationRunner {
       "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/static_passive_skills/";
 
   private Set<String> manuallyWhitelistedNames = Set.of(
+      "Periapt of Flames",
+      "Amulet of Draconic Vigilance",
       "War-forged Stompers",
       "Ring of Avarice",
       "Cinderlord’s Crown",
