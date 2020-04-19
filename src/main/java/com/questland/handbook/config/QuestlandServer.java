@@ -1,6 +1,6 @@
 package com.questland.handbook.config;
 
-public enum QuestlandRegion {
+public enum QuestlandServer {
   GLOBAL,
   EUROPE,
   AMERICA,

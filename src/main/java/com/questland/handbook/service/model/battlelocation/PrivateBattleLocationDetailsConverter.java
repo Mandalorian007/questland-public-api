@@ -1,12 +1,8 @@
-package com.questland.handbook.loader;
+package com.questland.handbook.service.model.battlelocation;
 
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import com.questland.handbook.loader.model.MonsterCountCsv;
-import com.questland.handbook.loader.model.PrivateBattleLocation;
-import com.questland.handbook.loader.model.PrivateMob;
-import com.questland.handbook.loader.model.PrivateStage;
 import com.questland.handbook.model.BattleLocation;
 import com.questland.handbook.model.Stage;
 import com.questland.handbook.model.StageMob;

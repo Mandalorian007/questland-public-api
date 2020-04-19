@@ -1,4 +1,4 @@
-package com.questland.handbook.loader.model;
+package com.questland.handbook.service.model.battlelocation;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

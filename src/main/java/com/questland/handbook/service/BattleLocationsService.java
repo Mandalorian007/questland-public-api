@@ -2,9 +2,9 @@ package com.questland.handbook.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.questland.handbook.loader.PrivateBattleLocationDetailsConverter;
-import com.questland.handbook.loader.model.PrivateBattleLocation;
-import com.questland.handbook.loader.model.PrivateMob;
+import com.questland.handbook.service.model.battlelocation.PrivateBattleLocationDetailsConverter;
+import com.questland.handbook.service.model.battlelocation.PrivateBattleLocation;
+import com.questland.handbook.service.model.battlelocation.PrivateMob;
 import com.questland.handbook.model.BattleLocation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

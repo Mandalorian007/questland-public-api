@@ -1,6 +1,6 @@
 package com.questland.handbook.config;
 
-import static com.questland.handbook.config.QuestlandRegion.*;
+import static com.questland.handbook.config.QuestlandServer.*;
 
 import java.util.Map;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class QuestlandApiConfigs {
 
   @Bean
-  public Map<QuestlandRegion, String> regionWorkerMap() {
+  public Map<QuestlandServer, String> regionWorkerMap() {
     //TODO resolve workers for other servers
     return Map.of(
         GLOBAL, "http://gs-global-wrk-04.api-ql.com/",
