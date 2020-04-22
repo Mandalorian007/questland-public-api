@@ -43,8 +43,10 @@ public class ItemLoader implements ApplicationRunner {
       "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/static_passive_skills/";
 
   private Set<String> manuallyWhitelistedNames = Set.of(
-      "Periapt of Flames",
+      "mini master shen IV",
+      "Wyvern Wing Greatshield",
       "Amulet of Draconic Vigilance",
+      "Periapt of Flames",
       "War-forged Stompers",
       "Ring of Avarice",
       "Cinderlord’s Crown",
