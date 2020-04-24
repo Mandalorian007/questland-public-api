@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Resource;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -33,8 +32,8 @@ public class GuildService {
 
   private RestTemplate restTemplate = new RestTemplate();
 
-  @Value("${PLAYER_TOKEN}")
-  private String playerToken;
+  @Resource()
+  Map<QuestlandServer, String> playerTokenMap;
 
   @Resource()
   Map<QuestlandServer, String> regionWorkerMap;
@@ -51,7 +50,7 @@ public class GuildService {
   private PrivateGuildDetails guildDetails(QuestlandServer server,
                                            PrivateSearchGuildDetails details) {
     String baseUrl = regionWorkerMap.get(server);
-    HttpHeaders headers = getHttpHeaders();
+    HttpHeaders headers = getHttpHeaders(server);
 
     MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
     map.add("guild_id", "" + details.getId());
@@ -69,7 +68,7 @@ public class GuildService {
 
   private List<PrivateSearchGuildDetails> searchForGuild(QuestlandServer server, String name) {
     String baseUrl = regionWorkerMap.get(server);
-    HttpHeaders headers = getHttpHeaders();
+    HttpHeaders headers = getHttpHeaders(server);
     MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
     map.add("name", name);
 
@@ -87,10 +86,10 @@ public class GuildService {
     return Collections.emptyList();
   }
 
-  private HttpHeaders getHttpHeaders() {
+  private HttpHeaders getHttpHeaders(QuestlandServer server) {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-    headers.add("token", playerToken);
+    headers.add("token", playerTokenMap.get(server));
     headers.add("Accept", APPLICATION_JSON.getType());
     headers.add("Content-Type", "application/x-www-form-urlencoded");
     return headers;

@@ -2,10 +2,12 @@ package com.questland.handbook.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.questland.handbook.config.QuestlandServer;
 import com.questland.handbook.service.model.battlelocation.PrivateBattleLocationDetailsConverter;
 import com.questland.handbook.service.model.battlelocation.PrivateBattleLocation;
 import com.questland.handbook.service.model.battlelocation.PrivateMob;
 import com.questland.handbook.model.BattleLocation;
+import javax.annotation.Resource;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -23,19 +25,23 @@ import java.util.Map;
 @Service
 @AllArgsConstructor
 public class BattleLocationsService {
+    @Resource()
+    Map<QuestlandServer, String> playerTokenMap;
 
     private final PrivateBattleLocationDetailsConverter privateBattleLocationDetailsConverter;
     private final RestTemplate restTemplate = new RestTemplate();
-    private final String latestTokenUrl =
+    private final String latestTokenEndpoint =
             "http://gs-bhs-wrk-02.api-ql.com/client/checkstaticdata/?lang=en&graphics_quality=hd_android";
-    private final String battleLocationsUrl =
+    private final String battleLocationsEndpoint =
             "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/static_battle_locations_new/";
-    private final String mobLocationsUrl =
+    private final String mobLocationsEndpoint =
             "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/static_mobs_on_stages/";
 
     public List<BattleLocation> getBattleLocationDetails() {
         try {
-            String latestTokenResponse = restTemplate.getForObject(latestTokenUrl, String.class);
+            String server = playerTokenMap.get(QuestlandServer.GLOBAL);
+            String latestTokenResponse = restTemplate.getForObject(
+                server + latestTokenEndpoint, String.class);
 
             JsonNode crcDetails = new ObjectMapper().readTree(latestTokenResponse)
                     .path("data")
@@ -48,14 +54,15 @@ public class BattleLocationsService {
             String mobLocationsToken = crcDetails.path("static_mobs_on_stages").asText();
             log.info("Latest mob locations token is: " + mobLocationsToken);
 
+            String battleLocationEndpoint = String.format(battleLocationsEndpoint, battleLocationsToken);
             List<PrivateBattleLocation> privateBattleLocations = Arrays.asList(
-                    restTemplate.getForObject(String.format(battleLocationsUrl, battleLocationsToken), PrivateBattleLocation[].class));
+                    restTemplate.getForObject(server + battleLocationEndpoint, PrivateBattleLocation[].class));
 
             ParameterizedTypeReference<Map<Integer, PrivateMob>> responseType =
                     new ParameterizedTypeReference<>() {
                     };
             RequestEntity<Void> request = RequestEntity
-                    .get(new URI(String.format(mobLocationsUrl, mobLocationsToken)))
+                    .get(new URI(server + String.format(mobLocationsEndpoint, mobLocationsToken)))
                     .accept(MediaType.APPLICATION_JSON).build();
 
             Map<Integer, PrivateMob> privateMobs = restTemplate.exchange(request, responseType).getBody();

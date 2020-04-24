@@ -1,9 +1,11 @@
 package com.questland.handbook.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.questland.handbook.config.QuestlandServer;
 import com.questland.handbook.model.DailyBoss;
+import java.util.Map;
+import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -14,25 +16,21 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class DailyBossQueryService {
 
-  @Value("${PLAYER_TOKEN}")
-  private String playerToken;
+  @Resource()
+  Map<QuestlandServer, String> regionWorkerMap;
+
+  @Resource()
+  Map<QuestlandServer, String> playerTokenMap;
 
   private final RestTemplate restTemplate = new RestTemplate();
-  private final String playerLoginUrl = "http://gs-global-wrk-04.api-ql.com/client/init/";
 
-  //TODO consider caching on this method
-  public DailyBoss getCurrentDailyBoss() {
-    if (playerToken == null) {
-      log.error("Player token is missing!");
-      return null;
-    }
-
+  public DailyBoss getCurrentDailyBoss(QuestlandServer server) {
     try {
       HttpHeaders headers = new HttpHeaders();
-      headers.set("token", playerToken);
+      headers.set("token", playerTokenMap.get(server));
 
       String playerLoginInfo = restTemplate.exchange(
-          playerLoginUrl,
+          regionWorkerMap.get(server) + "client/init/",
           HttpMethod.GET,
           new HttpEntity<String>(headers),
           String.class).getBody();
