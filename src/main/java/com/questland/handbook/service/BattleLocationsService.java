@@ -6,7 +6,7 @@ import com.questland.handbook.config.QuestlandServer;
 import com.questland.handbook.service.model.battlelocation.PrivateBattleLocationDetailsConverter;
 import com.questland.handbook.service.model.battlelocation.PrivateBattleLocation;
 import com.questland.handbook.service.model.battlelocation.PrivateMob;
-import com.questland.handbook.model.BattleLocation;
+import com.questland.handbook.publicmodel.BattleLocation;
 import javax.annotation.Resource;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

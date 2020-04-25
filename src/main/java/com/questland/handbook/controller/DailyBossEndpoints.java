@@ -1,7 +1,7 @@
 package com.questland.handbook.controller;
 
 import com.questland.handbook.config.QuestlandServer;
-import com.questland.handbook.model.DailyBoss;
+import com.questland.handbook.publicmodel.DailyBoss;
 import com.questland.handbook.service.DailyBossQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

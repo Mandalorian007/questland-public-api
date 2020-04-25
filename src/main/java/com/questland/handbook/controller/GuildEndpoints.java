@@ -1,7 +1,7 @@
 package com.questland.handbook.controller;
 
 import com.questland.handbook.config.QuestlandServer;
-import com.questland.handbook.model.Guild;
+import com.questland.handbook.publicmodel.Guild;
 import com.questland.handbook.service.GuildService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

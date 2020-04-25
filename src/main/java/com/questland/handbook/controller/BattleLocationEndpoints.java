@@ -1,7 +1,7 @@
 package com.questland.handbook.controller;
 
 import com.questland.handbook.service.BattleLocationsService;
-import com.questland.handbook.model.BattleLocation;
+import com.questland.handbook.publicmodel.BattleLocation;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

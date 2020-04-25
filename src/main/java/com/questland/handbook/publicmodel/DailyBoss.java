@@ -1,4 +1,4 @@
-package com.questland.handbook.model;
+package com.questland.handbook.publicmodel;
 
 import lombok.Data;
 

@@ -1,7 +1,7 @@
 package com.questland.handbook.controller;
 
-import com.questland.handbook.model.Item;
-import com.questland.handbook.model.Quality;
+import com.questland.handbook.publicmodel.Item;
+import com.questland.handbook.publicmodel.Quality;
 import com.questland.handbook.repository.ItemRepository;
 import java.util.List;
 import java.util.Set;

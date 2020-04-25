@@ -1,8 +1,8 @@
 package com.questland.handbook.service;
 
 import com.questland.handbook.config.QuestlandServer;
-import com.questland.handbook.model.Guild;
-import com.questland.handbook.model.GuildMember;
+import com.questland.handbook.publicmodel.Guild;
+import com.questland.handbook.publicmodel.GuildMember;
 import com.questland.handbook.service.model.guild.PrivateGuildDetails;
 import com.questland.handbook.service.model.guild.PrivateGuildMember;
 import java.util.List;

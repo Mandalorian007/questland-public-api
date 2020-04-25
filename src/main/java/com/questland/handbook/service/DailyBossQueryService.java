@@ -2,7 +2,7 @@ package com.questland.handbook.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.questland.handbook.config.QuestlandServer;
-import com.questland.handbook.model.DailyBoss;
+import com.questland.handbook.publicmodel.DailyBoss;
 import java.util.Map;
 import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

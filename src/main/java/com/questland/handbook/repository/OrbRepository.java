@@ -1,7 +1,7 @@
 package com.questland.handbook.repository;
 
-import com.questland.handbook.model.Orb;
-import com.questland.handbook.model.Quality;
+import com.questland.handbook.publicmodel.Orb;
+import com.questland.handbook.publicmodel.Quality;
 import java.util.List;
 import java.util.Set;
 import org.springframework.data.domain.Sort;

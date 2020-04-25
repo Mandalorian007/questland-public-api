@@ -1,7 +1,7 @@
 package com.questland.handbook.controller;
 
-import com.questland.handbook.model.Orb;
-import com.questland.handbook.model.Quality;
+import com.questland.handbook.publicmodel.Orb;
+import com.questland.handbook.publicmodel.Quality;
 import com.questland.handbook.repository.OrbRepository;
 import java.util.List;
 import java.util.Set;

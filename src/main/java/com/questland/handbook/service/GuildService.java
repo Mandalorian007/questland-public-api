@@ -1,9 +1,7 @@
 package com.questland.handbook.service;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON;
-
 import com.questland.handbook.config.QuestlandServer;
-import com.questland.handbook.model.Guild;
+import com.questland.handbook.publicmodel.Guild;
 import com.questland.handbook.service.model.guild.PrivateGetGuild;
 import com.questland.handbook.service.model.guild.PrivateGuildDetails;
 import com.questland.handbook.service.model.guild.PrivateSearchGuild;
@@ -17,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -42,18 +39,17 @@ public class GuildService {
 
     return searchForGuild(server, guildName).stream()
         .filter(details -> details.getName().equalsIgnoreCase(guildName))
-        .map(details -> guildDetails(server, details))
+        .map(details -> getGuildById(server, details.getId()))
         .map(details -> privateGuildConverter.convertGuildFromPrivate(server, details))
         .findFirst();
   }
 
-  private PrivateGuildDetails guildDetails(QuestlandServer server,
-                                           PrivateSearchGuildDetails details) {
+  public PrivateGuildDetails getGuildById(QuestlandServer server, int guildId) {
     String baseUrl = regionWorkerMap.get(server);
-    HttpHeaders headers = getHttpHeaders(server);
+    HttpHeaders headers = QueryUtils.getHttpHeaders(playerTokenMap.get(server));
 
     MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-    map.add("guild_id", "" + details.getId());
+    map.add("guild_id", "" + guildId);
 
     HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
 
@@ -68,7 +64,7 @@ public class GuildService {
 
   private List<PrivateSearchGuildDetails> searchForGuild(QuestlandServer server, String name) {
     String baseUrl = regionWorkerMap.get(server);
-    HttpHeaders headers = getHttpHeaders(server);
+    HttpHeaders headers = QueryUtils.getHttpHeaders(playerTokenMap.get(server));
     MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
     map.add("name", name);
 
@@ -84,14 +80,5 @@ public class GuildService {
       return result.getBody().getData().getGuildDetailList();
     }
     return Collections.emptyList();
-  }
-
-  private HttpHeaders getHttpHeaders(QuestlandServer server) {
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-    headers.add("token", playerTokenMap.get(server));
-    headers.add("Accept", APPLICATION_JSON.getType());
-    headers.add("Content-Type", "application/x-www-form-urlencoded");
-    return headers;
   }
 }

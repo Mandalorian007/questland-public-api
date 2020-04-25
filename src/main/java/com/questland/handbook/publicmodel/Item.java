@@ -1,4 +1,4 @@
-package com.questland.handbook.model;
+package com.questland.handbook.publicmodel;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Orb {
+public class Item {
 
     @Id
     private long id;
@@ -25,7 +25,9 @@ public class Orb {
     private Quality quality;
 
     @Enumerated(EnumType.STRING)
-    private Stat statBonus;
+    private ItemSlot itemSlot;
+
+    private int totalPotential;
 
     private int attack;
 
@@ -43,4 +45,27 @@ public class Orb {
 
     private int healthPotential;
 
+    @Enumerated(EnumType.STRING)
+    private Emblem emblem;
+
+    @Enumerated(EnumType.STRING)
+    private Stat itemBonus;
+
+    private Long itemLink1;
+    private Long itemLink2;
+    private Long itemLink3;
+
+    @Enumerated(EnumType.STRING)
+    private Stat orbBonus;
+
+    private Long orbLink1;
+    private Long orbLink2;
+
+    private String passive1Name;
+
+    private String passive1Description;
+
+    private String passive2Name;
+
+    private String passive2Description;
 }
