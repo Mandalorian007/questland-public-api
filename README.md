@@ -1,6 +1,6 @@
 # Questland API
 This is a public API for Questland inspired by Mandalorian007. 
-Current public url: http://34.217.43.20:8080/swagger-ui.html#/
+Current public url: https://questland-public-api.cfapps.io/swagger-ui.html
 
 # Purpose
 Help the community build and grow. I offer informative videos on my
