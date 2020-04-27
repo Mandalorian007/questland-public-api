@@ -10,7 +10,7 @@ import lombok.Data;
 public class PrivateGuildResearch {
 
   private List<Integer> damage;
-  private List<Integer> defense;
+  private List<Integer> defence;
   private List<Integer> hp;
   private List<Integer> magic;
 }

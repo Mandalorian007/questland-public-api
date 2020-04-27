@@ -28,7 +28,7 @@ public class PrivateGuildConverter {
         .currentMemberCount(privateGuildDetails.getCnt())
         .maximumMemberCount(privateGuildDetails.getMcnt())
         .attackResearchLevel(extractResearchLevel(privateGuildDetails.getAcademy().getDamage()))
-        .defenseResearchLevel(extractResearchLevel(privateGuildDetails.getAcademy().getDefense()))
+        .defenseResearchLevel(extractResearchLevel(privateGuildDetails.getAcademy().getDefence()))
         .healthResearchLevel(extractResearchLevel(privateGuildDetails.getAcademy().getHp()))
         .magicResearchLevel(extractResearchLevel(privateGuildDetails.getAcademy().getMagic()))
         .guildMembers(guildMembers)
