@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class PrivateGuildConverter {
 
   public Guild convertGuildFromPrivate(QuestlandServer server,
-                                      PrivateGuildDetails privateGuildDetails) {
+                                       PrivateGuildDetails privateGuildDetails) {
 
     List<GuildMember> guildMembers = privateGuildDetails.getMembers().stream()
         .map(this::convertGuildMemberFromPrivate)
@@ -27,6 +27,10 @@ public class PrivateGuildConverter {
         .level(privateGuildDetails.getLvl())
         .currentMemberCount(privateGuildDetails.getCnt())
         .maximumMemberCount(privateGuildDetails.getMcnt())
+        .attackResearchLevel(extractResearchLevel(privateGuildDetails.getAcademy().getDamage()))
+        .defenseResearchLevel(extractResearchLevel(privateGuildDetails.getAcademy().getDefense()))
+        .healthResearchLevel(extractResearchLevel(privateGuildDetails.getAcademy().getHp()))
+        .magicResearchLevel(extractResearchLevel(privateGuildDetails.getAcademy().getMagic()))
         .guildMembers(guildMembers)
         .build();
   }
@@ -39,5 +43,23 @@ public class PrivateGuildConverter {
         .level(privateMember.getLevel())
         .heroPower(privateMember.getPower())
         .build();
+  }
+
+  /*
+  "damage": [
+        9, - Level
+        0, - Gold Contributed
+        0, - Eternium Contributed
+        0, - Blue Contributed
+        0, - Red Contributed
+        0,
+        0
+    ],
+   */
+  private int extractResearchLevel(List<Integer> researchDetails) {
+    if (researchDetails == null || researchDetails.size() < 1) {
+      return 0;
+    }
+    return researchDetails.get(0);
   }
 }

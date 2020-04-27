@@ -24,6 +24,10 @@ public class Guild {
   private int level;
   private int currentMemberCount;
   private int maximumMemberCount;
+  private int attackResearchLevel;
+  private int defenseResearchLevel;
+  private int healthResearchLevel;
+  private int magicResearchLevel;
 
   List<GuildMember> guildMembers;
 }
