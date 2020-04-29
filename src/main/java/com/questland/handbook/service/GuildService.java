@@ -66,7 +66,7 @@ public class GuildService {
     String baseUrl = regionWorkerMap.get(server);
     HttpHeaders headers = QueryUtils.getHttpHeaders(playerTokenMap.get(server));
     MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-    map.add("name", name);
+    map.add("name", name.replace("'", "\\'"));
 
     HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
 

@@ -26,20 +26,21 @@ import java.util.Map;
 @AllArgsConstructor
 public class BattleLocationsService {
     @Resource()
-    Map<QuestlandServer, String> playerTokenMap;
+    Map<QuestlandServer, String> regionWorkerMap;
 
     private final PrivateBattleLocationDetailsConverter privateBattleLocationDetailsConverter;
     private final RestTemplate restTemplate = new RestTemplate();
     private final String latestTokenEndpoint =
-            "http://gs-bhs-wrk-02.api-ql.com/client/checkstaticdata/?lang=en&graphics_quality=hd_android";
+            "client/checkstaticdata/?lang=en&graphics_quality=hd_android";
     private final String battleLocationsEndpoint =
-            "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/static_battle_locations_new/";
+            "staticdata/key/en/android/%s/static_battle_locations_new/";
     private final String mobLocationsEndpoint =
-            "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/static_mobs_on_stages/";
+            "staticdata/key/en/android/%s/static_mobs_on_stages/";
 
     public List<BattleLocation> getBattleLocationDetails() {
         try {
-            String server = playerTokenMap.get(QuestlandServer.GLOBAL);
+            String server = regionWorkerMap.get(QuestlandServer.GLOBAL);
+            log.info(server + latestTokenEndpoint);
             String latestTokenResponse = restTemplate.getForObject(
                 server + latestTokenEndpoint, String.class);
 
