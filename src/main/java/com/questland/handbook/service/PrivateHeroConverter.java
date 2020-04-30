@@ -38,6 +38,7 @@ public class PrivateHeroConverter {
 
     return Hero.builder()
         .id(profile.getId())
+        .server(server.name())
         .guild(guildName)
         .name(profile.getName())
         .level(profile.getLevel())

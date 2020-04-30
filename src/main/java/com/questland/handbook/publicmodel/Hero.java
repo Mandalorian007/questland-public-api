@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class Hero {
 
   private int id;
+  private String server;
   private String guild;
   private String name;
   private int level;
