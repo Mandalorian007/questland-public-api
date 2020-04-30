@@ -30,7 +30,7 @@ public class Hero {
   private int heroPowerRank;
   private int heroPvpRank;
   //TODO equipped gear
-  private int battleEventMulti;
+  private double battleEventMulti;
   private String row1Bonus;
   private String row2Bonus;
   private String row3Bonus;

@@ -1,5 +1,8 @@
 package com.questland.handbook.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.questland.handbook.config.QuestlandServer;
 import com.questland.handbook.publicmodel.Guild;
 import com.questland.handbook.publicmodel.GuildMember;
@@ -49,7 +52,7 @@ public class HeroService {
     }
     int heroId = hero.get().getId();
 
-    return getHero(server,heroId);
+    return getHero(server, heroId);
   }
 
   public Optional<Hero> getHero(QuestlandServer server, int heroId) {
@@ -70,13 +73,23 @@ public class HeroService {
 
     HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
 
-    ResponseEntity<PrivateGetProfile> response =
+    ResponseEntity<String> response =
         restTemplate.exchange(baseUrl + "/user/getprofile/",
             HttpMethod.POST,
             entity,
-            PrivateGetProfile.class);
-    return response.getBody();
+            String.class);
+    try {
+      return getMapper().readValue(response.getBody(), PrivateGetProfile.class);
+    } catch (JsonProcessingException e) {
+      throw new RuntimeException(e);
+    }
 
+  }
+
+  private ObjectMapper getMapper() {
+    ObjectMapper objectMapper = new ObjectMapper();
+    objectMapper.configure(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT, true);
+    return objectMapper;
   }
 
 }
