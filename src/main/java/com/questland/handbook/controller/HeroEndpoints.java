@@ -28,7 +28,7 @@ public class HeroEndpoints {
 
   @GetMapping("/hero/{id}")
   public Hero getGuild(@PathVariable("id") int id,
-                         @RequestParam("server") String server) {
+                       @RequestParam("server") String server) {
     return heroService.getHero(QuestlandServer.valueOf(server), id)
         .orElseThrow(ResourceNotFoundException::new);
   }

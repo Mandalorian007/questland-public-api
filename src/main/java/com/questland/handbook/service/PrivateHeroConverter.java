@@ -32,9 +32,14 @@ public class PrivateHeroConverter {
     PrivateMultiplierDetailsContainer multiplierDetailsContainer =
         privateProfileData.getMultiplierDetails();
     PrivateMultiplierDetails multiplierDetails = multiplierDetailsContainer.getMultiplierDetails();
-    PrivateBonusContainer row1 = multiplierDetails.getBonuses().getRow1();
-    PrivateBonusContainer row3 = multiplierDetails.getBonuses().getRow3();
-    PrivateBonusContainer row4 = multiplierDetails.getBonuses().getRow4();
+    PrivateBonusContainer row1 = null;
+    PrivateBonusContainer row3 = null;
+    PrivateBonusContainer row4 = null;
+    if (multiplierDetails.getBonuses() != null) {
+      row1 = multiplierDetails.getBonuses().getRow1();
+      row3 = multiplierDetails.getBonuses().getRow3();
+      row4 = multiplierDetails.getBonuses().getRow4();
+    }
 
     return Hero.builder()
         .id(profile.getId())
@@ -72,7 +77,7 @@ public class PrivateHeroConverter {
         return rowBonus.getVal() + " " + rowBonus.getAttr().replaceAll("<.*?>", "");
       }
     }
-    return "";
+    return null;
   }
 
   private String getSpiritBonus(PrivateSpiritBonus spiritBonus) {
@@ -81,7 +86,7 @@ public class PrivateHeroConverter {
     } else if (spiritBonus.getBlue() > 0) {
       return spiritBonus.getBlue() + " blue";
     } else {
-      return "No Spirit Bonus";
+      return null;
     }
   }
 
