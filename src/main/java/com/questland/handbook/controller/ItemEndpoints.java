@@ -67,47 +67,6 @@ public class ItemEndpoints {
   @GetMapping("/developer-items")
 
   public List<Item> getItemsIncludingHidden(Sort sort,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                              @RequestParam(value = "filterArtifacts", defaultValue = "false") boolean filterArtifacts) {
     if (filterArtifacts) {
       return itemRepository.findAllByQualityIn(
