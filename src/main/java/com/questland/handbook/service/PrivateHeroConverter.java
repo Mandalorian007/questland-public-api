@@ -81,13 +81,17 @@ public class PrivateHeroConverter {
   }
 
   private String getSpiritBonus(PrivateSpiritBonus spiritBonus) {
+    if(spiritBonus == null) {
+      return null;
+    }
+
     if (spiritBonus.getRed() > 0) {
       return spiritBonus.getRed() + " red";
     } else if (spiritBonus.getBlue() > 0) {
       return spiritBonus.getBlue() + " blue";
-    } else {
-      return null;
     }
+
+    return null;
   }
 
   private int getPvpRank(PrivatePvpDetails pvpDetails) {
