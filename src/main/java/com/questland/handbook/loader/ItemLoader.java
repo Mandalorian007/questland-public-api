@@ -6,10 +6,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.questland.handbook.loader.model.PrivateItem;
 import com.questland.handbook.loader.model.PrivateWeaponPassive;
-import com.questland.handbook.repository.ItemRepository;
 import com.questland.handbook.publicmodel.Emblem;
 import com.questland.handbook.publicmodel.Item;
 import com.questland.handbook.publicmodel.Quality;
+import com.questland.handbook.repository.ItemRepository;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -195,17 +195,11 @@ public class ItemLoader implements ApplicationRunner {
     whiteListedNames.addAll(manuallyWhitelistedNames);
 
     return items.stream()
-        .filter(item -> {
-          boolean contains = whiteListedNames.contains(item.getName());
-          if (contains) {
-            return true;
-          } else {
-            if (!artifactQualities.contains(item.getQuality())) {
-              log.info("Filtering item with name: " + item.getName());
-              log.info(item.toString());
-            }
-            return false;
+        .map(item -> {
+          if(!whiteListedNames.contains(item.getName())) {
+            item.setHidden(true);
           }
+          return item;
         })
         .collect(Collectors.toList());
   }

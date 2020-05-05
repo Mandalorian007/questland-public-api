@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,7 +25,7 @@ public class ItemEndpoints {
   public List<Item> getItems(Sort sort,
                              @RequestParam(value = "filterArtifacts", defaultValue = "false") boolean filterArtifacts) {
     if (filterArtifacts) {
-      return itemRepository.findAllByQualityIn(
+      return itemRepository.findAllByQualityInAndHiddenFalse(
           Set.of(
               Quality.COMMON,
               Quality.UNCOMMON,
@@ -60,6 +61,67 @@ public class ItemEndpoints {
     }
     return itemsByName.stream().findFirst().orElseThrow(() ->
         new ResponseStatusException(HttpStatus.NOT_FOUND, "Item was not found."));
+  }
+
+  @ApiIgnore
+  @GetMapping("/developer-items")
+
+  public List<Item> getItemsIncludingHidden(Sort sort,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             @RequestParam(value = "filterArtifacts", defaultValue = "false") boolean filterArtifacts) {
+    if (filterArtifacts) {
+      return itemRepository.findAllByQualityIn(
+          Set.of(
+              Quality.COMMON,
+              Quality.UNCOMMON,
+              Quality.RARE,
+              Quality.EPIC,
+              Quality.LEGENDARY
+          ),
+          sort);
+    } else {
+      return itemRepository.findAll(sort);
+    }
   }
 
 }

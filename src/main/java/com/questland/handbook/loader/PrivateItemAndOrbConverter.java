@@ -29,6 +29,7 @@ public class PrivateItemAndOrbConverter {
 
     Item.ItemBuilder builder = Item.builder()
         .id(privateItem.getLinkId())
+        .hidden(false)
         .name(privateItem.getName())
         .quality(convertQualityFromPrivate(privateItem.getQuality()))
         .itemSlot(covertItemSlotFromPrivate(privateItem.getItemType()))

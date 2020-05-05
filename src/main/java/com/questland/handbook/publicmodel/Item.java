@@ -1,5 +1,6 @@
 package com.questland.handbook.publicmodel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -18,6 +19,9 @@ public class Item {
 
     @Id
     private long id;
+
+    @JsonIgnore
+    private boolean hidden;
 
     private String name;
 
