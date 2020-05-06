@@ -43,35 +43,10 @@ public class ItemLoader implements ApplicationRunner {
       "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/static_passive_skills/";
 
   private Set<String> manuallyWhitelistedNames = Set.of(
+      "Healing Spark",
+      "Knight of the Tempest Armor",
       "Helm of the Storm",
-      "Bolt of Lightning Ring",
-      "mini master shen IV",
-      "Wyvern Wing Greatshield",
-      "Amulet of Draconic Vigilance",
-      "Periapt of Flames",
-      "War-forged Stompers",
-      "Ring of Avarice",
-      "Cinderlord’s Crown",
-      "Fire-forged Claws",
-      "Cinderlord’s Carapace",
-      "The Last Wish",
-      "Oni Totem",
-      "Demon's Dame",
-      "Necklace of Serendipity",
-      "Ring of Folklore",
-      "Oni Horns",
-      "Claws of Oni",
-      "Oni Warrior Armor",
-      "Oni Grabbers",
-      "Winged Defender Shield",
-      "Triumphant Crown",
-      "Total Triumph Carapace",
-      "Gloves of Total Triumph ",
-      "Triumphant Walk Boots",
-      "The Sacred Claw",
-      "Triumphant Thump Ring",
-      "Flight of Victory Necklace",
-      "Triumphant Defender"
+      "Bolt of Lightning Ring"
   );
 
   @Override
@@ -189,7 +164,7 @@ public class ItemLoader implements ApplicationRunner {
     );
     Set<String> whiteListedNames = items.stream()
         .filter(item -> !artifactQualities.contains(item.getQuality()))
-        .filter(item -> item.getTotalPotential() < 200)
+        .filter(item -> item.getTotalPotential() < 210)
         .map(Item::getName)
         .collect(Collectors.toSet());
     whiteListedNames.addAll(manuallyWhitelistedNames);
@@ -198,6 +173,9 @@ public class ItemLoader implements ApplicationRunner {
         .map(item -> {
           if(!whiteListedNames.contains(item.getName())) {
             item.setHidden(true);
+            if (item.getQuality() == Quality.LEGENDARY) {
+              log.info("Hidden Item: " + item.toString());
+            }
           }
           return item;
         })
