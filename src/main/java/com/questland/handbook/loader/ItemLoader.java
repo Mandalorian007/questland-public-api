@@ -43,6 +43,10 @@ public class ItemLoader implements ApplicationRunner {
       "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/static_passive_skills/";
 
   private Set<String> manuallyWhitelistedNames = Set.of(
+      "Cursed Seafarer Armor",
+      "Seafarer’s Spyglass",
+      "Jolt of Lightning",
+      "Thunderbolt Stompers",
       "Thunderclap",
       "Booming Blade",
       "Sphere of the Tempest",
