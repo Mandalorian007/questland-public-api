@@ -9,5 +9,6 @@ public enum Quality {
     ARTIFACT1,
     ARTIFACT2,
     ARTIFACT3,
-    ARTIFACT4
+    ARTIFACT4,
+    ARTIFACT5
 }

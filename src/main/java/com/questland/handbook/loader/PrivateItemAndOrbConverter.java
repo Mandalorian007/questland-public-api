@@ -196,6 +196,8 @@ public class PrivateItemAndOrbConverter {
         return Quality.ARTIFACT3;
       case "artifact4":
         return Quality.ARTIFACT4;
+      case "artifact5":
+        return Quality.ARTIFACT5;
       default:
         throw new RuntimeException(
             "Unable to parse quality for " + privateQuality + " while loading gear/item data");
