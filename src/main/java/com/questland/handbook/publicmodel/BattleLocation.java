@@ -10,6 +10,8 @@ import java.util.List;
 public class BattleLocation {
     private int id;
 
+    private int number;
+
     private String name;
 
     private List<Stage> stages;

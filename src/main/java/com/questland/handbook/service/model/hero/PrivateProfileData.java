@@ -9,6 +9,7 @@ import lombok.Data;
 // Ignoring unknowns to minimize internal API reliance
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PrivateProfileData {
+
   private PrivateProfile profile;
   @JsonProperty("profile_heropower_rank")
   private PrivateHeroPowerRank heroPowerRank;
@@ -18,4 +19,6 @@ public class PrivateProfileData {
   private PrivateMultiplierDetailsContainer multiplierDetails;
   @JsonProperty("profile_pvp")
   private PrivatePvpDetails pvpDetails;
+  @JsonProperty("hero_quest_events_rank")
+  private PrivateQuestEventsRank questEventsRank;
 }

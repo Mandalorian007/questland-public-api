@@ -36,6 +36,7 @@ public class PrivateBattleLocationDetailsConverter {
             Map<Integer, PrivateMob> privateMobs) {
         BattleLocation.BattleLocationBuilder battleLocationBuilder = BattleLocation.builder()
                 .id(privateBattleLocation.getId())
+                .number(privateBattleLocation.getNumber())
                 .name(privateBattleLocation.getName());
 
         List<Stage> stages = privateBattleLocation.getStages().values().stream()
