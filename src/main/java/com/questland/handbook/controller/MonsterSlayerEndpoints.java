@@ -5,9 +5,7 @@ import com.questland.handbook.service.MonsterSlayerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.annotations.ApiIgnore;
 
-@ApiIgnore
 @RestController
 @RequiredArgsConstructor
 public class MonsterSlayerEndpoints {
