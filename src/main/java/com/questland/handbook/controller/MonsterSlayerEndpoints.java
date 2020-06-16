@@ -12,14 +12,8 @@ public class MonsterSlayerEndpoints {
 
   private final MonsterSlayerService monsterSlayerService;
 
-  private MonsterSlayerScore monsterSlayerScore;
-
   @GetMapping("/monster-slayer")
   public MonsterSlayerScore getMonsterSlayerScore() {
-    if (monsterSlayerScore == null) {
-      monsterSlayerScore = monsterSlayerService.getStageScores();
-    }
-    //TODO consider if monster slayer is inactive
-    return monsterSlayerScore;
+    return monsterSlayerService.getStageScores();
   }
 }
