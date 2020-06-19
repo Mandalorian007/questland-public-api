@@ -1,5 +1,6 @@
 package com.questland.handbook.publicmodel;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,7 +31,11 @@ public class Hero {
   private int dodgeChance;
   private int heroPowerRank;
   private int heroPvpRank;
-  //TODO equipped gear
+  private CollectionSlots collection1Slots;
+  private CollectionSlots collection2Slots;
+  private List<BuildItem> equippedGear;
+  private List<BuildItem> collections1;
+  private List<BuildItem> collections2;
   private double battleEventMulti;
   private String row1Bonus;
   private String row2Bonus;

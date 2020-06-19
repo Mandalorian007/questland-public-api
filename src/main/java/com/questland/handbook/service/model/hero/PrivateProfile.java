@@ -22,5 +22,7 @@ public class PrivateProfile {
   private String lang;
   @JsonProperty("fame_lvl")
   private int fameLevel;
+  private PrivateCollection collection1;
+  private PrivateCollection collection2;
 
 }

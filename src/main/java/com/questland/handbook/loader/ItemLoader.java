@@ -43,6 +43,8 @@ public class ItemLoader implements ApplicationRunner {
       "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/static_passive_skills/";
 
   private Set<String> manuallyWhitelistedNames = Set.of(
+      "Ring of the Cursed Depths",
+      "The Lost Helm",
       "Grips of the Depths",
       "Sea Hag’s Blessing",
       "Cursed Seafarer Armor",
