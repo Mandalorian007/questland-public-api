@@ -181,7 +181,7 @@ public class PrivateHeroConverter {
       ItemSlot orbGearSlot =
           PrivateItemAndOrbConverter.covertItemSlotFromPrivate((String) orb.get(0));
       BuildOrb buildOrb = BuildOrb.builder()
-          .id((Integer) profileItem.getA().get(0))
+          .id((Integer) profileItem.getA().get(1))
           .level((Integer) orb.get(1))
           .enhance((Integer) orb.get(2))
           .build();
