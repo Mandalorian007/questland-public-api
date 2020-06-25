@@ -13,7 +13,7 @@ public class DisplayableBuild {
   private String description;
   private String weapons;
   private String mainHandAlternatives;
-  private String offhandAlternatives;
+  private String offHandAlternatives;
   private String talent1;
   private String talent2;
   private String talent3;
