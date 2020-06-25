@@ -14,7 +14,6 @@ public class PopularBuildEndpoints {
 
   private final BuildDataService buildDataService;
 
-
   @GetMapping("/build/{build}")
   public DisplayableBuild getGuild(@PathVariable("build") Build build) {
     return buildDataService.getBuildByApiName(build).orElseThrow(ResourceNotFoundException::new);
