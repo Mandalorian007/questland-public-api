@@ -93,7 +93,7 @@ public class BuildDataService {
             .build(RED_GUILD_STRIKER)
             .name("Red Guild Boss Striker")
             .description(
-                "No passive use crest guardian, passive#1 sacred rage, and passive#2 Runich Touch. Sin Crusher is the tier 1 weapon here because of it's incredible magic resistance passive. Make sure you are counting the turns to deal with definitely dead. You will need to make sure you can 4R at least 2-3 times in a row to fully heal up.")
+                "No passive use crest guardian, passive#1 sacred rage, and passive#2 Runic Touch. Sin Crusher is the tier 1 weapon here because of it's incredible magic resistance passive. Make sure you are counting the turns to deal with definitely dead. You will need to make sure you can 4R at least 2-3 times in a row to fully heal up.")
             .weapons(RED_HOARDER_MAIN_HAND + ", Sin Crusher")
             .mainHandAlternatives(RED_HOARDER_MAIN_HAND_BACKUP)
             .offHandAlternatives(
