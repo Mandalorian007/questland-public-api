@@ -1,12 +1,14 @@
 package com.questland.handbook.service;
 
 import static com.questland.handbook.publicmodel.Build.BLUE_BATTLE_EVENT;
+import static com.questland.handbook.publicmodel.Build.BLUE_GUILD_STRIKER;
 import static com.questland.handbook.publicmodel.Build.BOOMING_TURTLE;
 import static com.questland.handbook.publicmodel.Build.FIRE_BLASTER;
 import static com.questland.handbook.publicmodel.Build.HECATOMBUS;
 import static com.questland.handbook.publicmodel.Build.ICY_CANNON;
 import static com.questland.handbook.publicmodel.Build.RATCHET_RUSH;
 import static com.questland.handbook.publicmodel.Build.RED_BATTLE_EVENT;
+import static com.questland.handbook.publicmodel.Build.RED_GUILD_STRIKER;
 import static com.questland.handbook.publicmodel.Build.SHINOBI;
 import static com.questland.handbook.publicmodel.Build.THE_PAX;
 import static com.questland.handbook.publicmodel.Build.TURTLE;
@@ -14,8 +16,11 @@ import static com.questland.handbook.publicmodel.Build.WARDING_FANG;
 
 import com.questland.handbook.publicmodel.Build;
 import com.questland.handbook.publicmodel.DisplayableBuild;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -47,6 +52,12 @@ public class BuildDataService {
   }
 
   private List<DisplayableBuild> getBuilds() {
+    return Stream.of(getCampaignBuilds(), getBattleEventBuilds(), getArenaBuilds())
+        .flatMap(Collection::stream)
+        .collect(Collectors.toList());
+  }
+
+  private List<DisplayableBuild> getBattleEventBuilds() {
     return List.of(
         DisplayableBuild.builder()
             .build(RED_BATTLE_EVENT)
@@ -78,6 +89,42 @@ public class BuildDataService {
             .videoGuide("https://www.youtube.com/watch?v=5zeUF_KstQg")
             .image("https://questland-public-api.cfapps.io/blue-be.png")
             .build(),
+        DisplayableBuild.builder()
+            .build(RED_GUILD_STRIKER)
+            .name("Red Guild Boss Striker")
+            .description(
+                "No passive use crest guardian, passive#1 sacred rage, and passive#2 Runich Touch. Sin Crusher is the tier 1 weapon here because of it's incredible magic resistance passive. Make sure you are counting the turns to deal with definitely dead. You will need to make sure you can 4R at least 2-3 times in a row to fully heal up.")
+            .weapons(RED_HOARDER_MAIN_HAND + ", Sin Crusher")
+            .mainHandAlternatives(RED_HOARDER_MAIN_HAND_BACKUP)
+            .offHandAlternatives(
+                "Second Chance: Triumphant Defender, Battle Beetle, The Scaleward, Arachnea's Heart, Redeemer, Frost Empress, Burden of Betrayal")
+            .talent1("Bloodlust")
+            .talent2("Transcendental Tornado")
+            .talent3("Crest Guardian / sacred rage / Runic Touch")
+            .links("15% damage, 10% magic resistance")
+            .videoGuide("https://youtu.be/Pf-C_H8xyEY")
+            .image("https://questland-public-api.cfapps.io/red-guild-striker.png")
+            .build(),
+        DisplayableBuild.builder()
+            .build(BLUE_GUILD_STRIKER)
+            .name("Blue Guild Boss Striker")
+            .description(
+                "You change your talent based on your passive. For no passive use Crest Guardian, for passive#1 use Sacred Rage, for passive#2 use Mystical Wind.")
+            .weapons(GRANNY_BROTH_MAIN_HAND + ", " + MIGHT_MAGIC_OFF_HAND)
+            .mainHandAlternatives(GRANNY_BROTH_MAIN_HAND_BACKUP)
+            .offHandAlternatives(MIGHT_MAGIC_OFF_HAND_BACKUP)
+            .talent1("Inner Fire")
+            .talent2("Chilling Cold")
+            .talent3("Crest Guardian / Sacred Rage / Mystical Wind")
+            .links("4% healing, 10% magic resistance")
+            .videoGuide("https://youtu.be/7fXR7Z3MiOM")
+            .image("https://questland-public-api.cfapps.io/blue-guild-striker.png")
+            .build()
+    );
+  }
+
+  private List<DisplayableBuild> getCampaignBuilds() {
+    return List.of(
         DisplayableBuild.builder()
             .build(HECATOMBUS)
             .name("The Hecatombus")
@@ -140,7 +187,12 @@ public class BuildDataService {
             .talent3("Elevation")
             .videoGuide("https://www.youtube.com/watch?v=EnMpxvYR7L8")
             .image("https://questland-public-api.cfapps.io/ratchet-rush.png")
-            .build(),
+            .build()
+    );
+  }
+
+  private List<DisplayableBuild> getArenaBuilds() {
+    return List.of(
         DisplayableBuild.builder()
             .build(BOOMING_TURTLE)
             .name("Booming Turtle")
@@ -192,5 +244,4 @@ public class BuildDataService {
             .build()
     );
   }
-
 }
