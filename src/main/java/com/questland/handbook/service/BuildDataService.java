@@ -10,6 +10,7 @@ import static com.questland.handbook.publicmodel.Build.RATCHET_RUSH;
 import static com.questland.handbook.publicmodel.Build.RED_BATTLE_EVENT;
 import static com.questland.handbook.publicmodel.Build.RED_GUILD_STRIKER;
 import static com.questland.handbook.publicmodel.Build.SHINOBI;
+import static com.questland.handbook.publicmodel.Build.THE_FARMER;
 import static com.questland.handbook.publicmodel.Build.THE_PAX;
 import static com.questland.handbook.publicmodel.Build.TURTLE;
 import static com.questland.handbook.publicmodel.Build.WARDING_FANG;
@@ -241,6 +242,20 @@ public class BuildDataService {
             .talent3("Sacred Rage")
             .videoGuide("https://www.youtube.com/watch?v=_SvZmoYtBLk")
             .image("https://questland-public-api.cfapps.io/icy-cannon.png")
+            .build(),
+        DisplayableBuild.builder()
+            .build(THE_FARMER)
+            .name("The Farmer")
+            .description(
+                "This build is amazing for farming anti-heal shield defense opponents of equal or lower power while not suffering heavily from dodge which makes it ideal for adding trophies to the system from farming lower opponents.")
+            .weapons(RED_HOARDER_MAIN_HAND + ", " + YOUR_HEAL_MY_GAIN_OFF_HAND)
+            .mainHandAlternatives(RED_HOARDER_MAIN_HAND_BACKUP)
+            .offHandAlternatives(YOUR_HEAL_MY_GAIN_OFF_HAND_BACKUP)
+            .talent1("Assassin's Way")
+            .talent2("Divine Force")
+            .talent3("Sacred Rage")
+            .videoGuide("https://youtu.be/94gERd2SmzI")
+            .image("https://questland-public-api.cfapps.io/the-farmer.png")
             .build()
     );
   }
