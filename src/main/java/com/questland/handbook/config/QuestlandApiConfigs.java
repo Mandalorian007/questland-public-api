@@ -28,7 +28,7 @@ public class QuestlandApiConfigs {
   @Bean
   public Map<QuestlandServer, String> regionWorkerMap() {
     return Map.of(
-        GLOBAL, "http://gs-global-wrk-04.api-ql.com/",
+        GLOBAL, "http://gs-global-wrk-03.api-ql.com/",
         EUROPE, "http://gs-eu2-wrk-02.api-ql.com/",
         AMERICA, "http://gs-bhs-wrk-01.api-ql.com/",
         ASIA, "http://gs-as-wrk-01.api-ql.com/",
