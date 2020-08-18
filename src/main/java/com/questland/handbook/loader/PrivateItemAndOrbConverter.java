@@ -27,6 +27,7 @@ public class PrivateItemAndOrbConverter {
     List<Integer> itemLinks = convertItemLinksFromPrivate(privateItem.getLinks());
     List<Integer> orbLinks = convertOrbLinksFromPrivate(privateItem.getLinks());
 
+    int totalPotential = convertTotalPotentialFromPrivate(privateItem.getStats());
     Item.ItemBuilder builder = Item.builder()
         .id(privateItem.getLinkId())
         .hidden(false)
@@ -34,7 +35,7 @@ public class PrivateItemAndOrbConverter {
         .quality(convertQualityFromPrivate(privateItem.getQuality()))
         .itemSlot(covertItemSlotFromPrivate(privateItem.getItemType()))
         .emblem(emblemMap.getOrDefault(privateItem.getSet(), Emblem.NONE))
-        .totalPotential(convertTotalPotentialFromPrivate(privateItem.getStats()))
+        .totalPotential(totalPotential)
         .attack(convertAttackFromPrivate(privateItem.getStats()))
         .magic(convertMagicFromPrivate(privateItem.getStats()))
         .defense(convertDefenseFromPrivate(privateItem.getStats()))
@@ -43,6 +44,7 @@ public class PrivateItemAndOrbConverter {
         .magicPotential(convertMagicPotentialFromPrivate(privateItem.getStats()))
         .defensePotential(convertDefensePotentialFromPrivate(privateItem.getStats()))
         .healthPotential(convertHealthPotentialFromPrivate(privateItem.getStats()))
+        .reforgePointsPerLevel(totalPotential/2)
         .itemBonus(covertItemBonusFromPrivate(privateItem.getLinks()))
         .orbBonus(covertOrbBonusFromPrivate(privateItem.getLinks()))
         .passive1Name(

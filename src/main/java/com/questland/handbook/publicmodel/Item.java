@@ -49,6 +49,8 @@ public class Item {
 
     private int healthPotential;
 
+    private int reforgePointsPerLevel;
+
     @Enumerated(EnumType.STRING)
     private Emblem emblem;
 
