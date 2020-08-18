@@ -3,6 +3,7 @@ package com.questland.handbook.controller;
 import com.questland.handbook.publicmodel.Orb;
 import com.questland.handbook.publicmodel.Quality;
 import com.questland.handbook.repository.OrbRepository;
+import com.questland.handbook.service.ItemOrbCalcService;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,7 +19,9 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController
 @RequiredArgsConstructor
 public class OrbEndpoints {
+
   private final OrbRepository orbRepository;
+  private final ItemOrbCalcService itemOrbCalcService;
 
   @GetMapping("/orbs")
   public List<Orb> getOrbs(Sort sort,
@@ -60,6 +63,14 @@ public class OrbEndpoints {
     }
     return orbsByName.stream().findFirst().orElseThrow(() ->
         new ResponseStatusException(HttpStatus.NOT_FOUND, "Orb was not found."));
+  }
+
+  @GetMapping("/orbs/calc")
+  public double calcOrb(@RequestParam("basestat") int baseStat,
+                           @RequestParam("potential") int potential,
+                           @RequestParam("enhance") int enhance,
+                           @RequestParam("level") int level) {
+    return itemOrbCalcService.calculateOrbStats(baseStat, potential, enhance, level);
   }
 
 }
