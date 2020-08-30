@@ -78,7 +78,7 @@ public class GuildService {
         .filter(Optional::isPresent)
         .map(Optional::get)
         .map(this::getPlanFrom)
-        .sorted(Comparator.comparingInt(HeroPlan::getHeroPower).reversed())
+        .sorted(Comparator.comparingDouble(HeroPlan::getBeHeroPower).reversed())
         .collect(Collectors.toList());
 
     return GuildPlan.builder()
