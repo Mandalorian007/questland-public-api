@@ -109,6 +109,11 @@ public class GuildService {
   }
 
   private HeroPlan getPlanFrom(Hero hero) {
+    double multi = hero.getBattleEventMulti();
+    double beHealth = hero.getHealth() * multi;
+    double beAttack = hero.getAttack() * multi;
+    double beDefense = hero.getDefense() * multi;
+    double beMagic = hero.getMagic() * multi;
     return HeroPlan.builder()
         .id(hero.getId())
         .name(hero.getName())
@@ -117,7 +122,12 @@ public class GuildService {
         .attack(hero.getAttack())
         .defense(hero.getDefense())
         .magic(hero.getMagic())
-        .battleEventMulti(hero.getBattleEventMulti())
+        .battleEventMulti(multi)
+        .beHeroPower(beHealth + beAttack + beDefense + beMagic)
+        .beHealth(beHealth)
+        .beAttack(beAttack)
+        .beDefense(beDefense)
+        .beMagic(beMagic)
         .row1Bonus(hero.getRow1Bonus())
         .row2Bonus(hero.getRow2Bonus())
         .row3Bonus(hero.getRow3Bonus())

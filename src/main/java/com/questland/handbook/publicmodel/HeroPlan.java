@@ -15,6 +15,11 @@ public class HeroPlan {
   private int defense;
   private int magic;
   private double battleEventMulti;
+  private double beHeroPower;
+  private double beHealth;
+  private double beAttack;
+  private double beDefense;
+  private double beMagic;
   private String row1Bonus;
   private String row2Bonus;
   private String row3Bonus;
