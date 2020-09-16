@@ -19,6 +19,7 @@ public class GuildEndpoints {
   @GetMapping("/guild/{name}")
   public Guild getGuild(@PathVariable("name") String name,
                         @RequestParam("server") String server) {
+    System.out.println("looking up guild: " + name + " on server: " + server);
     return guildService.getGuild(QuestlandServer.valueOf(server), name)
         .orElseThrow(ResourceNotFoundException::new);
   }
