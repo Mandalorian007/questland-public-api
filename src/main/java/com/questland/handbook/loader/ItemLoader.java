@@ -26,7 +26,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @RequiredArgsConstructor
-@Component
+//@Component
 public class ItemLoader implements ApplicationRunner {
 
   private final PrivateItemAndOrbConverter privateConverter;

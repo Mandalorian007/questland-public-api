@@ -18,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @RequiredArgsConstructor
-@Component
+//@Component
 public class OrbLoader implements ApplicationRunner {
 
   private final PrivateItemAndOrbConverter privateConverter;
