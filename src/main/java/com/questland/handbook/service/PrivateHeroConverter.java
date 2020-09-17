@@ -165,8 +165,7 @@ public class PrivateHeroConverter {
                                           List<PrivateProfileItem> privateOrbList) {
         privateOrbList.forEach(profileItem -> {
             List<Object> orb = profileItem.getOrb();
-            ItemSlot orbGearSlot =
-                    PrivateItemAndOrbConverter.covertItemSlotFromPrivate((String) orb.get(0));
+            ItemSlot orbGearSlot = getDisplayableItemSlot((String) orb.get(0));
             BuildOrb buildOrb = BuildOrb.builder()
                     .id((Integer) profileItem.getA().get(1))
                     .level((Integer) orb.get(1))
@@ -196,5 +195,31 @@ public class PrivateHeroConverter {
                 .unlockedSlots(collection.getUnlockedSlots())
                 .slotUpgradePercentages(collection.getSlotsUpgrade())
                 .build();
+    }
+
+    private static ItemSlot getDisplayableItemSlot(String privateItemType) {
+        switch (privateItemType) {
+            case "head":
+                return ItemSlot.HELM;
+            case "chest":
+                return ItemSlot.CHEST;
+            case "gloves":
+                return ItemSlot.GLOVES;
+            case "feet":
+                return ItemSlot.BOOTS;
+            case "amulet":
+                return ItemSlot.NECKLACE;
+            case "ring":
+                return ItemSlot.RING;
+            case "talisman":
+                return ItemSlot.TALISMAN;
+            case "main_hand":
+                return ItemSlot.MAIN_HAND;
+            case "off_hand":
+                return ItemSlot.OFF_HAND;
+            default:
+                throw new RuntimeException(
+                        "Unable to parse Item slot for " + privateItemType + " while loading gear/item data");
+        }
     }
 }

@@ -1,11 +1,17 @@
 package com.questland.handbook.loader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.questland.handbook.loader.model.PrivateOrb;
+import com.questland.handbook.flatbuffers.EquipSlot;
+import com.questland.handbook.flatbuffers.ItemQuality;
+import com.questland.handbook.flatbuffers.ItemTemplate;
+import com.questland.handbook.flatbuffers.ItemTemplates;
 import com.questland.handbook.repository.OrbRepository;
 import com.questland.handbook.publicmodel.Orb;
-import java.util.Arrays;
+
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
@@ -18,7 +24,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @RequiredArgsConstructor
-//@Component
+@Component
 public class OrbLoader implements ApplicationRunner {
 
   private final PrivateItemAndOrbConverter privateConverter;
@@ -27,7 +33,7 @@ public class OrbLoader implements ApplicationRunner {
   private final String latestTokenUrl =
       "http://gs-bhs-wrk-02.api-ql.com/client/checkstaticdata/?lang=en&graphics_quality=hd_android";
   private final String orbUrl =
-      "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/item_templates/";
+      "http://gs-bhs-wrk-01.api-ql.com/staticdata/fb/key/en/android/%s/fb_item_templates/";
 
   @Override
   @Scheduled(cron = "0 0 0 ? * * *")
@@ -38,17 +44,30 @@ public class OrbLoader implements ApplicationRunner {
         .path("data")
         .path("static_data")
         .path("crc_details")
-        .path("item_templates").asText();
+        .path("fb_item_templates").asText();
     log.info("Latest orb token is: " + latestToken);
 
-    List<PrivateOrb> privateOrbs = Arrays.asList(
-        restTemplate.getForObject(String.format(orbUrl, latestToken), PrivateOrb[].class));
+    byte[] itemBytes = restTemplate.getForObject(String.format(orbUrl, latestToken), byte[].class);
+    ItemTemplates itemTemplates = ItemTemplates.getRootAsItemTemplates(ByteBuffer.wrap(itemBytes));
+    List<ItemTemplate> privateOrbs = new ArrayList<>();
+    for(int i = 0; i < itemTemplates.templatesLength(); i++) {
+      privateOrbs.add(itemTemplates.templates(i));
+    }
+
+    Set<Byte> validItemTypes = Set.of(
+            ItemQuality.Uncommon,
+            ItemQuality.Rare,
+            ItemQuality.Epic,
+            ItemQuality.Legendary,
+            ItemQuality.LegendaryPlus
+    );
 
     List<Orb> orbs = privateOrbs.stream()
         // Filter out any item that wouldn't be considered an orb
-        .filter(item -> item.getItemType().equals("rune"))
+        .filter(orb -> orb.s() == EquipSlot.Orb)
+        .filter(orb -> validItemTypes.contains(orb.q()))
         // Convert to our internal orb model
-        .map(orb -> privateConverter.covertOrbFromPrivate(orb))
+        .map(privateConverter::covertOrbFromPrivate)
         .collect(Collectors.toList());
 
     log.info("dropping existing orb table");

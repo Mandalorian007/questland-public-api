@@ -1,88 +1,93 @@
 package com.questland.handbook.loader;
 
-import com.questland.handbook.loader.model.PrivateItem;
-import com.questland.handbook.loader.model.PrivateLink;
-import com.questland.handbook.loader.model.PrivateOrb;
-import com.questland.handbook.loader.model.PrivateStats;
+import com.questland.handbook.flatbuffers.*;
 import com.questland.handbook.loader.model.PrivateWeaponPassive;
-import com.questland.handbook.publicmodel.Emblem;
-import com.questland.handbook.publicmodel.Item;
-import com.questland.handbook.publicmodel.ItemSlot;
-import com.questland.handbook.publicmodel.Orb;
-import com.questland.handbook.publicmodel.Quality;
-import com.questland.handbook.publicmodel.Stat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import com.questland.handbook.publicmodel.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
 public class PrivateItemAndOrbConverter {
 
-  public Item covertItemFromPrivate(PrivateItem privateItem, Map<Integer, Emblem> emblemMap,
+  public Item covertItemFromPrivate(ItemTemplate privateItem, Map<Long, Emblem> emblemMap,
                                     Map<Integer, PrivateWeaponPassive> weaponPassives) {
-    List<Integer> itemLinks = convertItemLinksFromPrivate(privateItem.getLinks());
-    List<Integer> orbLinks = convertOrbLinksFromPrivate(privateItem.getLinks());
+    Item.ItemBuilder builder = Item.builder();
 
-    int totalPotential = convertTotalPotentialFromPrivate(privateItem.getStats());
-    Item.ItemBuilder builder = Item.builder()
-        .id(privateItem.getLinkId())
+    //weapon passives
+    // Note: This needed to be moved above the rest of the builder... somehow the bite array was being consumed early
+    int numOfPassives = privateItem.psklsLength();
+    if (numOfPassives >= 1) {
+      int passiveId = privateItem.pskls(0);
+      builder.passive1Name(convertToPassiveNameFromPrivate(passiveId, weaponPassives));
+      builder.passive1Description(convertToPassiveDescriptionFromPrivate(passiveId, weaponPassives));
+    }
+    if (numOfPassives >= 2) {
+      int passiveId = privateItem.pskls(1);
+      builder.passive2Name(convertToPassiveNameFromPrivate(passiveId, weaponPassives));
+      builder.passive2Description(convertToPassiveDescriptionFromPrivate(passiveId, weaponPassives));
+    }
+
+    int totalPotential = privateItem.statsDmgInc() + privateItem.statsMagicInc()
+            + privateItem.statsDefInc() + privateItem.statsHpInc();
+    builder
+        .id(privateItem.t())
         .hidden(false)
-        .name(privateItem.getName())
-        .quality(convertQualityFromPrivate(privateItem.getQuality()))
-        .itemSlot(covertItemSlotFromPrivate(privateItem.getItemType()))
-        .emblem(emblemMap.getOrDefault(privateItem.getSet(), Emblem.NONE))
+        .name(privateItem.n())
+        .quality(convertQualityFromPrivate(privateItem.q()))
+        .itemSlot(covertItemSlotFromPrivate(privateItem.s()))
+        .emblem(emblemMap.getOrDefault(privateItem.set(), Emblem.NONE))
         .totalPotential(totalPotential)
-        .attack(convertAttackFromPrivate(privateItem.getStats()))
-        .magic(convertMagicFromPrivate(privateItem.getStats()))
-        .defense(convertDefenseFromPrivate(privateItem.getStats()))
-        .health(convertHealthFromPrivate(privateItem.getStats()))
-        .attackPotential(convertAttackPotentialFromPrivate(privateItem.getStats()))
-        .magicPotential(convertMagicPotentialFromPrivate(privateItem.getStats()))
-        .defensePotential(convertDefensePotentialFromPrivate(privateItem.getStats()))
-        .healthPotential(convertHealthPotentialFromPrivate(privateItem.getStats()))
-        .reforgePointsPerLevel(totalPotential/2)
-        .itemBonus(covertItemBonusFromPrivate(privateItem.getLinks()))
-        .orbBonus(covertOrbBonusFromPrivate(privateItem.getLinks()))
-        .passive1Name(
-            convertToPassiveNameFromPrivate(privateItem.getWeaponPassives(), weaponPassives, 1))
-        .passive1Description(
-            convertToPassiveDescriptionFromPrivate(privateItem.getWeaponPassives(),
-                weaponPassives,
-                1))
-        .passive2Name(
-            convertToPassiveNameFromPrivate(privateItem.getWeaponPassives(), weaponPassives, 2))
-        .passive2Description(
-            convertToPassiveDescriptionFromPrivate(privateItem.getWeaponPassives(),
-                weaponPassives,
-                2));
+        .attack(privateItem.statsDmg())
+        .magic(privateItem.statsMagic())
+        .defense(privateItem.statsDef())
+        .health(privateItem.statsHp())
+        .attackPotential(privateItem.statsDmgInc())
+        .magicPotential(privateItem.statsMagicInc())
+        .defensePotential(privateItem.statsDefInc())
+        .healthPotential(privateItem.statsHpInc())
+        .reforgePointsPerLevel(totalPotential/2);
 
-    if (itemLinks.size() >= 1) {
-      builder.itemLink1((long)itemLinks.get(0));
-    }
-    if (itemLinks.size() >= 2) {
-      builder.itemLink2((long)itemLinks.get(1));
-    }
-    if (itemLinks.size() >= 3) {
-      builder.itemLink3((long)itemLinks.get(2));
+    //Item links exist
+    if (privateItem.linksLength() >= 1) {
+      Link itemLinks = privateItem.links(0);
+      builder.itemBonus(covertItemBonusFromPrivate(itemLinks.e()));
+
+      int numOfLinks = itemLinks.iLength();
+      if (numOfLinks >= 1) {
+        builder.itemLink1(itemLinks.i(0));
+      }
+      if (numOfLinks >= 2) {
+        builder.itemLink2(itemLinks.i(1));
+      }
+      if (numOfLinks >= 3) {
+        builder.itemLink3(itemLinks.i(2));
+      }
     }
 
-    if (orbLinks.size() >= 1) {
-      builder.orbLink1((long)orbLinks.get(0));
-    }
-    if (orbLinks.size() >= 2) {
-      builder.orbLink2((long)orbLinks.get(1));
+    //Orb links exist
+    if (privateItem.linksLength() >= 2) {
+      Link orbLinks = privateItem.links(1);
+      builder.orbBonus(covertItemBonusFromPrivate(orbLinks.e()));
+
+      int numOfLinks = orbLinks.iLength();
+      if (numOfLinks >= 1) {
+        builder.orbLink1(orbLinks.i(0));
+      }
+      if (numOfLinks >= 2) {
+        builder.orbLink2(orbLinks.i(1));
+      }
     }
 
     return builder.build();
   }
 
-  public Orb covertOrbFromPrivate(PrivateOrb privateOrb) {
-    int defense = convertDefenseFromPrivate(privateOrb.getStats());
-    int health = convertHealthFromPrivate(privateOrb.getStats());
+  public Orb covertOrbFromPrivate(ItemTemplate privateOrb) {
+    int defense = privateOrb.statsDef();
+    int health = privateOrb.statsHp();
     Stat stat;
 
     if (defense > 0) {
@@ -94,46 +99,46 @@ public class PrivateItemAndOrbConverter {
     }
 
     return Orb.builder()
-        .id(privateOrb.getLinkId())
-        .name(privateOrb.getName())
-        .quality(convertQualityFromPrivate(privateOrb.getQuality()))
-        .attack(convertAttackFromPrivate(privateOrb.getStats()))
+        .id(privateOrb.t())
+        .name(privateOrb.n())
+        .quality(convertQualityFromPrivate(privateOrb.q()))
+        .attack(privateOrb.statsDmg())
         // magic stat is always identical to attack
-        .magic(convertAttackFromPrivate(privateOrb.getStats()))
+        .magic(privateOrb.statsDmg())
         .defense(defense)
         .health(health)
-        .attackPotential(convertAttackPotentialFromPrivate(privateOrb.getStats()))
+        .attackPotential(privateOrb.statsDmgInc())
         // magic potential is always identical to attack
-        .magicPotential(convertAttackPotentialFromPrivate(privateOrb.getStats()))
-        .defensePotential(convertDefensePotentialFromPrivate(privateOrb.getStats()))
-        .healthPotential(convertHealthPotentialFromPrivate(privateOrb.getStats()))
+        .magicPotential(privateOrb.statsDmgInc())
+        .defensePotential(privateOrb.statsDefInc())
+        .healthPotential(privateOrb.statsHpInc())
         .statBonus(stat)
         .build();
   }
 
-  public static ItemSlot covertItemSlotFromPrivate(String privateItemType) {
+  private static ItemSlot covertItemSlotFromPrivate(byte privateItemType) {
     switch (privateItemType) {
-      case "head":
+      case EquipSlot.Head:
         return ItemSlot.HELM;
-      case "chest":
+      case EquipSlot.Chest:
         return ItemSlot.CHEST;
-      case "gloves":
+      case EquipSlot.Hands:
         return ItemSlot.GLOVES;
-      case "feet":
+      case EquipSlot.Legs:
         return ItemSlot.BOOTS;
-      case "amulet":
+      case EquipSlot.Amulet:
         return ItemSlot.NECKLACE;
-      case "ring":
+      case EquipSlot.Ring:
         return ItemSlot.RING;
-      case "talisman":
+      case EquipSlot.Talisman:
         return ItemSlot.TALISMAN;
-      case "main_hand":
+      case EquipSlot.MainHand:
         return ItemSlot.MAIN_HAND;
-      case "off_hand":
+      case EquipSlot.OffHand:
         return ItemSlot.OFF_HAND;
       default:
         throw new RuntimeException(
-            "Unable to parse Item slot for " + privateItemType + " while loading gear/item data");
+                "Unable to parse Item slot for " + privateItemType + " while loading gear/item data");
     }
   }
 
@@ -178,27 +183,27 @@ public class PrivateItemAndOrbConverter {
     }
   }
 
-  public static Quality convertQualityFromPrivate(String privateQuality) {
+  public static Quality convertQualityFromPrivate(byte privateQuality) {
     switch (privateQuality) {
-      case "common":
+      case ItemQuality.Common:
         return Quality.COMMON;
-      case "uncommon":
+      case ItemQuality.Uncommon:
         return Quality.UNCOMMON;
-      case "rare":
+      case ItemQuality.Rare:
         return Quality.RARE;
-      case "epic":
+      case ItemQuality.Epic:
         return Quality.EPIC;
-      case "legendary":
+      case ItemQuality.Legendary:
         return Quality.LEGENDARY;
-      case "artifact1":
+      case ItemQuality.LegendaryPlus:
         return Quality.ARTIFACT1;
-      case "artifact2":
+      case ItemQuality.Artifact:
         return Quality.ARTIFACT2;
-      case "artifact3":
+      case ItemQuality.ArtifactPlus:
         return Quality.ARTIFACT3;
-      case "artifact4":
+      case ItemQuality.Relic:
         return Quality.ARTIFACT4;
-      case "artifact5":
+      case ItemQuality.RelicPlus:
         return Quality.ARTIFACT5;
       default:
         throw new RuntimeException(
@@ -206,48 +211,18 @@ public class PrivateItemAndOrbConverter {
     }
   }
 
-  public static Stat convertStatFromPrivate(String stat) {
-    switch (stat) {
-      case "attack":
-      case "damage":
-        return Stat.ATTACK;
-      case "magic":
-        return Stat.MAGIC;
-      case "defense":
-      case "defence":
-        return Stat.DEFENSE;
-      case "health":
-      case "hp":
-        return Stat.HEALTH;
-      case "dmg":
-        return Stat.ATTACK_MAGIC;
-      default:
-        return Stat.NONE;
-    }
-  }
-
-  private static String convertToPassiveNameFromPrivate(List<Integer> passiveIds,
-                                                        Map<Integer, PrivateWeaponPassive> weaponPassives,
-                                                        int passiveNumber) {
-    if (passiveIds == null || passiveIds.size() < 2) {
-      return null;
-    }
-    PrivateWeaponPassive passive =
-        weaponPassives.getOrDefault(passiveIds.get(passiveNumber - 1), null);
+  private static String convertToPassiveNameFromPrivate(int passiveId,
+                                                        Map<Integer, PrivateWeaponPassive> weaponPassives) {
+    PrivateWeaponPassive passive = weaponPassives.getOrDefault(passiveId, null);
     if (passive == null) {
       return null;
     }
     return passive.getName();
   }
 
-  private static String convertToPassiveDescriptionFromPrivate(List<Integer> passiveIds,
-                                                               Map<Integer, PrivateWeaponPassive> weaponPassives,
-                                                               int passiveNumber) {
-    if (passiveIds == null || passiveIds.size() < 2) {
-      return null;
-    }
-    PrivateWeaponPassive passive =
-        weaponPassives.getOrDefault(passiveIds.get(passiveNumber - 1), null);
+  private static String convertToPassiveDescriptionFromPrivate(int passiveId,
+                                                               Map<Integer, PrivateWeaponPassive> weaponPassives) {
+    PrivateWeaponPassive passive = weaponPassives.getOrDefault(passiveId, null);
     if (passive == null) {
       return null;
     }
@@ -286,123 +261,18 @@ public class PrivateItemAndOrbConverter {
     return "";
   }
 
-  private static int convertTotalPotentialFromPrivate(PrivateStats stats) {
-    return convertAttackPotentialFromPrivate(stats) + convertMagicPotentialFromPrivate(stats)
-           + convertDefensePotentialFromPrivate(stats) + convertHealthPotentialFromPrivate(stats);
-  }
-
-  private static int convertAttackFromPrivate(PrivateStats stats) {
-    return getIndexOrDefault(stats.getAttack(), 0);
-  }
-
-  private static int convertMagicFromPrivate(PrivateStats stats) {
-    return getIndexOrDefault(stats.getMagic(), 0);
-  }
-
-  private static int convertDefenseFromPrivate(PrivateStats stats) {
-    return getIndexOrDefault(stats.getDefense(), 0);
-  }
-
-  private static int convertHealthFromPrivate(PrivateStats stats) {
-    return getIndexOrDefault(stats.getHealth(), 0);
-  }
-
-  private static int convertAttackPotentialFromPrivate(PrivateStats stats) {
-    return getIndexOrDefault(stats.getAttack(), 1);
-  }
-
-  private static int convertMagicPotentialFromPrivate(PrivateStats stats) {
-    return getIndexOrDefault(stats.getMagic(), 1);
-  }
-
-  private static int convertDefensePotentialFromPrivate(PrivateStats stats) {
-    return getIndexOrDefault(stats.getDefense(), 1);
-  }
-
-  private static int convertHealthPotentialFromPrivate(PrivateStats stats) {
-    return getIndexOrDefault(stats.getHealth(), 1);
-  }
-
-  private static int getIndexOrDefault(int[] array, int index) {
-    if (array != null && array.length >= index + 1) {
-      return array[index];
+  private static Stat covertItemBonusFromPrivate(byte statType) {
+    switch (statType) {
+      case StatType.Attack:
+        return Stat.ATTACK;
+      case StatType.Defence:
+        return Stat.DEFENSE;
+      case StatType.Health:
+        return Stat.HEALTH;
+      case StatType.Magic:
+        return Stat.MAGIC;
+      default:
+        return Stat.NONE;
     }
-    return 0;
-  }
-
-  private static Stat covertItemBonusFromPrivate(List<PrivateLink> links) {
-    Optional<PrivateLink> gearLink = extractGearLink(links);
-    if (gearLink.isPresent()) {
-      return convertStatFromPrivate(gearLink.get().getBonusStat());
-    }
-    return Stat.NONE;
-  }
-
-  private static Stat covertOrbBonusFromPrivate(List<PrivateLink> links) {
-    Optional<PrivateLink> orbLink = extractOrbLink(links);
-    if (orbLink.isPresent()) {
-      return convertStatFromPrivate(orbLink.get().getBonusStat());
-    }
-    return Stat.NONE;
-  }
-
-  private List<Integer> convertItemLinksFromPrivate(List<PrivateLink> links) {
-    Optional<PrivateLink> gearLink = extractGearLink(links);
-    return linkExtractor(gearLink);
-  }
-
-  private List<Integer> convertOrbLinksFromPrivate(List<PrivateLink> links) {
-    Optional<PrivateLink> orbLink = extractOrbLink(links);
-    return linkExtractor(orbLink);
-  }
-
-  private static List<Integer> linkExtractor(Optional<PrivateLink> gearLink) {
-    if (gearLink.isPresent()) {
-      int[][] linkData = gearLink.get().getLinkData();
-      List<Integer> linkIds = new ArrayList<>();
-      for (int[] linkItem : linkData) {
-        linkIds.add(linkItem[0]);
-      }
-      return linkIds;
-    }
-    return new ArrayList<>();
-  }
-
-  private static Optional<PrivateLink> extractGearLink(List<PrivateLink> privateLinks) {
-    if (privateLinks == null || privateLinks.size() == 0) {
-      return Optional.empty();
-    }
-
-    if (privateLinks.size() == 2) {
-      // Gear link should always be 30
-      if (privateLinks.get(0).getBonusAmount() > 20) {
-        return Optional.of(privateLinks.get(0));
-      } else {
-        return Optional.of(privateLinks.get(1));
-      }
-    } else if (privateLinks.size() == 1) {
-      if (privateLinks.get(0).getBonusAmount() > 20) {
-        return Optional.of(privateLinks.get(0));
-      }
-    }
-
-    return Optional.empty();
-  }
-
-  private static Optional<PrivateLink> extractOrbLink(List<PrivateLink> privateLinks) {
-    if (privateLinks == null || privateLinks.size() == 0) {
-      return Optional.empty();
-    }
-
-    if (privateLinks.size() == 2) {
-      // Orb link should always be 15
-      if (privateLinks.get(1).getBonusAmount() < 20) {
-        return Optional.of(privateLinks.get(1));
-      } else {
-        return Optional.of(privateLinks.get(0));
-      }
-    }
-
-    return Optional.empty();
   }
 }

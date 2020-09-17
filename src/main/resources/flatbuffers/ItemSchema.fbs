@@ -1,0 +1,220 @@
+enum EquipSlot : byte
+{
+    Unknown = 0,
+    Head,
+    Chest,
+    Hands,
+    Legs,
+    Ring,
+    Amulet,
+    MainHand,
+    OffHand,
+    Pet,
+    Talisman,
+    Potion,
+    Orb,
+    Lockbox,
+    Usable,
+    Valuable,
+    Giftbox,
+    ExactShard,
+    BarberShop,
+    GuildBanner,
+    TalentOne,
+    TalentTwo,
+    TalentThree
+}
+
+enum ItemQuality : byte
+{
+    Unknown = 0,
+    Common,
+    Uncommon,
+    Rare,
+    Epic,
+    Legendary,
+    LegendaryPlus,
+    Artifact,
+    ArtifactPlus,
+    Relic,
+    RelicPlus
+}
+
+enum StatType : byte
+{
+    Unknown = 0,
+    Attack,
+    Defence,
+    Health,
+    Magic
+}
+
+enum ItemEffect : byte
+{
+    Unknown = 0,
+    BronzeChestKey,
+    SilverChestKey,
+    GoldenChestKey,
+    TrainingPill,
+    MeditationCandle,
+    SpinToken,
+    ExtractPowder,
+    Identify,
+    AddEnergy,
+    LockBoxKey,
+    BronzeChestKeyPart,
+    SilverChestKeyPart,
+    GoldenChestKeyPart,
+    ShardWeapon,
+    ShardArmor,
+    ShardTrinket,
+    BankPoint,
+    RenewTokenLesser,
+    RenewTokenSuperior,
+    Material,
+    CollectionSeal,
+    ItemExperience,
+    BarterShopCurrency,
+    AddStamina,
+    LeagueFight,
+    ReforgeCurrency,
+    OrbEnhanceHealth,
+    OrbEnhanceDamage,
+    OrbEnhanceDefence,
+    BattleEventBoss,
+    BattleEvent,
+    BattleEventLocations,
+    BattleEventRanking,
+    BattleEventShop,
+    GuildCurrency,
+    BattleEventMultiplierToken,
+    VanityItem,
+    BattleX10,
+    TalentSeed,
+    SkipBattleEventBoss,
+    IncreaseNameChanges,
+    BattleArenaGo
+}
+
+enum TargetPlace : byte
+{
+    None = 0,
+    CityCraft,
+    EventCraft,
+    GuildShop,
+    GuildResearch,
+}
+
+enum BannerPart : byte
+{
+    Unknown = 0,
+    Shape,
+    ShapeColor1,
+    ShapeColor2,
+    Crown,
+    Symbol,
+    SymbolColor
+}
+
+enum ItemGroup : byte
+{
+    Unknown = 0,
+    Wearable,
+    Orb,
+    Part,
+    Usable,
+    UsableGiftboxLockbox
+}
+
+table ItemTemplates
+{
+    templates:[ItemTemplate];
+}
+
+table ItemTemplate
+{
+    t:uint;         // id
+    n:string;       // name
+    s:EquipSlot;    // slot
+    q:ItemQuality;  // quality
+    i:int;          // bundle id
+    i2:int;         // equip bundle
+    val:bool;       // is valuable
+    g:int;          // gold price
+    is_send:bool;   // is gift
+    p:int;          // premium price
+    d:string;       // description
+    hid:bool;       // is hidden in orb list
+    ord:int;        // order
+    set:uint;       // set id
+    i_sd:int;       // icon graphics id
+    prvw:int;       // preview graphics id
+    is_uchest:bool; // is universal chest key
+    uchest_roll:int;// universal chest roller id
+    ip:int;         // index points
+    si:bool;        // hidden in index
+    rm:int;         // will be removed after event
+    pskls:[int];    // passive skills ids
+    stats_dmg:int;
+    stats_dmg_inc:int;
+    stats_def:int;
+    stats_def_inc:int;
+    stats_hp:int;
+    stats_hp_inc:int;
+    stats_magic:int;
+    stats_magic_inc:int;
+    talent:Talent;  // talent
+    links:[Link];   // combined effects
+    lvl:int;        // required level
+    req:int;        // required parts amount
+    ritem:uint;     // combined item template id
+    ueff_n:ItemEffect; // usable effect type
+    ueff_p:int;        // usable effect value
+    ueff_c:int;         // usable effect required amount
+    ueff_t:TargetPlace;         // usable effect go place
+    preview_gold:int;           // preview gold
+    preview_premium:int;        // preview premium
+    preview_guaranteed:bool;    // guaranteed rewards
+    preview_items_ids:[uint];   // preview item template ids
+    preview_items_amount:[uint];// preview item amounts
+    banner_s:bool;              // is available
+    banner_p:BannerPart;        // type of banner part
+    banner_c:string;            // banner part color
+    banner_o:int;               // banner order
+    banner_g_id:[int];          // banner avatars graphics ids
+    banner_g_name:[string];       // banner avatars graphics names
+    loot_chances:[LootChancesGroup]; // drop rates
+    awaken_item_id:int;       //awaken item_id
+    raw_graphic_id:int;       //raw graphic id
+    extract_cost:int;       //extract cost
+    is_gear_shard:bool;       //is gear shard
+    req_gear_shard_amount:int;       //gear shard amount required
+    auto_open:bool;       //auto open giftbox
+    is_hidden:bool;       //is hidden in inventory
+    craft_tab_id:int;   //challenge craft tab id when item is usable with city_crat place
+    dnsti:bool;   //do not send to inventory (usables)
+}
+
+table Talent
+{
+    preview:int;        // preview graphic id
+    back:int;           // background graphic id
+    stars:int;          // required stars
+    extr_tpl:uint;      // extract currency template
+    extr_amount:int;    // required extract amount
+    s:[int];            // skill ids
+}
+
+table Link
+{
+    e:StatType;         // type of effect
+    p:float;            // value pct
+    i:[uint];            // required items template id
+}
+
+table LootChancesGroup
+{
+    item_group:ItemGroup;   // group
+    qualities:[ItemQuality];// qualities
+    chances:[float];        // chances
+}

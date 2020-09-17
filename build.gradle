@@ -1,9 +1,12 @@
+import io.netifi.flatbuffers.plugin.tasks.FlatBuffers
+
 plugins {
 	id 'org.springframework.boot' version '2.2.4.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
 	id 'idea'
 	id 'eclipse'
+	id "io.netifi.flatbuffers" version "1.0.7"
 }
 
 group = 'com.questland'
@@ -25,6 +28,7 @@ dependencies {
 	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 	compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-csv', version: '2.10.2'
+	compile group: 'com.google.flatbuffers', name: 'flatbuffers-java', version: '1.12.0'
 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -48,7 +52,17 @@ test {
 	useJUnitPlatform()
 }
 
+flatbuffers {
+	language = 'java'
+	flatBuffersVersion = '1.12.0'
+}
+
+task createFlatBuffers(type: FlatBuffers) {
+	inputDir = file("src/main/resources/flatbuffers")
+	outputDir = file("src/main/java/com/questland/flatbuffers")
+}
+
 /*
-docker build -t questland-public-api .
-docker run -p 8080:8080 -t questland-public-api
+//This requires flatc to be installed on your PC
+gradlew createFlatBuffers
  */
