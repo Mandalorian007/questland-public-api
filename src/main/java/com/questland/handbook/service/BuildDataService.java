@@ -41,6 +41,8 @@ public class BuildDataService {
   private final String YOUR_HEAL_MY_GAIN_OFF_HAND = "The Lost Helm";
   private final String YOUR_HEAL_MY_GAIN_OFF_HAND_BACKUP =
       "Your Heal My Gain: Windwolf Shield, Forest Fury Shield, Forbidden Ritual Shield, Iron Roar";
+  
+  private final String IMAGE_SERVER = "https://questland-public-api-dot-questland-tools.uc.r.appspot.com/";
 
   public BuildDataService() {
     buildList = getBuilds();
@@ -73,7 +75,7 @@ public class BuildDataService {
             .talent3("Crest Guardian / Elevation")
             .links("4% shield recovery / 15% damage, 10% magic resistance")
             .videoGuide("https://www.youtube.com/watch?v=fUVwTqMeVmI")
-            .image("https://questland-public-api.cfapps.io/red-be.png")
+            .image(IMAGE_SERVER + "red-be.png")
             .build(),
         DisplayableBuild.builder()
             .build(BLUE_BATTLE_EVENT)
@@ -88,7 +90,7 @@ public class BuildDataService {
             .talent3("Crest Guardian / Sacred Rage / Mystical Wind")
             .links("4% healing, 10% magic resistance")
             .videoGuide("https://www.youtube.com/watch?v=5zeUF_KstQg")
-            .image("https://questland-public-api.cfapps.io/blue-be.png")
+            .image(IMAGE_SERVER + "blue-be.png")
             .build(),
         DisplayableBuild.builder()
             .build(RED_GUILD_STRIKER)
@@ -104,7 +106,7 @@ public class BuildDataService {
             .talent3("Crest Guardian / sacred rage / Runic Touch")
             .links("15% damage, 10% magic resistance")
             .videoGuide("https://youtu.be/Pf-C_H8xyEY")
-            .image("https://questland-public-api.cfapps.io/red-guild-striker.png")
+            .image(IMAGE_SERVER + "red-guild-striker.png")
             .build(),
         DisplayableBuild.builder()
             .build(BLUE_GUILD_STRIKER)
@@ -119,7 +121,7 @@ public class BuildDataService {
             .talent3("Crest Guardian / Sacred Rage / Mystical Wind")
             .links("4% healing, 10% magic resistance")
             .videoGuide("https://youtu.be/7fXR7Z3MiOM")
-            .image("https://questland-public-api.cfapps.io/blue-guild-striker.png")
+            .image(IMAGE_SERVER + "blue-guild-striker.png")
             .build()
     );
   }
@@ -136,7 +138,7 @@ public class BuildDataService {
             .talent2("Transcendental Tornado")
             .talent3("Crest Guardian")
             .videoGuide("https://www.youtube.com/watch?v=wu-9ES9aAZg")
-            .image("https://questland-public-api.cfapps.io/hecatombus.png")
+            .image(IMAGE_SERVER + "hecatombus.png")
             .build(),
         DisplayableBuild.builder()
             .build(TURTLE)
@@ -148,7 +150,7 @@ public class BuildDataService {
             .talent2("Chilling Cold")
             .talent3("Magic Thief")
             .videoGuide("https://www.youtube.com/watch?v=cKGmy0tpDCo")
-            .image("https://questland-public-api.cfapps.io/turtle.png")
+            .image(IMAGE_SERVER + "turtle.png")
             .build(),
         DisplayableBuild.builder()
             .build(THE_PAX)
@@ -161,7 +163,7 @@ public class BuildDataService {
             .talent2("Faerie Flame")
             .talent3("Magic Thief")
             .videoGuide("https://www.youtube.com/watch?v=3VZ55-NCUlo")
-            .image("https://questland-public-api.cfapps.io/pax.png")
+            .image(IMAGE_SERVER + "pax.png")
             .build(),
         DisplayableBuild.builder()
             .build(SHINOBI)
@@ -175,7 +177,7 @@ public class BuildDataService {
             .talent2("Divine Force")
             .talent3("Crest Guardian")
             .videoGuide("https://youtu.be/tRp6RgmFjOI")
-            .image("https://questland-public-api.cfapps.io/shinobi.png")
+            .image(IMAGE_SERVER + "shinobi.png")
             .build(),
         DisplayableBuild.builder()
             .build(RATCHET_RUSH)
@@ -187,7 +189,7 @@ public class BuildDataService {
             .talent2("Faerie Flame")
             .talent3("Elevation")
             .videoGuide("https://www.youtube.com/watch?v=EnMpxvYR7L8")
-            .image("https://questland-public-api.cfapps.io/ratchet-rush.png")
+            .image(IMAGE_SERVER + "ratchet-rush.png")
             .build()
     );
   }
@@ -205,7 +207,7 @@ public class BuildDataService {
             .talent2("Chilling Cold")
             .talent3("Sacred Rage")
             .videoGuide("https://www.youtube.com/watch?v=Au-g0_nF8ng")
-            .image("https://questland-public-api.cfapps.io/booming-turtle.png")
+            .image(IMAGE_SERVER + "booming-turtle.png")
             .build(),
         DisplayableBuild.builder()
             .build(WARDING_FANG)
@@ -217,7 +219,7 @@ public class BuildDataService {
             .talent2("Transcendental Tornado")
             .talent3("Crest Guardian")
             .videoGuide("https://www.youtube.com/watch?v=H_3Zx1aslTQ")
-            .image("https://questland-public-api.cfapps.io/warding-fang.png")
+            .image(IMAGE_SERVER + "warding-fang.png")
             .build(),
         DisplayableBuild.builder()
             .build(FIRE_BLASTER)
@@ -229,7 +231,7 @@ public class BuildDataService {
             .talent2("Chilling Cold")
             .talent3("Sacred Rage")
             .videoGuide("https://www.youtube.com/watch?v=kFRl03id704")
-            .image("https://questland-public-api.cfapps.io/fire-blaster.png")
+            .image(IMAGE_SERVER + "fire-blaster.png")
             .build(),
         DisplayableBuild.builder()
             .build(ICY_CANNON)
@@ -241,7 +243,7 @@ public class BuildDataService {
             .talent2("Chilling Cold")
             .talent3("Sacred Rage")
             .videoGuide("https://www.youtube.com/watch?v=_SvZmoYtBLk")
-            .image("https://questland-public-api.cfapps.io/icy-cannon.png")
+            .image(IMAGE_SERVER + "icy-cannon.png")
             .build(),
         DisplayableBuild.builder()
             .build(THE_FARMER)
@@ -255,7 +257,7 @@ public class BuildDataService {
             .talent2("Divine Force")
             .talent3("Sacred Rage")
             .videoGuide("https://youtu.be/94gERd2SmzI")
-            .image("https://questland-public-api.cfapps.io/the-farmer.png")
+            .image(IMAGE_SERVER + "the-farmer.png")
             .build()
     );
   }
