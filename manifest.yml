@@ -1,7 +1,0 @@
-applications:
-  - name: questland-public-api
-    buildpack: https://github.com/cloudfoundry/java-buildpack.git#v4.16
-    path: build/libs/questland-public-api-0.0.1-SNAPSHOT.jar
-    memory: 1g
-    env:
-      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+}}'
