@@ -66,6 +66,8 @@ public class PrivateItemAndOrbConverter {
       if (numOfLinks >= 3) {
         builder.itemLink3(itemLinks.i(2));
       }
+    } else {
+      builder.itemBonus(Stat.NONE);
     }
 
     //Orb links exist
@@ -80,6 +82,8 @@ public class PrivateItemAndOrbConverter {
       if (numOfLinks >= 2) {
         builder.orbLink2(orbLinks.i(1));
       }
+    } else {
+      builder.orbBonus(Stat.NONE);
     }
 
     return builder.build();
