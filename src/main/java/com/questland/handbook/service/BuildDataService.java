@@ -28,16 +28,16 @@ import org.springframework.stereotype.Service;
 public class BuildDataService {
 
   private final List<DisplayableBuild> buildList;
-  private final String RED_HOARDER_MAIN_HAND = "Hecatombus";
-  private final String RED_HOARDER_MAIN_HAND_BACKUP = "Red Hoarder: None";
+  private final String RED_HOARDER_MAIN_HAND = "Anchor of the Damned";
+  private final String RED_HOARDER_MAIN_HAND_BACKUP = "Red Hoarder: Hecatombus";
   private final String SUPPORT_FOR_DESTROYERS_OFF_HAND = "ThunderClap";
   private final String SUPPORT_FOR_DESTROYERS_OFF_HAND_BACKUP =
       "Support for Destroyers: Azazel Shield, Green Crystal Shield, Nightmare Throne Shield, Bone Driller, Sacrosanctus Ward";
-  private final String GRANNY_BROTH_MAIN_HAND = "Malachite Truncheon";
-  private final String GRANNY_BROTH_MAIN_HAND_BACKUP = "Granny's Blue Broth: The Hulk, Dracarion";
+  private final String GRANNY_BROTH_MAIN_HAND = "Oathgiver";
+  private final String GRANNY_BROTH_MAIN_HAND_BACKUP = "Granny's Blue Broth: Malachite Truncheon, The Hulk, Dracarion";
   private final String MIGHT_MAGIC_OFF_HAND = "Winged Defender Shield";
   private final String MIGHT_MAGIC_OFF_HAND_BACKUP =
-      "Mighty Magic: Depth of Despair, Thunderbash, Shadow Owl, Hunger of the Dead";
+      "Mighty Magic: Feathered Ward, Depth of Despair, Thunderbash, Shadow Owl, Hunger of the Dead";
   private final String YOUR_HEAL_MY_GAIN_OFF_HAND = "The Lost Helm";
   private final String YOUR_HEAL_MY_GAIN_OFF_HAND_BACKUP =
       "Your Heal My Gain: Windwolf Shield, Forest Fury Shield, Forbidden Ritual Shield, Iron Roar";
@@ -95,10 +95,10 @@ public class BuildDataService {
             .name("Red Guild Boss Striker")
             .description(
                 "No passive use crest guardian, passive#1 sacred rage, and passive#2 Runic Touch. Sin Crusher is the tier 1 weapon here because of it's incredible magic resistance passive. Make sure you are counting the turns to deal with definitely dead. You will need to make sure you can 4R at least 2-3 times in a row to fully heal up.")
-            .weapons(RED_HOARDER_MAIN_HAND + ", Sin Crusher")
+            .weapons(RED_HOARDER_MAIN_HAND + ", Shield of Shadows")
             .mainHandAlternatives(RED_HOARDER_MAIN_HAND_BACKUP)
             .offHandAlternatives(
-                "Second Chance: Triumphant Defender, Battle Beetle, The Scaleward, Arachnea's Heart, Redeemer, Frost Empress, Burden of Betrayal")
+                "Second Chance: Sin Crusher, Triumphant Defender, Battle Beetle, The Scaleward, Arachnea's Heart, Redeemer, Frost Empress, Burden of Betrayal")
             .talent1("Bloodlust")
             .talent2("Transcendental Tornado")
             .talent3("Crest Guardian / sacred rage / Runic Touch")

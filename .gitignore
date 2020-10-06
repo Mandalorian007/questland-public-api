@@ -31,4 +31,4 @@ out/
 .vscode/
 
 ### Environment Variable Secrets ###
-src/main/appengine/env_variables.yaml
+env_variables.yaml

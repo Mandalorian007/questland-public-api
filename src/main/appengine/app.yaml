@@ -1,0 +1,7 @@
+service: questland-public-api
+runtime: java11
+manual_scaling:
+  instances: 1
+
+includes:
+  - env_variables.yaml
