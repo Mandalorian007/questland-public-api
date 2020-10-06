@@ -28,3 +28,34 @@ Patreon allows me to do what I love while supporting my projects
 and creations by pledging monthly. With your generosity and support 
 through Patreon, I can take these projects even further.
 https://www.patreon.com/thundersoap
+
+#Developers
+
+## Local Setup
+- Java 11 JDK is needed
+- Protocol Buffers is used so you need flatc installed on your PC
+- run: `gradlew createFlatBuffers`
+- Questland API tokens for each server need to be setup in your IDE or on your system to run locally: 
+```yaml
+GLOBAL_PLAYER_TOKEN
+EUROPE_PLAYER_TOKEN
+AMERICA_PLAYER_TOKEN
+ASIA_PLAYER_TOKEN
+VETERANS_PLAYER_TOKEN
+```
+- to start the application run: `gradlew bootRun`
+
+
+### Deployment
+- Deployment is done via appengine so you need a gcp project and to update your GCP project in `gradle.build`
+- you need a local environment variables file `src/main/appengine/env_variables.yaml` with Questland API tokens
+```$yaml
+env_variables:
+  GLOBAL_PLAYER_TOKEN: 'TOKEN_GOES_HERE'
+  EUROPE_PLAYER_TOKEN: 'TOKEN_GOES_HERE'
+  AMERICA_PLAYER_TOKEN: 'TOKEN_GOES_HERE'
+  ASIA_PLAYER_TOKEN: 'TOKEN_GOES_HERE'
+  VETERANS_PLAYER_TOKEN: 'TOKEN_GOES_HERE'
+```
+- run: `gradlew bootJar`
+- run: `gradlew appengineDeploy`
