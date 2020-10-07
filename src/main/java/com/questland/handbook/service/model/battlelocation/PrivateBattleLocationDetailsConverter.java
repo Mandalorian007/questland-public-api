@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -90,9 +90,9 @@ public class PrivateBattleLocationDetailsConverter {
             try {
                 CsvSchema bootstrapSchema = CsvSchema.emptySchema().withHeader();
                 CsvMapper mapper = new CsvMapper();
-                File file = new ClassPathResource("monster-count.csv").getFile();
+                InputStream battleLocations = new ClassPathResource("monster-count.csv").getInputStream();
                 MappingIterator<MonsterCountCsv> readValues =
-                        mapper.readerFor(MonsterCountCsv.class).with(bootstrapSchema).readValues(file);
+                        mapper.readerFor(MonsterCountCsv.class).with(bootstrapSchema).readValues(battleLocations);
                 monsterCountCache = readValues.readAll();
             } catch (Exception e) {
                 throw new RuntimeException(e);
