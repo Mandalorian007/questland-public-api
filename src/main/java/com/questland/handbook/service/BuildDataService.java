@@ -4,7 +4,7 @@ import static com.questland.handbook.publicmodel.Build.BLUE_BATTLE_EVENT;
 import static com.questland.handbook.publicmodel.Build.BLUE_GUILD_STRIKER;
 import static com.questland.handbook.publicmodel.Build.BOOMING_TURTLE;
 import static com.questland.handbook.publicmodel.Build.FIRE_BLASTER;
-import static com.questland.handbook.publicmodel.Build.BLOODLY_HELL;
+import static com.questland.handbook.publicmodel.Build.BLOODY_HELL;
 import static com.questland.handbook.publicmodel.Build.ICY_CANNON;
 import static com.questland.handbook.publicmodel.Build.PHOENIX;
 import static com.questland.handbook.publicmodel.Build.RED_BATTLE_EVENT;
@@ -131,7 +131,7 @@ public class BuildDataService {
   private List<DisplayableBuild> getCampaignBuilds() {
     return List.of(
         DisplayableBuild.builder()
-            .build(BLOODLY_HELL)
+            .build(BLOODY_HELL)
             .name("Bloody Hell")
             .weapons(RED_HOARDER_MAIN_HAND + ", " + SUPPORT_FOR_DESTROYERS_OFF_HAND)
             .mainHandAlternatives(RED_HOARDER_MAIN_HAND_BACKUP)
