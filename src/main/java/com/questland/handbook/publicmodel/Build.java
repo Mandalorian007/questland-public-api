@@ -2,7 +2,7 @@ package com.questland.handbook.publicmodel;
 
 public enum Build {
   //Campaign
-  BLOODLY_HELL,
+  BLOODY_HELL,
   TURTLE,
   FAERIE_WRATH,
   SHINOBI,
