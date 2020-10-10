@@ -4,14 +4,14 @@ import static com.questland.handbook.publicmodel.Build.BLUE_BATTLE_EVENT;
 import static com.questland.handbook.publicmodel.Build.BLUE_GUILD_STRIKER;
 import static com.questland.handbook.publicmodel.Build.BOOMING_TURTLE;
 import static com.questland.handbook.publicmodel.Build.FIRE_BLASTER;
-import static com.questland.handbook.publicmodel.Build.HECATOMBUS;
+import static com.questland.handbook.publicmodel.Build.BLOODLY_HELL;
 import static com.questland.handbook.publicmodel.Build.ICY_CANNON;
-import static com.questland.handbook.publicmodel.Build.RATCHET_RUSH;
+import static com.questland.handbook.publicmodel.Build.PHOENIX;
 import static com.questland.handbook.publicmodel.Build.RED_BATTLE_EVENT;
 import static com.questland.handbook.publicmodel.Build.RED_GUILD_STRIKER;
 import static com.questland.handbook.publicmodel.Build.SHINOBI;
 import static com.questland.handbook.publicmodel.Build.THE_FARMER;
-import static com.questland.handbook.publicmodel.Build.THE_PAX;
+import static com.questland.handbook.publicmodel.Build.FAERIE_WRATH;
 import static com.questland.handbook.publicmodel.Build.TURTLE;
 import static com.questland.handbook.publicmodel.Build.WARDING_FANG;
 
@@ -35,6 +35,8 @@ public class BuildDataService {
       "Support for Destroyers: Azazel Shield, Green Crystal Shield, Nightmare Throne Shield, Bone Driller, Sacrosanctus Ward";
   private final String GRANNY_BROTH_MAIN_HAND = "Oathgiver";
   private final String GRANNY_BROTH_MAIN_HAND_BACKUP = "Granny's Blue Broth: Malachite Truncheon, The Hulk, Dracarion";
+  private final String AZURE_GIFT_MAIN_HAND = "Evergreen Axe";
+  private final String AZURE_GIFT_MAIN_HAND_BACKUP = "Azure Gift: Cinderlord's Fang, The Pax, Fang of Naga";
   private final String MIGHT_MAGIC_OFF_HAND = "Winged Defender Shield";
   private final String MIGHT_MAGIC_OFF_HAND_BACKUP =
       "Mighty Magic: Feathered Ward, Depth of Despair, Thunderbash, Shadow Owl, Hunger of the Dead";
@@ -129,8 +131,8 @@ public class BuildDataService {
   private List<DisplayableBuild> getCampaignBuilds() {
     return List.of(
         DisplayableBuild.builder()
-            .build(HECATOMBUS)
-            .name("The Hecatombus")
+            .build(BLOODLY_HELL)
+            .name("Bloody Hell")
             .weapons(RED_HOARDER_MAIN_HAND + ", " + SUPPORT_FOR_DESTROYERS_OFF_HAND)
             .mainHandAlternatives(RED_HOARDER_MAIN_HAND_BACKUP)
             .offHandAlternatives(SUPPORT_FOR_DESTROYERS_OFF_HAND_BACKUP)
@@ -138,7 +140,7 @@ public class BuildDataService {
             .talent2("Transcendental Tornado")
             .talent3("Crest Guardian")
             .videoGuide("https://www.youtube.com/watch?v=wu-9ES9aAZg")
-            .image(IMAGE_SERVER + "hecatombus.png")
+            .image(IMAGE_SERVER + "bloody-hell.png")
             .build(),
         DisplayableBuild.builder()
             .build(TURTLE)
@@ -153,17 +155,16 @@ public class BuildDataService {
             .image(IMAGE_SERVER + "turtle.png")
             .build(),
         DisplayableBuild.builder()
-            .build(THE_PAX)
-            .name("The Pax")
-            .weapons("The Pax, " + MIGHT_MAGIC_OFF_HAND)
-            .mainHandAlternatives("Azure Gift: Fang of Naga")
-            .offHandAlternatives(
-                "Mighty Magic: Depth of Despair, Thunderbash, Shadow Owl, Hunger of the Dead")
+            .build(FAERIE_WRATH)
+            .name("Faerie Wrath")
+            .weapons(AZURE_GIFT_MAIN_HAND + ", " + MIGHT_MAGIC_OFF_HAND)
+            .mainHandAlternatives(AZURE_GIFT_MAIN_HAND_BACKUP)
+            .offHandAlternatives(MIGHT_MAGIC_OFF_HAND_BACKUP)
             .talent1("Fist of Frenzy")
             .talent2("Faerie Flame")
             .talent3("Magic Thief")
             .videoGuide("https://www.youtube.com/watch?v=3VZ55-NCUlo")
-            .image(IMAGE_SERVER + "pax.png")
+            .image(IMAGE_SERVER + "faerie-wrath.png")
             .build(),
         DisplayableBuild.builder()
             .build(SHINOBI)
@@ -180,8 +181,8 @@ public class BuildDataService {
             .image(IMAGE_SERVER + "shinobi.png")
             .build(),
         DisplayableBuild.builder()
-            .build(RATCHET_RUSH)
-            .name("Ratchet Rush")
+            .build(PHOENIX)
+            .name("Phoenix")
             .weapons("Ratchet Hatchet, " + SUPPORT_FOR_DESTROYERS_OFF_HAND)
             .mainHandAlternatives("Red Blast & Blue Twist: The Last Wish")
             .offHandAlternatives(SUPPORT_FOR_DESTROYERS_OFF_HAND_BACKUP)
@@ -189,7 +190,7 @@ public class BuildDataService {
             .talent2("Faerie Flame")
             .talent3("Elevation")
             .videoGuide("https://www.youtube.com/watch?v=EnMpxvYR7L8")
-            .image(IMAGE_SERVER + "ratchet-rush.png")
+            .image(IMAGE_SERVER + "pheonix.png")
             .build()
     );
   }

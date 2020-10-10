@@ -2,11 +2,11 @@ package com.questland.handbook.publicmodel;
 
 public enum Build {
   //Campaign
-  HECATOMBUS,
+  BLOODLY_HELL,
   TURTLE,
-  THE_PAX,
+  FAERIE_WRATH,
   SHINOBI,
-  RATCHET_RUSH,
+  PHOENIX,
   //Battle Event
   RED_BATTLE_EVENT,
   BLUE_BATTLE_EVENT,
