@@ -40,7 +40,7 @@ public class ItemLoader implements ApplicationRunner {
       "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/static_passive_skills/";
 
   @Override
-  @Scheduled(cron = "0 0 0 ? * * *")
+  @Scheduled(cron = "0 * * * *")
   public void run(ApplicationArguments args) throws Exception {
     String latestTokenResponse = restTemplate.getForObject(latestTokenUrl, String.class);
 
