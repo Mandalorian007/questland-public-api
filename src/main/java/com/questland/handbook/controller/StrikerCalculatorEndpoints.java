@@ -1,8 +1,10 @@
 package com.questland.handbook.controller;
 
+import com.questland.handbook.publicmodel.BlueGuildBossStrikerRequest;
 import com.questland.handbook.publicmodel.BossStats;
 import com.questland.handbook.publicmodel.RedGuildBossStrikerRequest;
 import com.questland.handbook.publicmodel.StrikerCalculatorResponse;
+import com.questland.handbook.service.BlueStrikerCalculatorService;
 import com.questland.handbook.service.BossDataService;
 import com.questland.handbook.service.RedStrikerCalculatorService;
 import lombok.RequiredArgsConstructor;
@@ -21,11 +23,12 @@ import java.util.Map;
 @RequestMapping("/calc")
 public class StrikerCalculatorEndpoints {
 
-    private final RedStrikerCalculatorService redStrikerCalculatorService;
     private final BossDataService bossDataService;
+    private final RedStrikerCalculatorService redStrikerCalculatorService;
+    private final BlueStrikerCalculatorService blueStrikerCalculatorService;
 
     @PostMapping("/red-guild-boss")
-    public StrikerCalculatorResponse test(@RequestBody RedGuildBossStrikerRequest strikerCalculatorRequest) {
+    public StrikerCalculatorResponse redGuildBossCalc(@RequestBody RedGuildBossStrikerRequest strikerCalculatorRequest) {
         Map<BigInteger, BossStats> guildBossStatsMap = bossDataService.getGuildBossStats();
         BossStats guildBossStats = guildBossStatsMap.get(BigInteger.valueOf(strikerCalculatorRequest.getBossLevel()));
         double riskyThreshold = redStrikerCalculatorService.riskyFormula(
@@ -50,6 +53,39 @@ public class StrikerCalculatorEndpoints {
                 .riskyThreshold(ceilHalf(riskyThreshold))
                 .stableThreshold(ceilHalf(stableThreshold))
                 .soloKillThreshold(ceilHalf(soloKillThreshold))
+                .build();
+    }
+
+    @PostMapping("/blue-guild-boss")
+    public StrikerCalculatorResponse blueGuildBossCalc(@RequestBody BlueGuildBossStrikerRequest strikerCalculatorRequest) {
+        Map<BigInteger, BossStats> guildBossStatsMap = bossDataService.getGuildBossStats();
+        BossStats guildBossStats = guildBossStatsMap.get(BigInteger.valueOf(strikerCalculatorRequest.getBossLevel()));
+        double riskyThreshold = blueStrikerCalculatorService.blueGuildBossRiskyFormula(
+                strikerCalculatorRequest.getHeroHealth(),
+                strikerCalculatorRequest.getHeroDefense(),
+                guildBossStats.getMagic().doubleValue(),
+                guildBossStats.getAttack().doubleValue()
+        );
+        double stableThreshold = blueStrikerCalculatorService.blueGuildBossStableFormula(
+                strikerCalculatorRequest.getHeroHealth(),
+                strikerCalculatorRequest.getHeroDefense(),
+                strikerCalculatorRequest.getHeroInnerFireLevel(),
+                guildBossStats.getMagic().doubleValue(),
+                guildBossStats.getAttack().doubleValue(),
+                riskyThreshold
+        );
+        double soloThreshold = blueStrikerCalculatorService.blueGuildBossSoloKillFormula(
+                strikerCalculatorRequest.getHeroHealth(),
+                strikerCalculatorRequest.getHeroDefense(),
+                strikerCalculatorRequest.getHeroInnerFireLevel(),
+                guildBossStats.getMagic().doubleValue(),
+                guildBossStats.getAttack().doubleValue(),
+                stableThreshold
+        );
+        return StrikerCalculatorResponse.builder()
+                .riskyThreshold(ceilHalf(riskyThreshold))
+                .stableThreshold(ceilHalf(stableThreshold))
+                .soloKillThreshold(ceilHalf(soloThreshold))
                 .build();
     }
 
