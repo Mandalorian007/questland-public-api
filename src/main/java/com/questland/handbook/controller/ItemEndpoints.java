@@ -4,6 +4,7 @@ import com.questland.handbook.publicmodel.Item;
 import com.questland.handbook.publicmodel.Quality;
 import com.questland.handbook.repository.ItemRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -63,9 +64,23 @@ public class ItemEndpoints {
         new ResponseStatusException(HttpStatus.NOT_FOUND, "Item was not found."));
   }
 
+  @GetMapping("/items/artifacts/{id}")
+  public List<Item> getArtifactVersionsOfItem(@PathVariable("id") long id) {
+    Optional<Item> maybeItem = itemRepository.findById(id);
+    if(maybeItem.isEmpty()) {
+      return List.of();
+    }
+
+    List<Item> itemWithAllQualities = itemRepository.findByNameIgnoreCase(maybeItem.get().getName());
+    return itemWithAllQualities.stream()
+            // filter out the legendary item so we only have artifacts
+            .filter(item -> !item.getQuality().equals(Quality.LEGENDARY))
+            .collect(Collectors.toList());
+
+  }
+
   @ApiIgnore
   @GetMapping("/developer-items")
-
   public List<Item> getItemsIncludingHidden(Sort sort,
                              @RequestParam(value = "filterArtifacts", defaultValue = "false") boolean filterArtifacts) {
     if (filterArtifacts) {
