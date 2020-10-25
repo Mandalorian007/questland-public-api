@@ -4,9 +4,6 @@ import com.questland.handbook.publicmodel.Orb;
 import com.questland.handbook.publicmodel.Quality;
 import com.questland.handbook.repository.OrbRepository;
 import com.questland.handbook.service.ItemOrbCalcService;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -15,6 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -73,4 +75,17 @@ public class OrbEndpoints {
     return itemOrbCalcService.calculateOrbStats(baseStat, potential, enhance, level);
   }
 
+  @GetMapping("/orbs/artifacts/{id}")
+  public List<Orb> getArtifactVersionsOfOrb(@PathVariable("id") long id) {
+    Optional<Orb> maybeOrb = orbRepository.findById(id);
+    if(maybeOrb.isEmpty()) {
+      return List.of();
+    }
+
+    List<Orb> orbWithAllQualities = orbRepository.findByNameIgnoreCase(maybeOrb.get().getName());
+    return orbWithAllQualities.stream()
+            // filter out the legendary orbs so we only have artifacts
+            .filter(orb -> !orb.getQuality().equals(Quality.LEGENDARY))
+            .collect(Collectors.toList());
+  }
 }
