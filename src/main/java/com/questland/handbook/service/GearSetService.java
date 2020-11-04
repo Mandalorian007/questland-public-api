@@ -12,11 +12,11 @@ public class GearSetService {
     private final List<GearSet> gearSets = List.of(
             GearSet.builder()
                     .refCode("wind-et")
-                    .title("Evernight Troubadour Wind Warrior Gear Set")
+                    .title("Evernight Troubadour - Wind Warrior Gear Set")
                     .build(),
             GearSet.builder()
                     .refCode("myth-gota")
-                    .title("Guardian of the Afterlife Myth Warrior Gear Set")
+                    .title("Guardian of the Afterlife - Myth Warrior Gear Set")
                     .setsUsed(List.of("Myth | Guardian of the Afterlife",
                             "Noble | Lionheart Crusader",
                             "Hex | Trickster Prince",
@@ -28,7 +28,7 @@ public class GearSetService {
                     .build(),
             GearSet.builder()
                     .refCode("noble-lc")
-                    .title("Lionheart Crusader Noble Warrior Gear Set")
+                    .title("Lionheart Crusader - Noble Warrior Gear Set")
                     .setsUsed(List.of("Noble | Lionheart Crusader",
                             "Hex | Trickster Prince",
                             "Abyss | Dread Captain",
@@ -40,7 +40,7 @@ public class GearSetService {
                     .build(),
             GearSet.builder()
                     .refCode("hex-tp")
-                    .title("Trickster Prince Hex Warrior Gear Set")
+                    .title("Trickster Prince - Hex Warrior Gear Set")
                     .setsUsed(List.of("Hex | Trickster Prince",
                             "Abyss | Dread Captain",
                             "Thunder | Knight of the Tempest",
@@ -52,7 +52,7 @@ public class GearSetService {
                     .build(),
             GearSet.builder()
                     .refCode("abyss-dc")
-                    .title("Dread Captain Abyss Warrior Gear Set")
+                    .title("Dread Captain - Abyss Warrior Gear Set")
                     .setsUsed(List.of("Abyss | Dread Captain",
                             "Thunder | Knight of the Tempest",
                             "Dragon | Cinderlord",
