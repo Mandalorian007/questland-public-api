@@ -23,7 +23,7 @@ public class GearSetService {
                             "Abyss | Dread Captain",
                             "Thunder | Knight of the Tempest"))
                     .notes(List.of("3 unlinked health collections",
-                            "artifact orbs cannot link: Noble Gloves"))
+                            "Artifact orbs cannot link the following gear: Noble Gloves"))
                     .imageUrl(IMAGE_SERVER + "myth-gota.png")
                     .build(),
             GearSet.builder()
@@ -35,7 +35,7 @@ public class GearSetService {
                             "Thunder | Knight of the Tempest",
                             "Dragon | Cinderlord"))
                     .notes(List.of("2 unlinked health collections",
-                            "artifact orbs cannot link: Noble Gloves, Abyss Necklace, Abyss Boots"))
+                            "Artifact orbs cannot link: Noble Gloves, Abyss Necklace, Abyss Boots"))
                     .imageUrl(IMAGE_SERVER + "noble-lc.png")
                     .build(),
             GearSet.builder()
@@ -47,7 +47,7 @@ public class GearSetService {
                             "Dragon | Cinderlord",
                             "Shadow | Oni Warrior"))
                     .notes(List.of("1 unlinked health collections",
-                            "artifact orbs cannot link: Abyss Necklace, Abyss Boots"))
+                            "Artifact orbs cannot link: Abyss Necklace, Abyss Boots"))
                     .imageUrl(IMAGE_SERVER + "hex-tp.png")
                     .build(),
             GearSet.builder()
@@ -59,7 +59,7 @@ public class GearSetService {
                             "Shadow | Oni Warrior",
                             "Sacred | Triumphant Crusader"))
                     .notes(List.of("1 unlinked health collections",
-                            "artifact orbs cannot link: Abyss Necklace, Abyss Boots, Dragon Talisman"))
+                            "Artifact orbs cannot link: Abyss Necklace, Abyss Boots, Dragon Talisman"))
                     .imageUrl(IMAGE_SERVER + "abyss-dc.png")
                     .build()
     );
