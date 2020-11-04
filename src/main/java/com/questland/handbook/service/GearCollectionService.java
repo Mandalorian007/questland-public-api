@@ -12,7 +12,7 @@ public class GearCollectionService {
     private final List<GearCollection> gearCollections = List.of(
             GearCollection.builder()
                     .refCode("wind-et")
-                    .title("Evernight Troubadour  Wind Set Warrior Build")
+                    .title("Evernight Troubadour Wind Set Warrior Build")
                     .build(),
             GearCollection.builder()
                     .refCode("myth-gota")
