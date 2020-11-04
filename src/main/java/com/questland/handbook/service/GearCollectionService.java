@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Service
 public class GearCollectionService {
-    private final String IMAGE_SERVER = "https://questland-public-api-dot-questland-tools.uc.r.appspot.com/gear-collections/";
+    private final String IMAGE_SERVER = "https://questland-public-api-dot-questland-tools.uc.r.appspot.com/meta-gear-collection/";
     private final List<GearCollection> gearCollections = List.of(
             GearCollection.builder()
                     .refCode("wind-et")
