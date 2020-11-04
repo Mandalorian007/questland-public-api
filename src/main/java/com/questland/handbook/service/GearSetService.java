@@ -1,22 +1,22 @@
 package com.questland.handbook.service;
 
-import com.questland.handbook.publicmodel.GearCollection;
+import com.questland.handbook.publicmodel.GearSet;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class GearCollectionService {
-    private final String IMAGE_SERVER = "https://questland-public-api-dot-questland-tools.uc.r.appspot.com/meta-gear-collection/";
-    private final List<GearCollection> gearCollections = List.of(
-            GearCollection.builder()
+public class GearSetService {
+    private final String IMAGE_SERVER = "https://questland-public-api-dot-questland-tools.uc.r.appspot.com/meta-gear-sets/";
+    private final List<GearSet> gearSets = List.of(
+            GearSet.builder()
                     .refCode("wind-et")
-                    .title("Evernight Troubadour Wind Set Warrior Build")
+                    .title("Evernight Troubadour Wind Set Warrior Gear Set")
                     .build(),
-            GearCollection.builder()
+            GearSet.builder()
                     .refCode("myth-gota")
-                    .title("Guardian of the Afterlife Myth Set Warrior Build")
+                    .title("Guardian of the Afterlife Myth Set Warrior Gear Set")
                     .setsUsed(List.of("Myth | Guardian of the Afterlife",
                             "Noble | Lionheart Crusader",
                             "Hex | Trickster Prince",
@@ -26,9 +26,9 @@ public class GearCollectionService {
                             "artifact orbs cannot link: Noble Gloves"))
                     .imageUrl(IMAGE_SERVER + "myth-gota.png")
                     .build(),
-            GearCollection.builder()
+            GearSet.builder()
                     .refCode("noble-lc")
-                    .title("Lionheart Crusader Noble Set Warrior Build")
+                    .title("Lionheart Crusader Noble Set Warrior Gear Set")
                     .setsUsed(List.of("Noble | Lionheart Crusader",
                             "Hex | Trickster Prince",
                             "Abyss | Dread Captain",
@@ -38,9 +38,9 @@ public class GearCollectionService {
                             "artifact orbs cannot link: Noble Gloves, Abyss Necklace, Abyss Boots"))
                     .imageUrl(IMAGE_SERVER + "noble-lc.png")
                     .build(),
-            GearCollection.builder()
+            GearSet.builder()
                     .refCode("hex-tp")
-                    .title("Trickster Prince Hex Set Warrior Build")
+                    .title("Trickster Prince Hex Set Warrior Gear Set")
                     .setsUsed(List.of("Hex | Trickster Prince",
                             "Abyss | Dread Captain",
                             "Thunder | Knight of the Tempest",
@@ -50,9 +50,9 @@ public class GearCollectionService {
                             "artifact orbs cannot link: Abyss Necklace, Abyss Boots"))
                     .imageUrl(IMAGE_SERVER + "hex-tp.png")
                     .build(),
-            GearCollection.builder()
+            GearSet.builder()
                     .refCode("abyss-dc")
-                    .title("Dread Captain Abyss Set Warrior Build")
+                    .title("Dread Captain Abyss Set Warrior Gear Set")
                     .setsUsed(List.of("Abyss | Dread Captain",
                             "Thunder | Knight of the Tempest",
                             "Dragon | Cinderlord",
@@ -64,11 +64,11 @@ public class GearCollectionService {
                     .build()
     );
 
-    public List<GearCollection> getGearCollections() {
-        return gearCollections;
+    public List<GearSet> getGearSets() {
+        return gearSets;
     }
 
-    public Optional<GearCollection> getSpecificGearCollection(String refCode) {
-        return gearCollections.stream().filter(collection -> collection.getRefCode().equalsIgnoreCase(refCode)).findFirst();
+    public Optional<GearSet> getSpecificGearSet(String refCode) {
+        return gearSets.stream().filter(collection -> collection.getRefCode().equalsIgnoreCase(refCode)).findFirst();
     }
 }

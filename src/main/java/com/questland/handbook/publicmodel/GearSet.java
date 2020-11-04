@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class GearCollection {
+public class GearSet {
 
     private final String refCode;
     private final String title;
