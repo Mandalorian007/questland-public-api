@@ -94,6 +94,8 @@ public class ItemLoader implements ApplicationRunner {
             .filter(item -> validItemSlots.contains(item.s()))
             // Convert to our internal gear model
             .map(item -> privateConverter.covertItemFromPrivate(item, emblemMap, weaponPassives))
+            // For some reason I find common versions of items with a potential of 0 so filter them
+            .filter(item -> item.getTotalPotential() > 0)
             .collect(Collectors.toList());
     log.info("# of items discovered: " + itemData.size());
 
