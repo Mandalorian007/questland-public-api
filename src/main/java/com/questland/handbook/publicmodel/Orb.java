@@ -43,4 +43,6 @@ public class Orb {
 
     private int healthPotential;
 
+    private String iconGraphicsUrl;
+
 }

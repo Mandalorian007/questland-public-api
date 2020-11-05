@@ -31,6 +31,8 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ItemSlot itemSlot;
 
+    private int extractCost;
+
     private int totalPotential;
 
     private int attack;
@@ -74,4 +76,8 @@ public class Item {
     private String passive2Name;
 
     private String passive2Description;
+
+    private String iconGraphicsUrl;
+
+    private String fullGraphicsUrl;
 }
