@@ -135,6 +135,8 @@ public class BuildDataService {
                 DisplayableBuild.builder()
                         .build(BLOODY_HELL)
                         .name("Bloody Hell")
+                        .description(
+                                "Popular build that is great for almost any content that doesn't punish healing. Play style wise you simply spam 4R repeatedly. If you don't have a 4R use 1B or 1W to heal yourself and gain 2 red spirits on your board to fix it.")
                         .weapons(RED_HOARDER_MAIN_HAND + ", " + SUPPORT_FOR_DESTROYERS_OFF_HAND)
                         .mainHandAlternatives(RED_HOARDER_MAIN_HAND_BACKUP)
                         .offHandAlternatives(SUPPORT_FOR_DESTROYERS_OFF_HAND_BACKUP)
@@ -147,6 +149,8 @@ public class BuildDataService {
                 DisplayableBuild.builder()
                         .build(TURTLE)
                         .name("The Turtle")
+                        .description(
+                                "A popular build that is great for most content that doesn't punish healing and works very well against melee damage. Play style wise you want to spam 4B as much as possible. If you don't have 4B and don't have max intensity use 1R otherwise use 1W to fix your board.")
                         .weapons(GRANNY_BROTH_MAIN_HAND + ", " + MIGHT_MAGIC_OFF_HAND)
                         .mainHandAlternatives(GRANNY_BROTH_MAIN_HAND_BACKUP)
                         .offHandAlternatives(MIGHT_MAGIC_OFF_HAND_BACKUP)
@@ -159,6 +163,8 @@ public class BuildDataService {
                 DisplayableBuild.builder()
                         .build(FAERIE_WRATH)
                         .name("Faerie Wrath")
+                        .description(
+                                "Strongest build for the campaign and can be used to beat some of the nearly unbeatable levels if you get good RNG. Play style wise your aim is to use 1W to get your board with two 4B and then once you get max intensity your spirits will take care of themselves. If you don't have a 4B use 1W to fix your board.")
                         .weapons(AZURE_GIFT_MAIN_HAND + ", " + MIGHT_MAGIC_OFF_HAND)
                         .mainHandAlternatives(AZURE_GIFT_MAIN_HAND_BACKUP)
                         .offHandAlternatives(MIGHT_MAGIC_OFF_HAND_BACKUP)
@@ -185,6 +191,8 @@ public class BuildDataService {
                 DisplayableBuild.builder()
                         .build(PHOENIX)
                         .name("Phoenix")
+                        .description(
+                                "This melee build is very strong against enemies that punish healing. The goal is to spam 4R as much as possible and if you have a bad board you want to use 1W to fix your board.")
                         .weapons("Ratchet Hatchet, " + SUPPORT_FOR_DESTROYERS_OFF_HAND)
                         .mainHandAlternatives("Red Blast & Blue Twist: The Last Wish")
                         .offHandAlternatives(SUPPORT_FOR_DESTROYERS_OFF_HAND_BACKUP)
@@ -202,6 +210,8 @@ public class BuildDataService {
                 DisplayableBuild.builder()
                         .build(BOOMING_TURTLE)
                         .name("Booming Turtle")
+                        .description(
+                                "This build is pretty rng intensive, but counters anti-healing shields (Your heal my gain passive shields) really well. Play style wise you want to use 1B or 1R while trying to build intensity and stun the opponent early with a 4B once you get max intensity if you can keep your health over 65% blue spirits won't be an issue.")
                         .weapons("Booming Blade, " + MIGHT_MAGIC_OFF_HAND)
                         .mainHandAlternatives(
                                 "Weaker Body Stronger Magic: Demon's Dame, Black Prophet, Heart of the Iceberg")
@@ -215,6 +225,8 @@ public class BuildDataService {
                 DisplayableBuild.builder()
                         .build(WARDING_FANG)
                         .name("Warding Fang")
+                        .description(
+                                "This build works amazingly against opponents who heal or use anti-heal shields (Your heal my gain passive shields). Play style wise you want to spam 4R as often as you can and if you can't use 1W or 1B to heal yourself for 2 red spirits.")
                         .weapons(RED_HOARDER_MAIN_HAND + ", Fiery Fury Ward")
                         .mainHandAlternatives(RED_HOARDER_MAIN_HAND_BACKUP)
                         .offHandAlternatives("Stunning White: None")
@@ -227,10 +239,12 @@ public class BuildDataService {
                 DisplayableBuild.builder()
                         .build(FIRE_BLASTER)
                         .name("Fire Blaster")
+                        .description(
+                                "This build is a very strong offensive and defensive setup. On offense you want to focus on players with anti-heal shields and open the fight with 2W to cause both you and the opponent to chain heal fixing your board's spirits. Then spam 4R to kill the enemy. You can swap to bloodlust optionally on defense if players are attacking you with chilling cold too often.")
                         .weapons(RED_HOARDER_MAIN_HAND + ", " + YOUR_HEAL_MY_GAIN_OFF_HAND)
                         .mainHandAlternatives(RED_HOARDER_MAIN_HAND_BACKUP)
                         .offHandAlternatives(YOUR_HEAL_MY_GAIN_OFF_HAND_BACKUP)
-                        .talent1("Inner Fire")
+                        .talent1("Inner Fire / Bloodlust")
                         .talent2("Chilling Cold")
                         .talent3("Sacred Rage")
                         .videoGuide("https://www.youtube.com/watch?v=kFRl03id704")
@@ -239,6 +253,8 @@ public class BuildDataService {
                 DisplayableBuild.builder()
                         .build(ICY_CANNON)
                         .name("Icy Cannon")
+                        .description(
+                                "This build is quite solid on defense if the enemy is leveraging lots of melee offensive builds. It can work okay on offense, but I don't recommend it unless you have a very high magic stat. On offense make sure to focus anti-heal shield builds and open with a 2W to flood your board with blue spirits to work with.")
                         .weapons(GRANNY_BROTH_MAIN_HAND + ", " + YOUR_HEAL_MY_GAIN_OFF_HAND)
                         .mainHandAlternatives(GRANNY_BROTH_MAIN_HAND_BACKUP)
                         .offHandAlternatives(YOUR_HEAL_MY_GAIN_OFF_HAND_BACKUP)
