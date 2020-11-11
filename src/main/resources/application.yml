@@ -1,6 +1,16 @@
 spring:
   application:
     name: questland-public-api
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+      client:
+        registration:
+          google:
+            client-id: 807823845869-r5n1qik8khnrulintmbpe62s9tthm952.apps.googleusercontent.com
+            client-secret: rXnUM2HKCH2yj1l5CAW-Y4Mt
 
 management:
   endpoint:
