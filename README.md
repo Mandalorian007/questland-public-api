@@ -43,7 +43,7 @@ AMERICA_PLAYER_TOKEN
 ASIA_PLAYER_TOKEN
 VETERANS_PLAYER_TOKEN
 GOOGLE_OAUTH_CLIENT_ID
-spring.profiles.active
+SPRING_PROFILES_ACTIVE
 ```
 - when running locally ensure you setup application default credentials: `gcloud auth application-default login`
 - to start the application run: `gradlew bootRun`
@@ -60,7 +60,7 @@ env_variables:
   ASIA_PLAYER_TOKEN: 'TOKEN_GOES_HERE'
   VETERANS_PLAYER_TOKEN: 'TOKEN_GOES_HERE'
   GOOGLE_OAUTH_CLIENT_ID: 'GOOGLE_OAUTH_CLIENT_ID_GOES_HERE'
-  spring.profiles.active: 'production'
+  SPRING_PROFILES_ACTIVE: 'production'
 ```
 - run: `gradlew bootJar`
 - run: `gradlew appengineDeploy`
