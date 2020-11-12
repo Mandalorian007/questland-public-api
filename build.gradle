@@ -7,6 +7,7 @@ buildscript {
 	}
 	dependencies {
 		classpath 'com.google.cloud.tools:appengine-gradle-plugin:2.2.0'
+		classpath 'io.spring.gradle:dependency-management-plugin:1.0.10.RELEASE'
 	}
 }
 
@@ -24,10 +25,17 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 apply plugin: 'com.google.cloud.tools.appengine'
+apply plugin: 'io.spring.dependency-management'
 
 repositories {
 	jcenter()
 	mavenCentral()
+}
+
+dependencyManagement {
+	imports {
+		mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR8'
+	}
 }
 
 dependencies {
@@ -39,6 +47,7 @@ dependencies {
 	compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-csv', version: '2.10.2'
 	compile group: 'com.google.flatbuffers', name: 'flatbuffers-java', version: '1.12.0'
 	compile group: 'com.google.api-client', name: 'google-api-client', version: '1.30.11'
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-gcp-starter-sql-mysql'
 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'

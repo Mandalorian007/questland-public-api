@@ -75,7 +75,7 @@ public class OrbLoader implements ApplicationRunner {
                 .collect(Collectors.toList());
 
         log.info("dropping existing orb table");
-        orbRepository.deleteAll();
+        orbRepository.deleteAllInBatch();
 
         log.info("Loading " + orbs.size() + " orbs into database...");
         orbRepository.saveAll(orbs);

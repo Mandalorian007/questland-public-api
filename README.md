@@ -35,7 +35,7 @@ https://www.patreon.com/thundersoap
 - Java 11 JDK is needed
 - Protocol Buffers is used so you need flatc installed on your PC
 - run: `gradlew createFlatBuffers`
-- Questland API tokens for each server need as well as the google oauth client id to support user login to be setup in your IDE or on your system to run locally: 
+- Questland API tokens for each server need as well as the google oauth client id to support user login to be setup, and your spring profile configured to `dev` in your IDE or on your system to run locally: 
 ```yaml
 GLOBAL_PLAYER_TOKEN
 EUROPE_PLAYER_TOKEN
@@ -43,7 +43,9 @@ AMERICA_PLAYER_TOKEN
 ASIA_PLAYER_TOKEN
 VETERANS_PLAYER_TOKEN
 GOOGLE_OAUTH_CLIENT_ID
+spring.profiles.active
 ```
+- when running locally ensure you setup application default credentials: `gcloud auth application-default login`
 - to start the application run: `gradlew bootRun`
 
 
@@ -58,6 +60,7 @@ env_variables:
   ASIA_PLAYER_TOKEN: 'TOKEN_GOES_HERE'
   VETERANS_PLAYER_TOKEN: 'TOKEN_GOES_HERE'
   GOOGLE_OAUTH_CLIENT_ID: 'GOOGLE_OAUTH_CLIENT_ID_GOES_HERE'
+  spring.profiles.active: 'production'
 ```
 - run: `gradlew bootJar`
 - run: `gradlew appengineDeploy`

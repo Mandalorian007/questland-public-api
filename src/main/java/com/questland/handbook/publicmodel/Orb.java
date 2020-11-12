@@ -8,13 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Persistable;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Orb {
+public class Orb implements Persistable<Long> {
 
     @Id
     private long id;
@@ -44,5 +45,16 @@ public class Orb {
     private int healthPotential;
 
     private String iconGraphicsUrl;
+
+    //prevent Spring Data doing a select-before-insert - this particular entity is never updated
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public boolean isNew() {
+        return true;
+    }
 
 }

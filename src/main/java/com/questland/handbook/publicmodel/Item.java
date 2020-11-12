@@ -9,13 +9,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Persistable;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Item {
+public class Item implements Persistable<Long> {
 
     @Id
     private long id;
@@ -80,4 +81,15 @@ public class Item {
     private String iconGraphicsUrl;
 
     private String fullGraphicsUrl;
+
+    //prevent Spring Data doing a select-before-insert - this particular entity is never updated
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public boolean isNew() {
+        return true;
+    }
 }

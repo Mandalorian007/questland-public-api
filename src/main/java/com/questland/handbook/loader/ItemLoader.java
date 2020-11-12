@@ -113,7 +113,7 @@ public class ItemLoader implements ApplicationRunner {
         log.info("# of items discovered: " + itemData.size());
 
         log.info("dropping existing item table");
-        itemRepository.deleteAll();
+        itemRepository.deleteAllInBatch();
 
         log.info("Loading " + itemData.size() + " items into database...");
         itemRepository.saveAll(itemData);

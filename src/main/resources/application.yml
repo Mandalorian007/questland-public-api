@@ -2,17 +2,35 @@ spring:
   application:
     name: questland-public-api
 
-management:
-  endpoint:
-    health:
-      show-details: always
-  endpoints:
-    web:
-      exposure:
-        include: "*"
+---
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:h2:mem:testdb
+  # Prevent CloudSQL datasource from attempting to load
+  cloud:
+    gcp:
+      sql:
+        enabled: false
 
 ---
 spring:
   profiles: production
-server:
-  port: 80
+  cloud:
+    gcp:
+      sql:
+        database-name: ql-handbook
+        instance-connection-name: questland-tools:us-central1:ql-handbook-instance
+  datasource:
+    initialization-mode: always
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 100
+          order_inserts: true
+          order_updates: true

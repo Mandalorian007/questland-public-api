@@ -23,6 +23,5 @@ public class GearSetEndpoints {
     @GetMapping("/gear-sets/{refCode}")
     public GearSet getSpecificMetaGearSets(@PathVariable("refCode") String refCode) {
         return gearSetService.getSpecificGearSet(refCode).orElse(null);
-
     }
 }
