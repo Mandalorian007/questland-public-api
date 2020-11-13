@@ -5,10 +5,7 @@ import com.questland.handbook.repository.ProfileRepository;
 import com.questland.handbook.service.GoogleIdTokenVerifierService;
 import com.questland.handbook.service.model.GoogleProfile;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -18,21 +15,29 @@ public class ProfileEndpoints {
     private final ProfileRepository profileRepository;
     private final GoogleIdTokenVerifierService tokenVerifierService;
 
-    @PostMapping("/profile")
-    public void login(@RequestHeader("id_token") String googleIdToken) {
+    @GetMapping("/profile")
+    public Profile login(@RequestHeader("id_token") String googleIdToken) {
         GoogleProfile googleProfile = tokenVerifierService.verify(googleIdToken);
         String googleProfileId = googleProfile.getId();
+
         Optional<Profile> existingProfile = profileRepository.findById(googleProfileId);
-        // consider updating the profile in the future if it does exist
-        if (existingProfile.isEmpty()) {
-            profileRepository.save(Profile.builder().googleId(googleProfileId).build());
+        if (existingProfile.isPresent()) {
+            return existingProfile.get();
+        } else {
+            // create the profile for a new user automatically
+            Profile newProfile = Profile.builder().googleId(googleProfileId).build();
+            return profileRepository.save(newProfile);
         }
     }
 
-    @GetMapping("/profile")
-    public Profile getProfile(@RequestHeader("id_token") String googleIdToken) {
+    @PatchMapping("/profile")
+    public Profile updateProfile(@RequestHeader("id_token") String googleIdToken, @RequestBody Profile updatedProfile) {
         GoogleProfile googleProfile = tokenVerifierService.verify(googleIdToken);
+        Profile profile = profileRepository.findById(googleProfile.getId()).orElseThrow(ResourceNotFoundException::new);
 
-        return profileRepository.findById(googleProfile.getId()).orElseThrow(ResourceNotFoundException::new);
+        if (updatedProfile.getDarkTheme() != null) {
+            profile.setDarkTheme(updatedProfile.getDarkTheme());
+        }
+        return profileRepository.save(profile);
     }
 }

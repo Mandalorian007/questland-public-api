@@ -17,4 +17,7 @@ public class Profile {
     @Id
     private String googleId;
 
+    // Null will be default
+    private Boolean darkTheme;
+
 }
