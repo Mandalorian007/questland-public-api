@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class OptimizedGearSet {
+public class OptimizedGearTemplate {
 
     private final String refCode;
     private final String title;

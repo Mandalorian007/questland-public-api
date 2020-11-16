@@ -26,6 +26,7 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration().applyPermitDefaultValues();
         config.addAllowedMethod("PATCH");
+        config.addAllowedMethod("DELETE");
         source.registerCorsConfiguration("/**", config);
         return source;
     }
