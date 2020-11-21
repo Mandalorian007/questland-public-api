@@ -28,7 +28,7 @@ public class GearTemplate {
 
     @Id
     @GeneratedValue
-    @Type(type="org.hibernate.type.UUIDCharType")
+    @Type(type="uuid-char")
     private UUID id;
 
     @JsonIgnore
