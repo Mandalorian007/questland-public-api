@@ -29,9 +29,9 @@ public class ProfileEndpoints {
         if (maybeProfile.isPresent()) {
             Profile existingProfile = maybeProfile.get();
             // If your name, email, or profile image change update them
-            if (existingProfile.getName().equals(googleProfile.getName())
-                    && existingProfile.getEmail().equals(googleProfile.getEmail())
-                    && existingProfile.getProfileImgUrl().equals(googleProfile.getProfileImage())) {
+            if (googleProfile.getName().equals(existingProfile.getName())
+                    && googleProfile.getEmail().equals(existingProfile.getEmail())
+                    && googleProfile.getProfileImage().equals(existingProfile.getProfileImgUrl())) {
                 return existingProfile;
             } else {
                 existingProfile.setName(googleProfile.getName());
