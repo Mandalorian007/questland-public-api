@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -27,6 +28,7 @@ public class GearTemplate {
 
     @Id
     @GeneratedValue
+    @Type(type="org.hibernate.type.UUIDCharType")
     private UUID id;
 
     @JsonIgnore
