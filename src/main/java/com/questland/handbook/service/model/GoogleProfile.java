@@ -8,4 +8,7 @@ import lombok.Data;
 public class GoogleProfile {
     // https://developers.google.com/identity/sign-in/web/backend-auth
     private String id;
+    private String name;
+    private String email;
+    private String profileImage;
 }

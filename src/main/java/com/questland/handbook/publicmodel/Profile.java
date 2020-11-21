@@ -16,6 +16,9 @@ import javax.persistence.Id;
 public class Profile {
     @Id
     private String googleId;
+    private String name;
+    private String email;
+    private String profileImgUrl;
 
     // Null will be default
     private Boolean darkTheme;

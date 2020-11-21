@@ -23,8 +23,8 @@ public class GearTemplateEndpoints {
     private final GoogleIdTokenVerifierService tokenVerifierService;
 
     @GetMapping("/gear-templates")
-    public List<GearTemplate> getGearSets(@RequestHeader("id_token") String googleIdToken) {
-        GoogleProfile googleProfile = tokenVerifierService.verify(googleIdToken);
+    public List<GearTemplate> getGearSets(@RequestHeader("Authorization") String authToken) {
+        GoogleProfile googleProfile = tokenVerifierService.verify(authToken);
 
         return gearTemplateRepository.findByGoogleId(googleProfile.getId());
     }
@@ -35,8 +35,8 @@ public class GearTemplateEndpoints {
     }
 
     @PostMapping("/gear-templates")
-    public GearTemplate saveGearSet(@RequestHeader("id_token") String googleIdToken, @Valid @RequestBody GearTemplate gearTemplate) {
-        GoogleProfile googleProfile = tokenVerifierService.verify(googleIdToken);
+    public GearTemplate saveGearSet(@RequestHeader("Authorization") String authToken, @Valid @RequestBody GearTemplate gearTemplate) {
+        GoogleProfile googleProfile = tokenVerifierService.verify(authToken);
 
         gearTemplate.setGoogleId(googleProfile.getId());
         return gearTemplateRepository.save(gearTemplate);
@@ -44,8 +44,8 @@ public class GearTemplateEndpoints {
 
     @DeleteMapping("/gear-templates/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteGearSet(@RequestHeader("id_token") String googleIdToken, @PathVariable("id") UUID gearSetId) {
-        tokenVerifierService.verify(googleIdToken);
+    public void deleteGearSet(@RequestHeader("Authorization") String authToken, @PathVariable("id") UUID gearSetId) {
+        tokenVerifierService.verify(authToken);
         gearTemplateRepository.deleteById(gearSetId);
     }
 
