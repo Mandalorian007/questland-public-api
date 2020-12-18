@@ -11,8 +11,20 @@ public class OptimizedGearTemplateService {
     private final String IMAGE_SERVER = "https://questland-public-api-dot-questland-tools.uc.r.appspot.com/meta-gear-templates/";
     private final List<OptimizedGearTemplate> optimizedGearTemplates = List.of(
             OptimizedGearTemplate.builder()
+                    .refCode("venom-pm")
+                    .title("Poison Master - Venom Warrior Gear Template")
+                    .build(),
+            OptimizedGearTemplate.builder()
                     .refCode("wind-et")
                     .title("Evernight Troubadour - Wind Warrior Gear Template")
+                    .setsUsed(List.of("Wind | Evernight Troubadour",
+                            "Myth | Guardian of the Afterlife",
+                            "Noble | Lionheart Crusader",
+                            "Hex | Trickster Prince",
+                            "Abyss | Dread Captain"))
+                    .notes(List.of("3 unlinked health collections",
+                            "Artifact orbs cannot link the following gear: Noble Gloves"))
+                    .imageUrl(IMAGE_SERVER + "wind-et.png")
                     .build(),
             OptimizedGearTemplate.builder()
                     .refCode("myth-gota")
