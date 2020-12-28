@@ -11,8 +11,20 @@ public class OptimizedGearTemplateService {
     private final String IMAGE_SERVER = "https://questland-public-api-dot-questland-tools.uc.r.appspot.com/meta-gear-templates/";
     private final List<OptimizedGearTemplate> optimizedGearTemplates = List.of(
             OptimizedGearTemplate.builder()
+                    .refCode("ice-st")
+                    .title("Sabertooth - Ice Warrior Gear Set")
+                    .build(),
+            OptimizedGearTemplate.builder()
                     .refCode("venom-pm")
                     .title("Poison Master - Venom Warrior Gear Template")
+                    .setsUsed(List.of("Venom | Poison Master",
+                            "Wind | Evernight Troubadour",
+                            "Myth | Guardian of the Afterlife",
+                            "Noble | Lionheart Crusader",
+                            "Hex | Trickster Prince"))
+                    .notes(List.of("2 unlinked health collections",
+                            "All artifact orbs linked"))
+                    .imageUrl(IMAGE_SERVER + "venom-pm.png")
                     .build(),
             OptimizedGearTemplate.builder()
                     .refCode("wind-et")
