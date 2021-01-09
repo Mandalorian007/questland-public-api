@@ -44,8 +44,12 @@ public class ItemLoader implements ApplicationRunner {
             "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/static_passive_skills/";
 
     @Override
-    @Scheduled(cron = "0 * * * *")
     public void run(ApplicationArguments args) throws Exception {
+        loadItems();
+    }
+
+    @Scheduled(cron = "0 0 0/1 * * ?")
+    private void loadItems() throws JsonProcessingException {
         String latestTokenResponse = restTemplate.getForObject(latestTokenUrl, String.class);
 
         String latestToken = new ObjectMapper().readTree(latestTokenResponse)

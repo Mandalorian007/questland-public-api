@@ -1,5 +1,6 @@
 package com.questland.handbook.loader;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,8 +39,12 @@ public class OrbLoader implements ApplicationRunner {
             "http://gs-bhs-wrk-01.api-ql.com/staticdata/fb/key/en/android/%s/fb_item_templates/";
 
     @Override
-    @Scheduled(cron = "0 * * * *")
     public void run(ApplicationArguments args) throws Exception {
+        loadOrbs();
+    }
+
+    @Scheduled(cron = "0 0 0/1 * * ?")
+    private void loadOrbs() throws JsonProcessingException {
         String latestTokenResponse = restTemplate.getForObject(latestTokenUrl, String.class);
 
         String latestToken = new ObjectMapper().readTree(latestTokenResponse)
