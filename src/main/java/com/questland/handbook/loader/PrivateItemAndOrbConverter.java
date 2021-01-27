@@ -1,8 +1,11 @@
 package com.questland.handbook.loader;
 
+import com.questland.handbook.config.QuestlandApiConfigs;
+import com.questland.handbook.config.QuestlandServer;
 import com.questland.handbook.flatbuffers.*;
 import com.questland.handbook.loader.model.PrivateWeaponPassive;
 import com.questland.handbook.publicmodel.*;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -10,13 +13,21 @@ import java.util.Map;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class PrivateItemAndOrbConverter {
-    private final String GRAPHICS_SERVER_URL = "http://s1.us-questland.gamesture.com/packs/";
+    private final String GRAPHICS_SERVER_PATH = "/packs/";
+    private final QuestlandApiConfigs questlandApiConfigs;
+    private String graphicsServerUrl;
 
     public Item convertItemFromPrivate(ItemTemplate privateItem,
                                        Map<Long, Emblem> emblemMap,
                                        Map<Integer, PrivateWeaponPassive> weaponPassives,
                                        Map<Integer, Integer> rawToFinalGraphicsIdMap) {
+
+        if (graphicsServerUrl == null) {
+            String qlServer = questlandApiConfigs.regionWorkerMap().get(QuestlandServer.GLOBAL);
+            graphicsServerUrl = LoaderUtility.getGraphicsServerUrl(qlServer);
+        }
         Item.ItemBuilder builder = Item.builder();
 
         //weapon passives
@@ -53,8 +64,8 @@ public class PrivateItemAndOrbConverter {
                 .defensePotential(privateItem.statsDefInc())
                 .healthPotential(privateItem.statsHpInc())
                 .reforgePointsPerLevel(totalPotential / 2)
-                .iconGraphicsUrl(GRAPHICS_SERVER_URL + rawToFinalGraphicsIdMap.getOrDefault(privateItem.iSd(), -1) + "/")
-                .fullGraphicsUrl(GRAPHICS_SERVER_URL + rawToFinalGraphicsIdMap.getOrDefault(privateItem.prvw(), -1)+ "/");
+                .iconGraphicsUrl(graphicsServerUrl + GRAPHICS_SERVER_PATH + rawToFinalGraphicsIdMap.getOrDefault(privateItem.iSd(), -1) + "/")
+                .fullGraphicsUrl(graphicsServerUrl + GRAPHICS_SERVER_PATH + rawToFinalGraphicsIdMap.getOrDefault(privateItem.prvw(), -1) + "/");
 
         //Item links exist
         if (privateItem.linksLength() >= 1) {
@@ -122,7 +133,7 @@ public class PrivateItemAndOrbConverter {
                 .defensePotential(privateOrb.statsDefInc())
                 .healthPotential(privateOrb.statsHpInc())
                 .statBonus(stat)
-                .iconGraphicsUrl(GRAPHICS_SERVER_URL + rawToFinalGraphicsIdMap.getOrDefault(privateOrb.iSd(), -1) + "/")
+                .iconGraphicsUrl(graphicsServerUrl + GRAPHICS_SERVER_PATH + rawToFinalGraphicsIdMap.getOrDefault(privateOrb.iSd(), -1) + "/")
                 .build();
     }
 

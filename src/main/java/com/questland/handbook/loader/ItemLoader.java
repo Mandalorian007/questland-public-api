@@ -5,6 +5,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.questland.handbook.config.QuestlandApiConfigs;
+import com.questland.handbook.config.QuestlandServer;
 import com.questland.handbook.flatbuffers.EquipSlot;
 import com.questland.handbook.flatbuffers.ItemQuality;
 import com.questland.handbook.flatbuffers.ItemTemplate;
@@ -34,14 +36,11 @@ public class ItemLoader implements ApplicationRunner {
     private final PrivateItemAndOrbConverter privateConverter;
     private final ItemRepository itemRepository;
     private final RestTemplate restTemplate = new RestTemplate();
-    private final String latestTokenUrl =
-            "http://gs-bhs-wrk-02.api-ql.com/client/checkstaticdata/?lang=en&graphics_quality=hd_android";
-    private final String itemUrl =
-            "http://gs-bhs-wrk-01.api-ql.com/staticdata/fb/key/en/android/%s/fb_item_templates/";
-    private final String setEmblemUrl =
-            "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/wearable_sets/";
-    private final String weaponPassivesUrl =
-            "http://gs-bhs-wrk-01.api-ql.com/staticdata/key/en/android/%s/static_passive_skills/";
+    private final String latestTokenUrl = "client/checkstaticdata/?lang=en&graphics_quality=hd_android";
+    private final String itemUrl = "staticdata/fb/key/en/android/%s/fb_item_templates/";
+    private final String setEmblemUrl = "staticdata/key/en/android/%s/wearable_sets/";
+    private final String weaponPassivesUrl = "staticdata/key/en/android/%s/static_passive_skills/";
+    private final QuestlandApiConfigs questlandApiConfigs;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -50,7 +49,8 @@ public class ItemLoader implements ApplicationRunner {
 
     @Scheduled(cron = "0 0 0/1 * * ?")
     private void loadItems() throws JsonProcessingException {
-        String latestTokenResponse = restTemplate.getForObject(latestTokenUrl, String.class);
+        String qlServer = questlandApiConfigs.regionWorkerMap().get(QuestlandServer.GLOBAL);
+        String latestTokenResponse = restTemplate.getForObject(qlServer + latestTokenUrl, String.class);
 
         String latestToken = new ObjectMapper().readTree(latestTokenResponse)
                 .path("data")
@@ -59,20 +59,20 @@ public class ItemLoader implements ApplicationRunner {
                 .path("fb_item_templates").asText();
         log.info("Latest item token is: " + latestToken);
 
-        byte[] itemBytes = restTemplate.getForObject(String.format(itemUrl, latestToken), byte[].class);
+        byte[] itemBytes = restTemplate.getForObject(String.format(qlServer + itemUrl, latestToken), byte[].class);
         ItemTemplates itemTemplates = ItemTemplates.getRootAsItemTemplates(ByteBuffer.wrap(itemBytes));
         List<ItemTemplate> privateItems = new ArrayList<>();
         for (int i = 0; i < itemTemplates.templatesLength(); i++) {
             privateItems.add(itemTemplates.templates(i));
         }
 
-        Map<Long, Emblem> emblemMap = getEmblemMap();
+        Map<Long, Emblem> emblemMap = getEmblemMap(qlServer);
 
-        Map<Integer, PrivateWeaponPassive> weaponPassives = getWeaponPassives();
+        Map<Integer, PrivateWeaponPassive> weaponPassives = getWeaponPassives(qlServer);
         log.info("Loaded " + weaponPassives.size() + " weapon passives");
 
         //loading graphics id mapper
-        Map<Integer, Integer> rawToFinalGraphicIdMap = getRawToFinalGraphicIdMap();
+        Map<Integer, Integer> rawToFinalGraphicIdMap = LoaderUtility.getRawToFinalGraphicIdMap(qlServer);
 
         Set<Byte> validItemTypes = Set.of(
                 ItemQuality.Common,
@@ -125,8 +125,8 @@ public class ItemLoader implements ApplicationRunner {
     }
 
 
-    private Map<Long, Emblem> getEmblemMap() {
-        String latestTokenResponse = restTemplate.getForObject(latestTokenUrl, String.class);
+    private Map<Long, Emblem> getEmblemMap(String qlServer) {
+        String latestTokenResponse = restTemplate.getForObject(qlServer + latestTokenUrl, String.class);
         Map<Long, Emblem> emblemMap = new HashMap<>();
         try {
             String emblemToken = new ObjectMapper().readTree(latestTokenResponse)
@@ -136,7 +136,7 @@ public class ItemLoader implements ApplicationRunner {
                     .path("wearable_sets").asText();
             log.info("Latest set/emblem token is: " + emblemToken);
 
-            String emblemUrl = String.format(setEmblemUrl, emblemToken);
+            String emblemUrl = String.format(qlServer + setEmblemUrl, emblemToken);
             log.info(emblemUrl);
             String emblemDataRaw =
                     restTemplate.getForObject(emblemUrl, String.class);
@@ -157,9 +157,9 @@ public class ItemLoader implements ApplicationRunner {
         }
     }
 
-    private Map<Integer, PrivateWeaponPassive> getWeaponPassives() {
+    private Map<Integer, PrivateWeaponPassive> getWeaponPassives(String qlServer) {
         try {
-            String latestTokenResponse = restTemplate.getForObject(latestTokenUrl, String.class);
+            String latestTokenResponse = restTemplate.getForObject(qlServer + latestTokenUrl, String.class);
 
             String passiveToken = new ObjectMapper().readTree(latestTokenResponse)
                     .path("data")
@@ -168,7 +168,7 @@ public class ItemLoader implements ApplicationRunner {
                     .path("static_passive_skills").asText();
             log.info("Latest weapon passives token is: " + passiveToken);
 
-            String passiveWeaponsUrl = String.format(weaponPassivesUrl, passiveToken);
+            String passiveWeaponsUrl = String.format(qlServer + weaponPassivesUrl, passiveToken);
             String passiveItemsRaw =
                     restTemplate.getForObject(passiveWeaponsUrl, String.class);
 
@@ -177,56 +177,6 @@ public class ItemLoader implements ApplicationRunner {
             return new ObjectMapper().readValue(passiveItemsRaw, typeRef);
 
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private Map<Integer, Integer> getRawToFinalGraphicIdMap() {
-        try {
-            String latestTokenResponse = restTemplate.getForObject(latestTokenUrl, String.class);
-            String graphicsEndpoint = new ObjectMapper().readTree(latestTokenResponse)
-                    .path("data")
-                    .path("static_data")
-                    .path("uri_assets").asText();
-
-            String graphicsMapAsString = restTemplate.getForObject(getGraphicsServerUrl() + graphicsEndpoint, String.class);
-            TypeReference<HashMap<String, Object[]>> typeRef = new TypeReference<>() {
-            };
-            Map<String, Object[]> graphicsMap = new ObjectMapper().readValue(graphicsMapAsString, typeRef);
-
-            return graphicsMap.entrySet().stream()
-                    .collect(Collectors.toMap(
-                            entry -> Integer.parseInt(entry.getKey()),
-                            entry -> {
-                                Object[] value = entry.getValue();
-                                if (value == null || value.length <= 1) {
-                                    return -1;
-                                }
-                                return (Integer) value[0];
-                            }));
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private String getGraphicsServerUrl() {
-        try {
-            String latestTokenResponse = restTemplate.getForObject(latestTokenUrl, String.class);
-            ArrayNode serverDomainsNode = (ArrayNode) new ObjectMapper().readTree(latestTokenResponse)
-                    .path("data")
-                    .path("server_domains");
-            List<JsonNode> serverDomains = StreamSupport
-                    .stream(serverDomainsNode.spliterator(), false)
-                    .collect(Collectors.toList());
-            if (serverDomains.size() < 1) {
-                throw new RuntimeException("Couldn't locate the image server");
-            }
-            String graphicsServerUrl = serverDomains.get(0).asText();
-            log.info("Graphics server url: " + graphicsServerUrl);
-            return graphicsServerUrl;
-
-        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
