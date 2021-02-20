@@ -229,7 +229,7 @@ public class BuildDataService {
                                 "This build works amazingly against opponents who heal or use anti-heal shields (Your heal my gain passive shields). Play style wise you want to spam 4R as often as you can and if you can't use 1W or 1B to heal yourself for 2 red spirits.")
                         .weapons(RED_HOARDER_MAIN_HAND + ", Fiery Fury Ward")
                         .mainHandAlternatives(RED_HOARDER_MAIN_HAND_BACKUP)
-                        .offHandAlternatives("Stunning White: None")
+                        .offHandAlternatives("Stunning White: Soul Guard")
                         .talent1("Bloodlust")
                         .talent2("Transcendental Tornado")
                         .talent3("Crest Guardian")
