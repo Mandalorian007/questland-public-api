@@ -15,7 +15,6 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class PrivateItemAndOrbConverter {
-    private final String GRAPHICS_SERVER_PATH = "/packs/";
     private final QuestlandApiConfigs questlandApiConfigs;
     private String graphicsServerUrl;
 
@@ -64,8 +63,8 @@ public class PrivateItemAndOrbConverter {
                 .defensePotential(privateItem.statsDefInc())
                 .healthPotential(privateItem.statsHpInc())
                 .reforgePointsPerLevel(totalPotential / 2)
-                .iconGraphicsUrl(graphicsServerUrl + GRAPHICS_SERVER_PATH + rawToFinalGraphicsIdMap.getOrDefault(privateItem.iSd(), -1) + "/")
-                .fullGraphicsUrl(graphicsServerUrl + GRAPHICS_SERVER_PATH + rawToFinalGraphicsIdMap.getOrDefault(privateItem.prvw(), -1) + "/");
+                .iconGraphicsUrl(graphicsServerUrl + "/" +  rawToFinalGraphicsIdMap.getOrDefault(privateItem.iSd(), -1) + ".bin")
+                .fullGraphicsUrl(graphicsServerUrl + "/" +  rawToFinalGraphicsIdMap.getOrDefault(privateItem.prvw(), -1) + ".bin");
 
         //Item links exist
         if (privateItem.linksLength() >= 1) {
@@ -133,7 +132,7 @@ public class PrivateItemAndOrbConverter {
                 .defensePotential(privateOrb.statsDefInc())
                 .healthPotential(privateOrb.statsHpInc())
                 .statBonus(stat)
-                .iconGraphicsUrl(graphicsServerUrl + GRAPHICS_SERVER_PATH + rawToFinalGraphicsIdMap.getOrDefault(privateOrb.iSd(), -1) + "/")
+                .iconGraphicsUrl(graphicsServerUrl + "/" + rawToFinalGraphicsIdMap.getOrDefault(privateOrb.iSd(), -1) + ".bin")
                 .build();
     }
 

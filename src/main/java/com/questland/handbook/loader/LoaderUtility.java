@@ -20,16 +20,9 @@ public class LoaderUtility {
     public static String getGraphicsServerUrl(String qlServer) {
         try {
             String latestTokenResponse = new RestTemplate().getForObject(qlServer + latestTokenUrl, String.class);
-            ArrayNode serverDomainsNode = (ArrayNode) new ObjectMapper().readTree(latestTokenResponse)
+            String graphicsServerUrl = new ObjectMapper().readTree(latestTokenResponse)
                     .path("data")
-                    .path("server_domains");
-            List<JsonNode> serverDomains = StreamSupport
-                    .stream(serverDomainsNode.spliterator(), false)
-                    .collect(Collectors.toList());
-            if (serverDomains.size() < 1) {
-                throw new RuntimeException("Couldn't locate the image server");
-            }
-            String graphicsServerUrl = serverDomains.get(0).asText();
+                    .path("server_domains").asText();
             log.info("Graphics server url: " + graphicsServerUrl);
             return graphicsServerUrl;
 
@@ -47,7 +40,7 @@ public class LoaderUtility {
                     .path("static_data")
                     .path("uri_assets").asText();
 
-            String graphicsMapAsString = restTemplate.getForObject(getGraphicsServerUrl(qlServer) + graphicsEndpoint, String.class);
+            String graphicsMapAsString = restTemplate.getForObject(qlServer + graphicsEndpoint, String.class);
             TypeReference<HashMap<String, Object[]>> typeRef = new TypeReference<>() {
             };
             Map<String, Object[]> graphicsMap = new ObjectMapper().readValue(graphicsMapAsString, typeRef);
