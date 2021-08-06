@@ -1,3 +1,5 @@
+// Important Note: This flatbuffer schema is provided directly from Gamesture and working with them or reverse engineering will be required for updates.
+
 enum EquipSlot : byte
 {
     Unknown = 0,

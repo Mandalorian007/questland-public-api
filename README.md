@@ -1,6 +1,16 @@
 # Questland API
-This is a public API for Questland inspired by Mandalorian007. 
+This is a public API for Questland. 
 Current public url: https://questland-public-api.cfapps.io/swagger-ui.html
+
+# Status
+
+This project is no longer in active development and should be considered 
+deprecated. Any changes made will be to support the existing production 
+deployment while it's still active. Any community developers who wish 
+to take over this project need only fork this repository and do not 
+need any special permission. I do request that credit for the original 
+work be acknowledged in any forked projects. If this project is to be 
+used for commercial means then please contact me first for approval.
 
 # Purpose
 Help the community build and grow. I offer informative videos on my
@@ -23,11 +33,6 @@ https://questland-handbook.cfapps.io/
 Repository available at: https://github.com/Mandalorian007/questland-discord-bot
 Discord installation link: https://discordapp.com/oauth2/authorize?client_id=675765765395316740&scope=bot
 
-# Patreon
-Patreon allows me to do what I love while supporting my projects
-and creations by pledging monthly. With your generosity and support 
-through Patreon, I can take these projects even further.
-https://www.patreon.com/thundersoap
 
 #Developers
 
